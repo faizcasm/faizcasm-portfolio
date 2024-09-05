@@ -28,7 +28,7 @@ interface LanguageData {
   value: number;
 }
 
-const octokit = new Octokit({ auth: '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' });
+const octokit = new Octokit({ auth: process.env.GITHUB_SECRET });
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8'];
 
