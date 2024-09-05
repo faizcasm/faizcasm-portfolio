@@ -1,0 +1,98 @@
+{
+  "personalInfo": {
+    "name": "Faizan Hameed",
+    "title": "Software Engineer",
+    "email": "faizanhameed690@gmail.com",
+    "phone": "+919149522458",
+    "location": "Srinagar, India",
+    "github": "https://github.com/faizcasm",
+    "linkedin": "https://www.linkedin.com/in/faizan-hameed/",
+    "website": "https://faizcasm.in",
+    "summary": "Hey there, I'm Faizan, a Fullstack Developer based in Kashmir, India. I dive deep into JavaScript and love crafting sleek, efficient fullstack web apps. With an eye for detail and a hunger for learning, I'm all about delivering high-quality solutions that meet both user needs and business objectives.\n\nAI? Oh, that's my jam. I geek out on building software that taps into AI magic.",
+    "image": "https://avatars.githubusercontent.com/u/40724828?v=4"
+  },
+  "experience": [
+    {
+      "company": "Infosys",
+      "position": "Fullstack Intern",
+      "startDate": "Aug 2023",
+      "endDate": "Aug 2024",
+      "description":""
+    },
+    {
+      "company": "UpskillMafia",
+      "position": "Intern",
+      "startDate": "Jan 2024",
+      "endDate": "Sep 2024",
+      "description":""
+    }
+  ],
+  "education": [
+    {
+      "institution": "Punjab Technical Univeristy",
+      "degree": "Bachelor of Computer Applications",
+      "startDate": "June 2023",
+      "endDate": "June 2026",
+      "description": ""
+    },
+    {
+      "institution": "Govt. Higher Secondary School Palhallan",
+      "degree": "12th Class",
+      "startDate": "Oct 2021",
+      "endDate": "May 2023",
+      "description": ""
+    }
+  ],
+  "skills": [
+    "HTML/CSS",
+    "Javascript/Typescript",
+    "React/Next JS",
+    "Ext JS/Webix JS",
+    "PHP/Laravel",
+    "Mysql/MongoDB",
+    "Git/SVN",
+    "Docker",
+    "Node js"
+  ],
+  "languages": [
+    {
+      "language": "English",
+      "proficiency": "A++"
+    },
+    {
+      "language": "Hindi",
+      "proficiency": "A++"
+    },
+    {
+      "language": "Urdu",
+      "proficiency": "A++"
+    }
+  ],
+  "projects": [
+    {
+      "name": "Portfolio",
+      "description": "Faizcasm Portfolio.",
+      "technologies": ["AI", "Web Development"],
+      "link": "https://faizcasm.in"
+    },
+    {
+      "name": "Foodify",
+      "description": "Fullstack Food Delivery App.",
+      "technologies": ["AI", "Web Development"],
+      "link": "https://foodify-seven.vercel.app"
+    }
+  ],
+  "interests": [
+    "Coding",
+    "Gaming",
+    "Chess",
+    "Crypto"
+  ],
+  "certifications": [
+    {
+      "name": "Microsoft Certified Professional (MCP)",
+      "date": "May 2024",
+      "description": "HTM, CSS, JAVASCRIPT"
+    }
+  ]
+}

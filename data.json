@@ -1,0 +1,75 @@
+{
+  "personalInfo": {
+    "name": "Faizan Hameed",
+    "username": "@faizcasm",
+    "location": "Srinagar, India",
+    "role": "Fullstack Developer",
+    "bio": "Hey there, I'm Faizan, a Fullstack Developer based in Kashmir, India. I dive deep into JavaScript and love crafting sleek, efficient fullstack web apps. With an eye for detail and a hunger for learning, I'm all about delivering high-quality solutions that meet both user needs and business objectives.\n\nAI? Oh, that's my jam. I geek out on building software that taps into AI magic.",
+    "githubStats": {
+      "repositories": 28,
+      "stars": 2,
+      "followers": 3,
+      "following": 4
+    },
+    "topLanguages": [
+      { "name": "JavaScript", "percentage": 63 },
+      { "name": "TypeScript", "percentage": 20 },
+      { "name": "Python", "percentage": 7 },
+      { "name": "CSS", "percentage": 5 },
+      { "name": "HTML", "percentage": 5 }
+    ],
+    "memberSince": "1.04.2019"
+  },
+  "websiteExistingPages": {
+    "homePage": "/",
+    "projectsPage": "/projects",
+    "blogPage": "/blog",
+    "gtihubStatistics": "/github-stats"
+  },
+  "technologies": [
+    "JavaScript", "TypeScript", "React", "Next.js", "Tailwind CSS",
+    "Webix JS", "Ext JS", "Node.js", "PHP", "MongoDB", "MySQL",
+    "Prisma", "Git", "GitHub", "Docker", "VS Code",
+     "OpenAI"
+  ],
+  "featuredProjects": [
+    {
+      "title": "Portfolio",
+      "description": "Faizan Hameed Portfolio Website with an AI chatbot that can answer any question about you.",
+      "technologies": ["Next.js", "Gemini", "MongoDB", "Stripe", "tailwind"],
+      "stars": 0,
+      "forks": 0,
+      "lastUpdated": "2024-07-03T13:07:54.735Z",
+      "githubLink": "https://github.com/faizcasm/faizcasm-portfolio",
+      "liveDemo": "https://faizcasm.in"
+    },
+    {
+      "title": "Foodify",
+      "description": "Full Stack food app",
+      "technologies": ["React", "Firebase", "Tailwind CSS"],
+      "stars": 0,
+      "forks": 0,
+      "lastUpdated": "2024-07-03T13:07:54.736Z",
+      "githubLink": "https://github.com/faizcasm/foodify",
+      "liveDemo": "foodify-seven.vercel.app"
+    }
+  ],
+  "projects": [
+    {
+      "title": "Portfolio",
+      "description": "A Faizcasm Portfolio",
+      "stars": 0,
+      "forks": 0,
+      "lastUpdated": "12.1.2024",
+      "githubLink": "https://github.com/faizcasm/faizcasm-portfolio"
+    },
+    {
+      "title": "Foodify",
+      "description": "Fullstack Food delivery app With NextJS, Typescript, React, ChatGPT, Tailwind, Prisma, Upstash.",
+      "stars": 0,
+      "forks": 0,
+      "lastUpdated": "12.5.2024",
+      "githubLink": "https://github.com/faizcasm/foodify"
+    }
+  ]
+}
