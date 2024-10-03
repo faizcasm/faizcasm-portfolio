@@ -23,14 +23,12 @@ Before we dive into building the application, let’s set up our development env
 
 ### Create a new Next.js project:
 
-```bash
+```
 npx create-next-app fullstack-app
 cd fullstack-app
 Set up the backend with Node.js:
 Create a new directory for your backend:
 
-bash
-Copy code
 mkdir backend
 cd backend
 npm init -y
@@ -39,7 +37,6 @@ Configure your backend:
 Create a file named server.js in the backend directory:
 
 javascript
-Copy code
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -67,8 +64,6 @@ app.listen(PORT, () => {
 Create a .env file:
 In the backend directory, create a .env file with the following content:
 
-env
-Copy code
 MONGO_URI=your_mongo_db_connection_string
 Building the Application
 Frontend: Connecting Next.js to the Backend
@@ -76,8 +71,6 @@ In the frontend, we’ll create a simple form that interacts with our Node.js ba
 
 Update pages/index.js:
 
-javascript
-Copy code
 import { useState } from 'react';
 
 export default function Home() {
@@ -102,13 +95,9 @@ export default function Home() {
 Run the frontend and backend:
 Start the Next.js frontend:
 
-bash
-Copy code
 npm run dev
 Start the Node.js backend:
 
-bash
-Copy code
 node backend/server.js
 You should now have a full-stack application where the frontend interacts with the backend.
 
@@ -125,3 +114,5 @@ Conclusion
 Building a full-stack application with Next.js and Node.js offers a comprehensive approach to web development. This guide covered the basic setup and interaction between the frontend and backend, but there's much more you can do. Explore integrating authentication, databases, and advanced state management to take your application to the next level.
 
 By mastering these tools, you'll be well-equipped to build modern, scalable, and performant web applications. Happy coding!
+
+Created with ❤ by Faizan Hameed
