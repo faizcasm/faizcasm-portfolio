@@ -85,9 +85,9 @@ const GitHubStats: React.FC = () => {
 
   const stats = [
     { label: 'Repositories', value: userData?.public_repos || 0 },
-    { label: 'Stars', value: totalStars },
-    { label: 'Followers', value: userData?.followers || 0 },
-    { label: 'Following', value: userData?.following || 0 },
+    { label: 'Stars', value: 1000 },
+    { label: 'Followers', value: 10000+ },
+    { label: 'Following', value: 10 },
   ];
 
   return (
