@@ -84,11 +84,12 @@ const GitHubStats: React.FC = () => {
   const totalStars = repos.reduce((sum, repo) => sum + repo.stargazers_count, 0);
 
   const stats = [
-    { label: 'Repositories', value: userData?.public_repos || 0 },
-    { label: 'Stars', value: 1000 },
-    { label: 'Followers', value: 10000+ },
-    { label: 'Following', value: 10 },
-  ];
+  { label: 'Repositories', value: userData?.public_repos || 0 },
+  { label: 'Stars', value: 1000 },
+  { label: 'Followers', value: 10000 }, // Fixed the value here
+  { label: 'Following', value: 10 },
+];
+
 
   return (
     <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md flex-grow">
