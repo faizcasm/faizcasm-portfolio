@@ -5,7 +5,7 @@ import { getSortedPostsData, PostData, getAllCategories, getAllTags } from "../.
 import { Calendar, Clock, Tag, Loader } from 'lucide-react';
 
 export const metadata = {
-  title: "Blog | Your Name",
+  title: "Blog | Faizan Hameed",
   description: "Explore insightful articles on web development, design, and technology.",
 };
 
