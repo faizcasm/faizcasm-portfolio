@@ -16,9 +16,10 @@ const AboutMe: React.FC = () => {
           <div className="flex-1 text-center sm:text-left">
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">Faizan Hameed</h1>
             <p className="text-blue-600 dark:text-blue-400 mb-4">@faizcasm&apos;s</p> {/* Escaped apostrophe */}
-            <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
-              Hey! I&apos;m Faizan Hameed, Fullstack Developer and Founder of Wolvinix from Srinagar, India. I build sleek, efficient web apps and love diving into AI to create smart solutions that blend user needs with business goals.
-            </p>
+             <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
+  Faizan Hameed Tantray, Fullstack Developer and Founder of Wolvinix from Palhallan Pattan, Srinagar, India. Specializing in building sleek, efficient web apps while exploring AI to create intelligent solutions that align user needs with business goals.
+</p>
+
             <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
               Founder of Wolvinix social network
             </p>
