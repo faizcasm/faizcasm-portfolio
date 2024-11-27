@@ -1,7 +1,7 @@
 ---
 title: "Wolvinix Launch Date: A Social Media Revolution for Gamers"
 date: "2024-11-27"
-author: "Wolvinix Team"
+author: "Wolvinix CEO Faizan Hameed"
 tags: ["Gaming", "Social Media", "Wolvinix", "Gamers Unite", "Gaming Community"]
 category: "Tech Announcements"
 description: "Wolvinix, a revolutionary social media platform for gamers, is set to launch in February 2025. Discover how this platform will reshape gaming connectivity and unite gamers worldwide."
@@ -26,9 +26,18 @@ Key Features of Wolvinix
 - Game Discovery: Find new games tailored to your interests, with personalized recommendations.  
 - Esports Integration: Stay updated with tournaments, follow teams, and engage in discussions.  
 - Marketplace for Gamers: Buy, sell, or trade in-game items, merchandise, or services.  
-- Streaming Connectivity: Link your favorite streaming platforms and share gameplay.  
+- Streaming Connectivity: Link your favorite streaming platforms and share gameplay.
+- Chatting and calling : Both Video and voice calling and chatting system.
+- Clans : You can join clans or create your own.
+- Wolvinix has many features. 
 
 Wolvinix is more than a platform—it’s a movement to foster connections and build a global gaming community.  
+
+---
+Founder and CEO of Wolvinix? 
+Faizan Hameed is the founder and CEO of Wolvinix social networking platform. 
+
+---
 
 ---
 
@@ -69,7 +78,7 @@ Join the Movement
 The countdown has begun, and we invite you to be part of the Wolvinix revolution. Connect with us on social media to stay updated:  
 
 - Twitter: [@Wolvinix](https://twitter.com/wolvinix)  
-- Instagram: [@WolvinixOfficial](https://instagram.com/wolvinix)  
+- Instagram: [@Wolvinix](https://instagram.com/wolvinix)  
 - Discord: [Join Our Community](https://discord.gg/wolvinix)  
 
 Together, let’s build the future of gaming connectivity.  
