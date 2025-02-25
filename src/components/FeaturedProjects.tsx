@@ -26,6 +26,12 @@ const projects: Omit<ProjectCardProps, 'stars' | 'forks' | 'lastUpdated'>[] = [
     technologies: ["Nodejs", "React", "Tailwind CSS"],
     githubLink: "https://github.com/faizcasm/Foodify",
     liveLink: "https://foodify-seven.vercel.app"
+  }, 
+  {title: "Wolvinix",
+    description: "Full Stack social media platform for gamers",
+    technologies: ["Nodejs", "React", "Tailwind CSS","MongoDb","Cron","Postgres","WebRTC","WebSockets","Industry ready"],
+    githubLink: "https://github.com/faizcasm/wolvinix",
+    liveLink: "https://wolvinix.com"
   }
 ];
 
