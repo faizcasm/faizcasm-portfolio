@@ -264,7 +264,8 @@ const AIChatBox: React.FC<AIChatBoxProps> = ({ open, onClose }) => {
             value={input}
             onChange={handleInputChange}
             placeholder="Say something..."
-            className="flex-grow rounded-full border border-gray-300 bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+             className="flex-grow rounded-full border border-gray-300 bg-white text-black dark:bg-gray-800 dark:text-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+{/*             className="flex-grow rounded-full border border-gray-300 bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500" */}
             ref={inputRef}
           />
           <button
