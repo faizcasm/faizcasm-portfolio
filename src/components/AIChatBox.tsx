@@ -136,8 +136,6 @@
 // export default AIChatBox;
 
 
-
-
 "use client";
 
 import React, { useEffect, useRef, useState } from 'react';
@@ -149,8 +147,13 @@ interface AIChatBoxProps {
   onClose: () => void;
 }
 
+type Message = {
+  role: 'user' | 'assistant';
+  content: string;
+};
+
 const AIChatBox: React.FC<AIChatBoxProps> = ({ open, onClose }) => {
-  const [messages, setMessages] = useState<{ role: 'user' | 'assistant'; content: string }[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -177,7 +180,7 @@ const AIChatBox: React.FC<AIChatBoxProps> = ({ open, onClose }) => {
     e.preventDefault();
     if (!input.trim()) return;
 
-    const userMessage = { role: 'user', content: input };
+    const userMessage: Message = { role: 'user', content: input };
     setMessages(prev => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
@@ -189,16 +192,16 @@ const AIChatBox: React.FC<AIChatBoxProps> = ({ open, onClose }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ code: userMessage.content }), // ✅ Send { code: input }
+        body: JSON.stringify({ code: userMessage.content }),
       });
 
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
 
-      const data = await response.text(); // assuming server sends plain text
-      const aiMessage = { role: 'assistant', content: data };
+      const data = await response.text();
 
+      const aiMessage: Message = { role: 'assistant', content: data };
       setMessages(prev => [...prev, aiMessage]);
     } catch (err) {
       console.error('Fetch error:', err);
@@ -214,16 +217,13 @@ const AIChatBox: React.FC<AIChatBoxProps> = ({ open, onClose }) => {
 
   return (
     <div className={`fixed inset-0 flex items-center justify-center z-50 ${open ? 'block' : 'hidden'}`}>
-      <div className="flex flex-col h-[500px] w-full max-w-sm p-4 border bg-background shadow-xl rounded-lg overflow-hidden">
-        {/* Header */}
+      <div className="flex flex-col h-[300px] w-full max-w-sm p-4 border bg-background shadow-xl rounded-lg overflow-hidden">
         <div className="flex items-center justify-between bg-blue-500 p-4 rounded">
           <h2 className="text-white font-bold">Faizcasm AI</h2>
           <button onClick={onClose} className="text-white hover:text-gray-300 transition-colors">
             <XCircle size={24} />
           </button>
         </div>
-
-        {/* Messages */}
         <div className="mt-3 h-full overflow-y-auto px-3" ref={scrollRef}>
           {messages.map((message, index) => (
             <div
@@ -232,24 +232,18 @@ const AIChatBox: React.FC<AIChatBoxProps> = ({ open, onClose }) => {
             >
               {message.role === 'assistant' && <Bot className="mr-2" />}
               <div
-                className={`rounded-md border px-3 py-2 ${
-                  message.role === 'assistant'
-                    ? 'bg-background'
-                    : 'bg-foreground text-background'
-                }`}
+                className={`rounded-md border px-3 py-2 ${message.role === 'assistant' ? 'bg-background' : 'bg-foreground text-background'}`}
               >
                 <ReactMarkdown>{message.content}</ReactMarkdown>
               </div>
             </div>
           ))}
-
           {isLoading && (
             <div className="mb-3 flex items-center">
               <Bot className="mr-2" />
-              <div className="rounded-md border px-3 py-2 bg-background">🤖 Thinking...</div>
+              <div className="rounded-md border px-3 py-2 bg-background">🤖 is Thinking...</div>
             </div>
           )}
-
           {error && (
             <div className="mb-3 flex items-center">
               <Bot className="mr-2" />
@@ -257,18 +251,15 @@ const AIChatBox: React.FC<AIChatBoxProps> = ({ open, onClose }) => {
             </div>
           )}
         </div>
-
-        {/* Input Form */}
         <form onSubmit={handleSubmit} className="m-3 flex gap-1">
           <button
             type="button"
-            onClick={clearMessages}
             className="flex w-10 flex-none items-center justify-center hover:text-red-500 transition-colors"
-            title="Clear Chat"
+            title="Clear chat"
+            onClick={clearMessages}
           >
             <Trash size={24} />
           </button>
-
           <input
             value={input}
             onChange={handleInputChange}
@@ -276,12 +267,11 @@ const AIChatBox: React.FC<AIChatBoxProps> = ({ open, onClose }) => {
             className="flex-grow rounded-full border border-gray-300 bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
             ref={inputRef}
           />
-
           <button
             type="submit"
+            className="flex w-10 flex-none items-center justify-center disabled:opacity-50 hover:text-blue-400 transition-colors"
             disabled={input.length === 0}
-            className="flex w-10 flex-none items-center justify-center hover:text-blue-400 transition-colors"
-            title="Send Message"
+            title="Submit message"
           >
             <SendHorizontal size={24} />
           </button>
@@ -292,4 +282,5 @@ const AIChatBox: React.FC<AIChatBoxProps> = ({ open, onClose }) => {
 };
 
 export default AIChatBox;
+
 
