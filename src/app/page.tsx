@@ -24,11 +24,17 @@ const HomePage: React.FC = () => {
       "https://www.linkedin.com/in/faizan-hameed-tantray-a54316255",
       "https://x.com/faizanhameedtan",
       "https://github.com/faizcasm",
-      "https://www.instagram.com/_._faizcasm",
+      "https://www.instagram.com/faizcasmcodes",
       "https://youtube.com/@faizcasm",
     ],
     description:
-      "Faizan Hameed Tantray is a software engineer specializing in full-stack development, AI, ML, and Web3 technologies. He is also the founder of Wolvinix.",
+      `Faizan Hameed Tantray
+Software Engineer • Founder of Wolvinix
+📍 Palhallan Pattan, Srinagar, India
+
+Crafting sleek, scalable web applications with precision and purpose. As the founder of Wolvinix,
+a social network built for gamers, I blend deep fullstack expertise with a passion for AI turning complex ideas into intelligent,
+user-focused solutions that scale. I'm all about writing clean code, building smart systems, and delivering products that actually solve problems.`,
     email: "faizanhameed690@gmail.com",
     address: {
       "@type": "PostalAddress",
