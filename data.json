@@ -2,21 +2,21 @@
   "personalInfo": {
     "name": "Faizan Hameed",
     "username": "@faizcasm",
-    "location": "Srinagar, India",
-    "role": "Fullstack Developer",
-    "bio": "Hey there, I'm Faizan, a Fullstack Developer based in Kashmir, India. I dive deep into JavaScript and love crafting sleek, efficient fullstack web apps. With an eye for detail and a hunger for learning, I'm all about delivering high-quality solutions that meet both user needs and business objectives.\n\nAI? Oh, that's my jam. I geek out on building software that taps into AI magic.",
+    "location": "Pattan, J&K, India",
+    "role": "Full Stack Developer (PERN / MERN)",
+    "bio": "Full Stack Developer with a strong foundation in PERN/MERN stacks and hands-on experience in building scalable, production-ready applications. Proficient in Docker, Redis, CI/CD pipelines with GitHub Actions, and modern development best practices. Passionate open-source contributor and founder of a gaming-focused social media platform.",
     "githubStats": {
       "repositories": 28,
-      "stars": 2,
+      "stars": 29,
       "followers": 3,
       "following": 4
     },
     "topLanguages": [
-      { "name": "JavaScript", "percentage": 63 },
-      { "name": "TypeScript", "percentage": 20 },
-      { "name": "Python", "percentage": 7 },
-      { "name": "CSS", "percentage": 5 },
-      { "name": "HTML", "percentage": 5 }
+      { "name": "JavaScript", "percentage": 100 },
+      { "name": "TypeScript", "percentage": 80 },
+      { "name": "Python", "percentage": 50 },
+      { "name": "CSS", "percentage": 100},
+      { "name": "HTML", "percentage": 100 }
     ],
     "memberSince": "1.04.2019"
   },
@@ -27,49 +27,92 @@
     "gtihubStatistics": "/github-stats"
   },
   "technologies": [
-    "JavaScript", "TypeScript", "React", "Next.js", "Tailwind CSS",
-    "Webix JS", "Ext JS", "Node.js", "PHP", "MongoDB", "MySQL",
-    "Prisma", "Git", "GitHub", "Docker", "VS Code",
-     "OpenAI"
+    "JavaScript", "TypeScript", "React.js", "Next.js", "Tailwind CSS",
+    "Redux", "Node.js", "Express.js", "PostgreSQL", "MongoDB",
+    "REST APIs", "Docker", "GitHub Actions", "CI/CD", "Redis",
+    "NGINX", "Linux", "Git","Prisma","Mongoose"
+  ],
+  "education": {
+    "degree": "Bachelor of Computer Applications (BCA)",
+    "institution": "Punjab Technical University (PTU)",
+    "duration": "2023 – 2026"
+  },
+  "experience": [
+    {
+      "position": "Founder",
+      "company": "Wolvinix",
+      "duration": "Jan 2024 – Present",
+      "description": "Built a scalable social media platform for gamers from scratch. Implemented real-time chat, authentication, and scalable backend systems."
+    },
+    {
+      "position": "Full Stack Intern",
+      "company": "Infosys",
+      "duration": "Oct 2024 – Dec 2024",
+      "description": "Worked on enterprise-level projects using Node.js, React, PostgreSQL. Implemented CI/CD automation with GitHub Actions."
+    },
+    {
+      "position": "Full Stack Intern",
+      "company": "Upskill Mafia",
+      "duration": "Aug 2023 – Feb 2024",
+      "description": "Developed full-stack features, dashboards, and API integrations. Enhanced performance and security of web applications."
+    }
   ],
   "featuredProjects": [
     {
-      "title": "Portfolio",
-      "description": "Faizan Hameed Portfolio Website with an AI chatbot that can answer any question about you.",
-      "technologies": ["Next.js", "Gemini", "MongoDB", "Stripe", "tailwind"],
-      "stars": 0,
-      "forks": 0,
+      "title": "Wolvinix",
+      "description": "A scalable social media platform for gamers with real-time chat, authentication, and scalable backend systems.",
+      "technologies": ["Node.js", "React.js", "MongoDB", "Redis", "Docker"],
+      "stars": 1,
+      "forks": 2,
       "lastUpdated": "2024-07-03T13:07:54.735Z",
-      "githubLink": "https://github.com/faizcasm/faizcasm-portfolio",
-      "liveDemo": "https://faizcasm.in"
+      "githubLink": "",
+      "liveDemo": "https://wolvinix.com"
     },
     {
       "title": "Foodify",
-      "description": "Full Stack food app",
+      "description": "Full Stack food app with modern UI and real-time features.",
       "technologies": ["React", "Firebase", "Tailwind CSS"],
-      "stars": 0,
+      "stars": 2,
       "forks": 0,
       "lastUpdated": "2024-07-03T13:07:54.736Z",
       "githubLink": "https://github.com/faizcasm/foodify",
-      "liveDemo": "foodify-seven.vercel.app"
+      "liveDemo": "https://foodify-seven.vercel.app"
+    },
+    {
+      "title": "Portfolio",
+      "description": "Faizan Hameed's portfolio website showcasing projects and skills.",
+      "technologies": ["Next.js", "Tailwind CSS", "MongoDB", "Gemini"],
+      "stars": 3,
+      "forks": 0,
+      "lastUpdated": "2024-07-03T13:07:54.737Z",
+      "githubLink": "https://github.com/faizcasm/faizcasm-portfolio",
+      "liveDemo": "https://faizcasm.in"
     }
   ],
   "projects": [
     {
-      "title": "Portfolio",
-      "description": "A Faizcasm Portfolio",
-      "stars": 0,
-      "forks": 0,
-      "lastUpdated": "12.1.2024",
-      "githubLink": "https://github.com/faizcasm/faizcasm-portfolio"
+      "title": "Wolvinix",
+      "description": "A real-time, scalable gaming social media platform built from scratch.",
+      "stars": 3,
+      "forks": 1,
+      "lastUpdated": "2024-07-03",
+      "githubLink": ""
     },
     {
       "title": "Foodify",
-      "description": "Fullstack Food delivery app With NextJS, Typescript, React, ChatGPT, Tailwind, Prisma, Upstash.",
-      "stars": 0,
-      "forks": 0,
-      "lastUpdated": "12.5.2024",
+      "description": "Fullstack Food delivery app with NextJS, TypeScript, React, ChatGPT, Tailwind, Prisma, Upstash.",
+      "stars": 2,
+      "forks": 1,
+      "lastUpdated": "2024-05-12",
       "githubLink": "https://github.com/faizcasm/foodify"
+    },
+    {
+      "title": "Portfolio",
+      "description": "Personal developer portfolio to showcase projects and skills.",
+      "stars": 3,
+      "forks": 0,
+      "lastUpdated": "2024-01-12",
+      "githubLink": "https://github.com/faizcasm/faizcasm-portfolio"
     }
   ]
 }
