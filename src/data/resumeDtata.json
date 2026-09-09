@@ -1,39 +1,53 @@
 {
   "personalInfo": {
     "name": "Faizan Hameed",
-    "title": "Software Engineer",
+    "title": "AI Engineer & Full Stack Developer",
     "email": "faizanhameed690@gmail.com",
     "phone": "+919149522458",
     "location": "Srinagar, India",
     "github": "https://github.com/faizcasm",
     "linkedin": "https://www.linkedin.com/in/faizan-hameed/",
     "website": "https://faizcasm.in",
-    "summary": "Hey there, I'm Faizan, a Fullstack Developer based in Kashmir, India. I dive deep into JavaScript and love crafting sleek, efficient fullstack web apps. With an eye for detail and a hunger for learning, I'm all about delivering high-quality solutions that meet both user needs and business objectives.\n\nAI? Oh, that's my jam. I geek out on building software that taps into AI magic.",
+    "summary": "I'm an AI engineer and full stack developer based in Kashmir, India. Over the last two years, I have delivered more production-grade projects, strengthened my system design and deployment skills, and focused on building practical AI features including agentic workflows. I enjoy creating reliable products that balance performance, usability, and business impact.",
     "image": "https://avatars.githubusercontent.com/u/40724828?v=4"
   },
   "experience": [
     {
       "company": "Infosys",
-      "position": "Fullstack Intern",
-      "startDate": "Aug 2023",
-      "endDate": "Aug 2024",
-      "description":""
+      "position": "Full Stack Intern",
+      "startDate": "Oct 2024",
+      "endDate": "Dec 2024",
+      "description":"Worked on full-stack product features and backend workflows with a focus on quality, maintainability, and delivery."
     },
     {
       "company": "UpskillMafia",
       "position": "Intern",
+      "startDate": "Aug 2023",
+      "endDate": "Feb 2024",
+      "description":"Built and shipped web features, dashboards, and integrations while improving API reliability and overall UX."
+    },
+    {
+      "company": "Wolvinix",
+      "position": "Founder & Builder",
       "startDate": "Jan 2024",
-      "endDate": "Sep 2024",
-      "description":""
+      "endDate": "Present",
+      "description":"Leading product and engineering for a gaming-focused social platform, including architecture, feature delivery, and scaling decisions."
     }
   ],
   "education": [
     {
-      "institution": "Punjab Technical Univeristy",
+      "institution": "Punjab Technical University",
       "degree": "Bachelor of Computer Applications",
       "startDate": "June 2023",
       "endDate": "June 2026",
-      "description": ""
+      "description": "Completed."
+    },
+    {
+      "institution": "KIECAT Srinagar",
+      "degree": "Master of Computer Applications",
+      "startDate": "2026",
+      "endDate": "Present",
+      "description": "Currently pursuing."
     },
     {
       "institution": "Govt. Higher Secondary School Palhallan",
@@ -47,12 +61,14 @@
     "HTML/CSS",
     "Javascript/Typescript",
     "React/Next JS",
-    "Ext JS/Webix JS",
-    "PHP/Laravel",
-    "Mysql/MongoDB",
-    "Git/SVN",
+    "Node.js/Express.js",
+    "PostgreSQL/MongoDB",
+    "Git/GitHub",
     "Docker",
-    "Node js"
+    "Redis",
+    "OpenAI APIs",
+    "LangChain",
+    "Agentic Systems"
   ],
   "languages": [
     {
@@ -71,15 +87,21 @@
   "projects": [
     {
       "name": "Portfolio",
-      "description": "Faizcasm Portfolio.",
-      "technologies": ["AI", "Web Development"],
+      "description": "A modern portfolio with AI-assisted interactions and updated project storytelling.",
+      "technologies": ["Next.js", "TypeScript", "Tailwind CSS", "LangChain", "Gemini"],
       "link": "https://faizcasm.in"
     },
     {
       "name": "Foodify",
-      "description": "Fullstack Food Delivery App.",
-      "technologies": ["AI", "Web Development"],
+      "description": "Full-stack food ordering project with modern frontend architecture and backend integrations.",
+      "technologies": ["Next.js", "Prisma", "TypeScript", "Upstash", "Tailwind CSS"],
       "link": "https://foodify-seven.vercel.app"
+    },
+    {
+      "name": "Wolvinix",
+      "description": "Gaming-focused social platform featuring real-time communication and scalable backend services.",
+      "technologies": ["Node.js", "React", "MongoDB", "Redis", "WebSockets"],
+      "link": "https://wolvinix.com"
     }
   ],
   "interests": [

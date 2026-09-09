@@ -27,27 +27,28 @@ const skills = [
   { icon: <Atom />, name: "React" },
   { icon: <Zap />, name: "Next.js" },
   { icon: <Palette />, name: "Tailwind CSS" },
-  { icon: <Globe />, name: "Webix JS" },
-  { icon: <BarChart />, name: "Ext JS" },
+  { icon: <Globe />, name: "REST APIs" },
+  { icon: <BarChart />, name: "System Design" },
   { icon: <Server />, name: "Node.js" },
   { icon: <FileCode />, name: "Python" },
   { icon: <Database />, name: "MongoDB" },
-  { icon: <Table />, name: "MySQL" },
+  { icon: <Table />, name: "PostgreSQL" },
   { icon: <GitBranch />, name: "Prisma" },
   { icon: <GitCommit />, name: "Git" },
   { icon: <Github />, name: "GitHub" },
-  { icon: <GitCommit />, name: "SVN" },
   { icon: <Container />, name: "Docker" },
-  { icon: <Terminal />, name: "VS Code" },
-  { icon: <Rocket />, name: "Astro" },
+  { icon: <Terminal />, name: "CI/CD" },
+  { icon: <Rocket />, name: "Redis" },
   { icon: <Bot />, name: "OpenAI" },
-  { icon: <Link />, name: "Langchain" },
+  { icon: <Link />, name: "LangChain" },
+  { icon: <Bot />, name: "Agentic Systems" },
 ];
 
 const Technologies: React.FC = () => {
   return (
-    <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg md:col-span-2 lg:col-span-3 transition-all duration-300 hover:shadow-xl flex-grow">
-      <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white text-center">Technologies</h2>
+    <div className="flex-grow rounded-2xl border border-gray-200/80 bg-white/90 p-6 shadow-lg transition-all duration-300 hover:shadow-2xl dark:border-gray-700 dark:bg-gray-800/90 md:col-span-2 lg:col-span-3">
+      <h2 className="mb-2 text-center text-2xl font-bold text-gray-800 dark:text-white">Technologies</h2>
+      <p className="mb-6 text-center text-sm text-gray-600 dark:text-gray-300">Modern full-stack and AI tooling used in recent projects</p>
       <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
         {skills.map((skill, index) => (
           <li 

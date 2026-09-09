@@ -3,8 +3,8 @@
     "name": "Faizan Hameed",
     "username": "@faizcasm",
     "location": "Pattan, J&K, India",
-    "role": "Full Stack Developer (PERN / MERN)",
-    "bio": "Full Stack Developer with a strong foundation in PERN/MERN stacks and hands-on experience in building scalable, production-ready applications. Proficient in Docker, Redis, CI/CD pipelines with GitHub Actions, and modern development best practices. Passionate open-source contributor and founder of a gaming-focused social media platform.",
+    "role": "AI Engineer & Full Stack Developer",
+    "bio": "AI engineer and full stack developer focused on building production-ready web products and agentic systems. Over the last two years, I have shipped more real-world projects, improved system design skills, and deepened my experience across modern frontend, backend, and AI tooling.",
     "githubStats": {
       "repositories": 28,
       "stars": 29,
@@ -30,12 +30,12 @@
     "JavaScript", "TypeScript", "React.js", "Next.js", "Tailwind CSS",
     "Redux", "Node.js", "Express.js", "PostgreSQL", "MongoDB",
     "REST APIs", "Docker", "GitHub Actions", "CI/CD", "Redis",
-    "NGINX", "Linux", "Git","Prisma","Mongoose"
+    "NGINX", "Linux", "Git","Prisma","Mongoose", "OpenAI APIs", "LangChain", "Agentic Workflows"
   ],
   "education": {
-    "degree": "Bachelor of Computer Applications (BCA)",
-    "institution": "Punjab Technical University (PTU)",
-    "duration": "2023 – 2026"
+    "degree": "Master of Computer Applications (ongoing), Bachelor of Computer Applications (completed)",
+    "institution": "KIECAT Srinagar; Punjab Technical University (PTU)",
+    "duration": "2023 – Present"
   },
   "experience": [
     {
@@ -60,8 +60,8 @@
   "featuredProjects": [
     {
       "title": "Wolvinix",
-      "description": "A scalable social media platform for gamers with real-time chat, authentication, and scalable backend systems.",
-      "technologies": ["Node.js", "React.js", "MongoDB", "Redis", "Docker"],
+      "description": "A scalable social platform for gamers featuring real-time interactions, authentication, and resilient backend services.",
+      "technologies": ["Node.js", "React.js", "MongoDB", "Redis", "Docker", "WebSockets"],
       "stars": 1,
       "forks": 2,
       "lastUpdated": "2024-07-03T13:07:54.735Z",
@@ -70,8 +70,8 @@
     },
     {
       "title": "Foodify",
-      "description": "Full Stack food app with modern UI and real-time features.",
-      "technologies": ["React", "Firebase", "Tailwind CSS"],
+      "description": "Full-stack food ordering platform with polished UI, role-based flows, and modern deployment practices.",
+      "technologies": ["Next.js", "TypeScript", "Prisma", "Tailwind CSS", "Upstash"],
       "stars": 2,
       "forks": 0,
       "lastUpdated": "2024-07-03T13:07:54.736Z",
@@ -80,8 +80,8 @@
     },
     {
       "title": "Portfolio",
-      "description": "Faizan Hameed's portfolio website showcasing projects and skills.",
-      "technologies": ["Next.js", "Tailwind CSS", "MongoDB", "Gemini"],
+      "description": "Personal portfolio with AI-powered interactions and continuously updated project highlights.",
+      "technologies": ["Next.js", "Tailwind CSS", "LangChain", "Gemini"],
       "stars": 3,
       "forks": 0,
       "lastUpdated": "2024-07-03T13:07:54.737Z",
@@ -92,7 +92,7 @@
   "projects": [
     {
       "title": "Wolvinix",
-      "description": "A real-time, scalable gaming social media platform built from scratch.",
+      "description": "A real-time gaming social platform built from scratch with scalable APIs and live engagement features.",
       "stars": 3,
       "forks": 1,
       "lastUpdated": "2024-07-03",
@@ -100,7 +100,7 @@
     },
     {
       "title": "Foodify",
-      "description": "Fullstack Food delivery app with NextJS, TypeScript, React, ChatGPT, Tailwind, Prisma, Upstash.",
+      "description": "A full-stack food delivery experience built with Next.js, TypeScript, Prisma, and modern cloud tooling.",
       "stars": 2,
       "forks": 1,
       "lastUpdated": "2024-05-12",
@@ -108,7 +108,7 @@
     },
     {
       "title": "Portfolio",
-      "description": "Personal developer portfolio to showcase projects and skills.",
+      "description": "Personal portfolio that reflects current AI engineering and full-stack development capabilities.",
       "stars": 3,
       "forks": 0,
       "lastUpdated": "2024-01-12",

@@ -109,9 +109,9 @@ const ProjectsGrid: React.FC = () => {
   );
 
   return (
-    <div className="space-y-6 p-6 bg-gray-50 dark:bg-gray-900 rounded-lg shadow-lg">
+    <div className="space-y-6 rounded-2xl border border-gray-200/80 bg-gray-50/80 p-6 shadow-lg backdrop-blur-sm dark:border-gray-700 dark:bg-gray-900/70">
       <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
-        <h2 className="text-3xl font-bold text-gray-800 dark:text-white">Projects on Github</h2>
+        <h2 className="text-3xl font-bold text-gray-800 dark:text-white">GitHub Projects</h2>
         <select
           className="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
           value={filter}

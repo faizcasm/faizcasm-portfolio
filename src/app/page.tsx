@@ -16,7 +16,7 @@ const HomePage: React.FC = () => {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Faizan Hameed Tantray",
-    jobTitle: "Software Engineer, Founder of Wolvinix",
+    jobTitle: "AI Engineer, Full Stack Developer, Founder of Wolvinix",
     url: "https://faizcasm.in",
     image:
       "https://res.cloudinary.com/dvqs8ferk/image/upload/v1729588663/muegehb9q00obxstv57m.jpg",
@@ -29,12 +29,11 @@ const HomePage: React.FC = () => {
     ],
     description:
       `Faizan Hameed Tantray
-Software Engineer • Founder of Wolvinix
+AI Engineer • Full Stack Developer • Founder of Wolvinix
 📍 Palhallan Pattan, Srinagar, India
-
+ 
 Crafting sleek, scalable web applications with precision and purpose. As the founder of Wolvinix,
-a social network built for gamers, I blend deep fullstack expertise with a passion for AI turning complex ideas into intelligent,
-user-focused solutions that scale. I'm all about writing clean code, building smart systems, and delivering products that actually solve problems.`,
+a social network built for gamers, I blend deep full-stack expertise with practical AI engineering to build user-focused solutions that scale.`,
     email: "faizanhameed690@gmail.com",
     address: {
       "@type": "PostalAddress",
@@ -54,7 +53,7 @@ user-focused solutions that scale. I'm all about writing clean code, building sm
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
         />
       </Head>
-      <div className="min-h-screen p-4 md:p-8">
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-blue-50/60 p-4 dark:from-gray-950 dark:via-gray-950 dark:to-gray-900 md:p-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
           <div className="sm:col-span-2 md:col-span-3 lg:col-span-4 xl:col-span-6">
             <AboutMe />
