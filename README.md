@@ -1,10 +1,10 @@
-# Faizcasm Portfolio with AI Chatbot
+# Faizcasm Portfolio (Next.js + AI Features)
 
-This project is a personal portfolio website built with Next.js, featuring an AI-powered chatbot that can answer questions about the website's content and the owner's projects.
+This repository contains Faizan Hameed's personal portfolio, built with Next.js, TypeScript, and Tailwind CSS. It showcases recent full-stack and AI engineering work, including practical agentic-system capabilities and project highlights.
 
 ## Features
 
-- Responsive portfolio website showcasing projects and skills
+- Responsive portfolio website with modern UI sections
 - AI chatbot integrated into the website
 - Dynamic content management for projects and blog posts
 - GitHub integration to display repositories and contributions
@@ -28,7 +28,7 @@ This project is a personal portfolio website built with Next.js, featuring an AI
 1. Clone the repository:
    ```bash
    git clone https://github.com/faizcasm/faizcasm-portfolio.git
-   cd portfolio-chatbot
+   cd faizcasm-portfolio
    ```
 
 2. Install dependencies:
@@ -54,11 +54,11 @@ This project is a personal portfolio website built with Next.js, featuring an AI
 
 6. Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
-## Deployment
+## Profile Notes
 
-This project is set up for easy deployment on Vercel. Connect your GitHub repository to Vercel and it will automatically deploy your main branch.
-
-Make sure to add all the environment variables from your `.env.local` file to your Vercel project settings.
+- Current focus: AI engineering + full-stack systems
+- Education: BCA completed, currently pursuing MCA at KIECAT Srinagar
+- Portfolio content is refreshed to reflect growth across the last two years of project work and learning
 
 ## Updating Content
 

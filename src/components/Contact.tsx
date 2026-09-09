@@ -1,13 +1,8 @@
 'use client'
 import React, { FormEvent, useState } from 'react';
-import { Mail, Phone, MapPin, Linkedin, Send } from 'lucide-react';
+import { Send } from 'lucide-react';
 import axios from 'axios'
 const ContactPage: React.FC = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
@@ -35,9 +30,10 @@ const ContactPage: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen p-6">
-      <div className="w-full max-w-lg bg-white dark:bg-gray-800 rounded-lg shadow-2xl p-6">
-        <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 text-center">Contact</h2>
+    <div className="flex min-h-screen items-center justify-center p-6">
+      <div className="w-full max-w-lg rounded-2xl border border-gray-200/80 bg-white/90 p-6 shadow-2xl backdrop-blur-sm dark:border-gray-700 dark:bg-gray-800/90">
+        <h2 className="mb-2 text-center text-2xl font-bold text-gray-800 dark:text-white">Let&apos;s Build Something Great</h2>
+        <p className="mb-6 text-center text-sm text-gray-600 dark:text-gray-300">Open to AI engineering, product, and full-stack collaboration opportunities.</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
