@@ -47,7 +47,7 @@ const AboutMe: React.FC = () => {
               {roles.map((role, index) => (
                 <React.Fragment key={role}>
                   {index > 0 && (
-                    <span className="text-gray-300 dark:text-gray-600" aria-hidden>
+                    <span className="text-gray-300 dark:text-gray-500" aria-hidden>
                       |
                     </span>
                   )}

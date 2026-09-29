@@ -77,9 +77,9 @@ const TimelineItem: React.FC<{ item: TimelineItem }> = ({ item }) => (
       <div className="absolute left-0 top-4 h-5 w-5 rounded-full border-4 border-white bg-blue-500 dark:border-gray-800" />
       <h3 className="text-lg font-medium text-gray-900 dark:text-white">{item.title}</h3>
       <p className="text-sm text-gray-600 dark:text-gray-400">{item.organization}</p>
-      {item.date && <p className="text-sm text-gray-500 dark:text-gray-500">{item.date}</p>}
+      {item.date && <p className="text-sm text-gray-500 dark:text-gray-400">{item.date}</p>}
       {item.location && (
-        <p className="text-sm text-gray-500 dark:text-gray-500">{item.location}</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400">{item.location}</p>
       )}
       {item.description && (
         <p className="mt-2 text-sm text-gray-700 dark:text-gray-300">{item.description}</p>

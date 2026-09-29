@@ -106,13 +106,19 @@ export default function BlogList({
               <Link href={`/blog/${post.id}`} className="group block h-full">
                 <article className="flex h-full flex-col overflow-hidden rounded-lg bg-white shadow-md transition-all duration-300 hover:shadow-xl dark:bg-gray-800">
                   <div className="relative h-48 w-full">
-                    <Image
-                      src={`/images/${post.id}.jpg`}
-                      alt={post.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
+                    {post.cover ? (
+                      <Image
+                        src={post.cover}
+                        alt={post.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-700 dark:to-gray-800">
+                        <Tag size={32} className="text-blue-400 dark:text-blue-500" />
+                      </div>
+                    )}
                   </div>
                   <div className="flex flex-col flex-grow p-6">
                     <div className="mb-2 flex flex-wrap items-center gap-2 text-xs font-medium text-blue-600 dark:text-blue-400">

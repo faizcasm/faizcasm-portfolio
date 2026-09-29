@@ -78,7 +78,7 @@ export default function Navbar({ posts = [] }: NavbarProps) {
 
       {isOpen && (
         <motion.div
-          className="md:hidden backdrop-blur-md  bg-opacity-70"
+          className="md:hidden backdrop-blur-md bg-white/90 dark:bg-gray-900/90"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
@@ -95,7 +95,7 @@ export default function Navbar({ posts = [] }: NavbarProps) {
               </Link>
             ))}
           </div>
-          <div className="pt-4 pb-3 border-t border-gray-200">
+          <div className="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
             <div className="flex items-center px-5">
               <ThemeToggle />
             </div>

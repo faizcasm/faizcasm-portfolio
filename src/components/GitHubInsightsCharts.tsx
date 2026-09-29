@@ -1,80 +1,46 @@
 "use client"
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import { Github, Star, GithubIcon, Loader } from 'lucide-react';
+import { Star, GithubIcon } from 'lucide-react';
 import LanguageChart3D from './LanguageChart3D';
+import type { InsightsSnapshot } from '@/lib/github';
 
-interface LanguageData {
-  name: string;
-  value: number;
+interface GitHubInsightsChartsProps {
+  data: InsightsSnapshot;
 }
 
-interface RepoData {
-  name: string;
-  stars: number;
-}
+/**
+ * Charts render from a snapshot fetched and cached on the server
+ * (src/lib/github.ts) — no unauthenticated search-API calls from the browser.
+ */
+const GitHubInsightsCharts: React.FC<GitHubInsightsChartsProps> = ({ data }) => {
+  const { languages, topRepos, live } = data;
 
-interface EventData {
-  type: string;
-  count: number;
-}
-
-const GitHubInsightsCharts: React.FC = () => {
-  const [languages, setLanguages] = useState<LanguageData[]>([]);
-  const [topRepos, setTopRepos] = useState<RepoData[]>([]);
-  const [events, setEvents] = useState<EventData[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchInsights = async () => {
-      try {
-        // Fetch top languages
-        const langResponse = await fetch('https://api.github.com/search/repositories?q=stars:>10000&sort=stars&order=desc&per_page=100');
-        const langData = await langResponse.json();
-        const languageCounts: { [key: string]: number } = {};
-        langData.items.forEach((repo: any) => {
-          if (repo.language) {
-            languageCounts[repo.language] = (languageCounts[repo.language] || 0) + 1;
-          }
-        });
-        const languageData = Object.entries(languageCounts)
-          .map(([name, value]) => ({ name, value }))
-          .sort((a, b) => b.value - a.value)
-          .slice(0, 7);
-        setLanguages(languageData);
-
-        // Fetch top repositories
-        const repoResponse = await fetch('https://api.github.com/search/repositories?q=stars:>50000&sort=stars&order=desc&per_page=10');
-        const repoData = await repoResponse.json();
-        const topReposData = repoData.items.map((repo: any) => ({
-          name: repo.name,
-          stars: repo.stargazers_count
-        }));
-        setTopRepos(topReposData);
-
-      } catch (err) {
-        console.error('Error fetching GitHub insights:', err);
-        setError('Failed to fetch GitHub insights. Please try again later.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchInsights();
-  }, []);
-
-  if (loading) return <div className="flex justify-center items-center h-64">
-    <Loader className="animate-spin text-indigo-500" size={48} />
-  </div>;
-  if (error) return <div className="text-red-600 dark:text-red-400">{error}</div>;
+  if (!live && languages.length === 0 && topRepos.length === 0) {
+    return (
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200 flex items-center">
+          <GithubIcon className="mr-2" /> GitHub Insights
+        </h2>
+        <p className="text-amber-600 dark:text-amber-400 text-sm">
+          GitHub is rate-limiting this network right now, so the charts are
+          temporarily unavailable. Refresh a bit later to see them.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200 flex items-center">
         <GithubIcon className="mr-2" /> GitHub Insights
       </h2>
+      {!live && (
+        <p className="mb-3 text-xs font-medium text-amber-600 dark:text-amber-400">
+          Showing cached data — GitHub is rate-limiting this network.
+        </p>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>

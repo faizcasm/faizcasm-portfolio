@@ -1,6 +1,6 @@
 import BackToTop from "@/components/BackToTop";
-import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import PrintThemeSync from "@/components/PrintThemeSync";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { getSortedPostsData } from "../../utils/markdown";
 import type { Metadata } from "next";
@@ -15,7 +15,8 @@ export const metadata: Metadata = {
     template: "%s | Faizcasm",
     default: "Faizan Hameed",
   },
-  description: "Check out my portfolio website with a custom AI chatbot.",
+  description:
+    "Portfolio of Faizan Hameed Tantray (faizcasm) — Forward Deployed Engineer, Software Engineer and Agentic AI Engineer building scalable infrastructure and intelligent products.",
 };
 
 export default async function RootLayout({
@@ -26,9 +27,14 @@ export default async function RootLayout({
   const posts = await getSortedPostsData();
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider attribute="class">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           <Navbar
             posts={posts.map((post) => ({
               id: post.id,
@@ -39,8 +45,8 @@ export default async function RootLayout({
           <main className="p-4 pb-12 max-w-7xl mx-auto overflow-hidden lg:overflow-visible">
             {children}
           </main>
-          <Footer />
           <BackToTop />
+          <PrintThemeSync />
         </ThemeProvider>
       </body>
     </html>

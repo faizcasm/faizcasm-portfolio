@@ -47,7 +47,7 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content }) => {
       <a className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer" {...props} />
     ),
     blockquote: ({ node, ...props }) => (
-      <blockquote className="border-l-4 border-gray-300 pl-4 italic my-2" {...props} />
+      <blockquote className="border-l-4 border-gray-300 pl-4 italic my-2 dark:border-gray-600" {...props} />
     ),
   };
 

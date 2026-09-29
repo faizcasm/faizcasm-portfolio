@@ -1,14 +1,15 @@
-# Faizcasm Portfolio (Next.js + AI Features)
+# Faizcasm Portfolio (Next.js)
 
-This repository contains Faizan Hameed's personal portfolio, built with Next.js, TypeScript, and Tailwind CSS. It showcases recent full-stack and AI engineering work, including practical agentic-system capabilities and project highlights.
+Faizan Hameed's personal portfolio, built with Next.js (App Router), TypeScript and Tailwind CSS. It showcases full-stack and agentic-AI engineering work, a dynamic blog and an interactive GitHub section — production-ready on Vercel.
 
 ## Features
 
-- Responsive portfolio website with modern UI sections
-- AI chatbot integrated into the website
-- Dynamic content management for projects and blog posts
-- Live GitHub integration powering the top-languages chart
-- Dark mode support
+- Responsive portfolio site with modern UI sections (hero, timeline, skills, projects, contact)
+- **Dynamic blog** — posts are managed at runtime through an admin panel backed by SQLite/libSQL, with the existing `posts/*.md` files migrated automatically
+- **Admin panel** at `/admin` — login, create/edit/delete posts, publish/unpublish, markdown editor with live preview
+- Live GitHub integration (server-side, cached) powering the top-languages chart and projects grid
+- Dark mode with system preference detection; print-safe themes
+- ⌘K command palette, scroll-reveal animations, reading progress, TOC, tag filtering, share buttons
 
 ### Blog reading experience
 
@@ -25,7 +26,7 @@ This repository contains Faizan Hameed's personal portfolio, built with Next.js,
 
 - ⌘K / Ctrl+K command palette — fuzzy search across pages, projects and blog posts, with keyboard navigation
 - Scroll-reveal animations on every homepage section (framer-motion, `whileInView`)
-- Back-to-top button (bottom-left, so it never covers the chat widget)
+- Back-to-top button (bottom-left)
 - Cursor-tracking glow + gradient halo on the hero card
 - Interactive 3D top-languages donut built from stacked SVG layers — hover a slice to lift it out of the disc, with a synced legend (falls back to a labelled snapshot if the GitHub API is rate-limited)
 - Tech stack grouped by the resume's skill categories: Languages, Frontend, Backend, Data, Agentic AI, Cloud & DevOps, Engineering
@@ -37,16 +38,13 @@ This repository contains Faizan Hameed's personal portfolio, built with Next.js,
 
 ## Tech Stack
 
-- Next.js
-- React
-- TypeScript
-- Tailwind CSS
-- Octokit (for GitHub API integration)
-- Langchain (for AI chatbot functionality)
-- Vercel (for deployment)
-
-## Project Structure
-
+- Next.js 14 (App Router) + React 18 + TypeScript
+- Tailwind CSS (+ `@tailwindcss/typography`)
+- SQLite via `@libsql/client` (local `file:` DB; Turso-compatible on Vercel)
+- `react-markdown` + `gray-matter` for blog content (server-rendered, no raw HTML)
+- Server-side GitHub API access (native `fetch`, ISR-cached) — no tokens in the browser
+- Nodemailer for the contact form
+- Vercel for deployment
 
 ## Setup and Installation
 
@@ -61,50 +59,65 @@ This repository contains Faizan Hameed's personal portfolio, built with Next.js,
    npm install
    ```
 
-3. Create a `.env.local` file in the root directory and add the following environment variables:
-   ```
-   GITHUB_SECRET=your_github_personal_access_token
-   OPENAI_API_KEY=your_openai_api_key
-   ```
-
-4. Generate embeddings for the chatbot:
+3. Copy the environment template and fill it in (see `.env.example` for details):
    ```bash
-   npm run generate
+   cp .env.example .env.local
    ```
+   | Variable | Purpose |
+   | --- | --- |
+   | `ADMIN_USERNAME` / `ADMIN_PASSWORD` | `/admin` login credentials (required) |
+   | `GITHUB_SECRET` | GitHub token, used **server-side only** to avoid the anonymous rate limit |
+   | `MAIL_USER` / `MAIL_PASS` / `MAIL_TO` | Contact-form Gmail account + app password |
+   | `DATABASE_URL` (+ `TURSO_AUTH_TOKEN`) | Optional — persistent DB on Vercel (Turso). Locally a SQLite file is used automatically. |
 
-5. Run the development server:
+   `.env.local` is gitignored. **Never commit real credentials — this repository is public.**
+
+4. Run the development server:
    ```bash
    npm run dev
    ```
 
-6. Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Profile Notes
+## Database & content
 
-- Current focus: AI engineering + full-stack systems
-- Education: BCA completed, currently pursuing MCA at NIELIT Srinagar
-- Portfolio content is refreshed to reflect growth across the last two years of project work and learning
+- Locally the SQLite file `data/portfolio.db` is created and seeded from `posts/*.md` on first use (gitignored). The seed runs once — posts deleted in the admin panel are not resurrected by rebuilds; `npm run db:seed -- --force` re-seeds.
+- On **Vercel the filesystem is read-only**, so set `DATABASE_URL` to a libSQL/Turso database if you want admin writes to persist. Without it the site still builds and serves the blog from the markdown files (read-only on Vercel).
+- Admin panel: `https://your-domain/admin` (login → dashboard → New/Edit/Delete/Publish). `/admin` is blocked in `robots.txt` and served with `noindex` + `no-store` headers.
+
+## Security & performance notes
+
+- Security headers (CSP, HSTS, X-Frame-Options, nosniff, Referrer-Policy, Permissions-Policy) set in `next.config.mjs`
+- GitHub tokens and mail credentials are server-side only (`server-only` module imports guard them); nothing sensitive ships to the browser
+- Sessions: random 256-bit token, SHA-256 at rest in the DB, HTTP-only SameSite=Lax cookie, 7-day TTL, login rate limiting
+- Markdown is rendered as React elements — no `rehype-raw`, so posts cannot inject HTML/scripts
+- GitHub calls are ISR-cached for 1 hour (2 requests for the homepage instead of dozens) with graceful fallback snapshots when the API is unavailable
+- `/admin` is disallowed for crawlers; blog posts prerendered with `revalidate = 3600`
+
+## Project Structure
+
+```
+src/
+  app/                 # App Router pages (home, blog, projects, resume, admin, api)
+  components/          # UI components (incl. admin/)
+  lib/                 # server-only modules: db, auth, posts, github, rate-limit
+utils/markdown.ts      # DB-first blog data layer with markdown fallback
+posts/*.md             # Blog source content (migrated into SQLite on first run)
+scripts/seed.mjs       # markdown → SQLite migration (also runs during build)
+public/                # static assets (Faizcasm.pdf, images, robots.txt)
+```
 
 ## Updating Content
 
-To update the chatbot's knowledge:
-
-1. Modify the `data.json` file with your updated content
-2. Run the embedding generation script:
-   ```bash
-   npm run generate
-   ```
-3. Deploy the updates to Vercel
+- **Blog:** use the admin panel at `/admin`, or edit/add markdown files in `posts/*.md` (picked up automatically; seeded into the DB on first run).
+- **Projects / GitHub:** automatic from the GitHub profile.
+- **Resume:** edit `src/data/resumeDtata.json` (HTML) and `public/Faizcasm.pdf`.
 
 ## Customization
 
-- Modify the components in `src/components/` to change the layout and design of your portfolio
-- Update the `src/app/` directory to add or modify pages
-- Adjust the chatbot's behavior by modifying the `Chatbot.tsx` component and the embedding generation script
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
+- Modify components in `src/components/`
+- Add pages under `src/app/`
+- Theme/colors: `tailwind.config.ts`, `src/app/globals.css`
 
 ## License
 

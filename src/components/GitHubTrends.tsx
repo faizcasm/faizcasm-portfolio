@@ -1,58 +1,37 @@
 "use client"
 
 import React, { useState, useEffect } from 'react';
-import { Octokit } from '@octokit/rest';
 import { ChevronLeft, ChevronRight, Loader } from 'lucide-react';
-
-interface TrendingRepo {
-  id: number;
-  full_name: string;
-  html_url: string;
-  description: string | null;
-  stargazers_count: number;
-  forks_count: number;
-  language: string | null;
-  topics: string[];
-}
-
-const octokit = new Octokit({ auth: process.env.GITHUB_SECRET });
+import type { TrendingRepo } from '@/lib/github';
 
 const GitHubTrends: React.FC = () => {
   const [trendingRepos, setTrendingRepos] = useState<TrendingRepo[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [live, setLive] = useState<boolean>(true);
   const [page, setPage] = useState<number>(1);
   const perPage = 6; // 6 projects per page, 5 pages total for 30 projects
 
   useEffect(() => {
+    const controller = new AbortController();
+
     const fetchTrendingRepos = async () => {
       setLoading(true);
+      setError(null);
       try {
-        const date = new Date();
-        date.setDate(date.getDate() - 7); // Get repos from the last week
-        const formattedDate = date.toISOString().split('T')[0];
-
-        const response = await octokit.search.repos({
-          q: `created:>${formattedDate}`,
-          sort: 'stars',
-          order: 'desc',
-          per_page: perPage,
-          page: page
+        // Internal route — the token and GitHub cache live server-side.
+        const response = await fetch(`/api/github/trending?page=${page}`, {
+          signal: controller.signal,
         });
-
-        const mappedRepos: TrendingRepo[] = response.data.items.map(item => ({
-          id: item.id,
-          full_name: item.full_name,
-          html_url: item.html_url,
-          description: item.description,
-          stargazers_count: item.stargazers_count,
-          forks_count: item.forks_count,
-          language: item.language,
-          topics: item.topics || []
-        }));
-
-        setTrendingRepos(mappedRepos);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data: { repos: TrendingRepo[]; live: boolean } = await response.json();
+        setTrendingRepos(data.repos);
+        setLive(data.live);
+        if (data.repos.length === 0 && !data.live) {
+          setError('GitHub is rate-limiting this network right now. Please try again in a few minutes.');
+        }
       } catch (err) {
+        if ((err as Error).name === 'AbortError') return;
         setError('Failed to fetch trending repositories');
         console.error('Error fetching trending repos:', err);
       } finally {
@@ -61,6 +40,7 @@ const GitHubTrends: React.FC = () => {
     };
 
     fetchTrendingRepos();
+    return () => controller.abort();
   }, [page]);
 
   if (loading) return <div className="flex justify-center items-center h-64">
@@ -71,6 +51,11 @@ const GitHubTrends: React.FC = () => {
   return (
     <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">Trending Repositories in Github from last Week</h2>
+      {!live && (
+        <p className="mb-3 text-xs font-medium text-amber-600 dark:text-amber-400">
+          Showing cached data — GitHub is rate-limiting this network.
+        </p>
+      )}
       <div className="space-y-4">
         {trendingRepos.map((repo) => (
           <div key={repo.id} className="bg-gray-100 dark:bg-gray-700 p-4 rounded-md shadow-sm">

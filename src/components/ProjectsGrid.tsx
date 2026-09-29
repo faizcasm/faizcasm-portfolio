@@ -1,105 +1,29 @@
 "use client"
 
-import React, { useState, useEffect } from 'react';
-import { Octokit } from '@octokit/rest';
+import React, { useState } from 'react';
 import ProjectCard from './ProjectCard';
-import { Loader, GitBranch, User } from 'lucide-react';
+import { GitBranch, User } from 'lucide-react';
+import type { Project } from '@/lib/github';
 
-interface Project {
-  title: string;
-  description: string;
-  technologies: string[];
-  githubLink: string;
-  liveLink?: string;
-  latestCommitDate: string;
-  isOwn: boolean;
+interface ProjectsGridProps {
+  projects: Project[];
+  /** false when GitHub was unreachable — we show a graceful notice instead of an error box. */
+  live: boolean;
 }
 
-const octokit = new Octokit({ auth: process.env.GITHUB_SECRET });
-
-const ProjectsGrid: React.FC = () => {
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+const ProjectsGrid: React.FC<ProjectsGridProps> = ({ projects, live }) => {
   const [filter, setFilter] = useState<string>('All');
-  const [technologies, setTechnologies] = useState<string[]>(['All']);
   const [activeTab, setActiveTab] = useState<'own' | 'contributed'>('own');
 
-  const fetchProjects = async () => {
-    setLoading(true);
-    try {
-      const username = 'faizcasm';
-  
-      console.log('Fetching projects for user:', username);
-  
-      const { data: allRepos } = await octokit.repos.listForUser({
-        username,
-        per_page: 100,
-        sort: 'updated',
-        type: 'all',
-      });
-  
-      console.log('Fetched repositories:', allRepos);
-  
-      if (allRepos.length === 0) {
-        setError('No repositories found for this user.');
-        setLoading(false);
-        return;
-      }
-  
-      const allProjects: Project[] = await Promise.all(allRepos.map(async (repo) => {
-        const { data: commits } = await octokit.repos.listCommits({
-          owner: repo.owner?.login ?? username,
-          repo: repo.name,
-          per_page: 1,
-        });
-  
-        console.log(`Commits for ${repo.name}:`, commits);
-  
-        const getValidDateString = (dateString: string | null | undefined): string => {
-          if (dateString && !isNaN(Date.parse(dateString))) {
-            return new Date(dateString).toISOString();
-          }
-          return new Date().toISOString();
-        };
-  
-        const latestCommitDate = commits[0]?.commit?.author?.date || repo.updated_at;
-  
-        return {
-          title: repo.name,
-          description: repo.description || 'No description available',
-          technologies: repo.topics || [],
-          githubLink: repo.html_url,
-          liveLink: repo.homepage || undefined,
-          latestCommitDate: getValidDateString(latestCommitDate),
-          isOwn: !repo.fork,
-        };
-      }));
-  
-      const sortedProjects = allProjects.sort((a, b) =>
-        new Date(b.latestCommitDate).getTime() - new Date(a.latestCommitDate).getTime()
-      );
-  
-      setProjects(sortedProjects);
-  
-      const allTechs = Array.from(new Set(sortedProjects.flatMap(project => project.technologies)));
-      setTechnologies(['All', ...allTechs]);
-    } catch (err) {
-      console.error('Error fetching projects:', err);
-      setError('Error fetching projects. Please try again later.');
-    } finally {
-      setLoading(false);
-    }
-  };
-  
-  
-  useEffect(() => {
-    fetchProjects();
-  }, []);
+  const technologies = [
+    'All',
+    ...Array.from(new Set(projects.flatMap((project) => project.technologies))),
+  ];
 
-  const filteredProjects = projects.filter(project => 
-    (filter === 'All' || project.technologies.includes(filter)) &&
-    (activeTab === 'own' ? project.isOwn : !project.isOwn)
+  const filteredProjects = projects.filter(
+    (project) =>
+      (filter === 'All' || project.technologies.includes(filter)) &&
+      (activeTab === 'own' ? project.isOwn : !project.isOwn)
   );
 
   return (
@@ -123,8 +47,8 @@ const ProjectsGrid: React.FC = () => {
         <button
           className={`py-2 px-4 font-medium focus:outline-none ${
             activeTab === 'own'
-              ? 'text-indigo-600 border-b-2 border-indigo-600'
-              : 'text-gray-500 hover:text-gray-700'
+              ? 'text-indigo-600 border-b-2 border-indigo-600 dark:text-indigo-400 dark:border-indigo-400'
+              : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
           }`}
           onClick={() => setActiveTab('own')}
         >
@@ -134,8 +58,8 @@ const ProjectsGrid: React.FC = () => {
         <button
           className={`py-2 px-4 font-medium focus:outline-none ${
             activeTab === 'contributed'
-              ? 'text-indigo-600 border-b-2 border-indigo-600'
-              : 'text-gray-500 hover:text-gray-700'
+              ? 'text-indigo-600 border-b-2 border-indigo-600 dark:text-indigo-400 dark:border-indigo-400'
+              : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
           }`}
           onClick={() => setActiveTab('contributed')}
         >
@@ -144,29 +68,38 @@ const ProjectsGrid: React.FC = () => {
         </button>
       </div>
 
-      {renderProjects(filteredProjects, loading, error)}
-    </div>
-  );
-};
+      {!live && (
+        <p className="text-sm font-medium text-amber-600 dark:text-amber-400">
+          GitHub is rate-limiting this network — the project list may be out of
+          date.{' '}
+          <a
+            href="https://github.com/faizcasm?tab=repositories"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline"
+          >
+            Browse repositories on GitHub ↗
+          </a>
+        </p>
+      )}
 
-const renderProjects = (projects: Project[], loading: boolean, error: string | null) => {
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <Loader className="animate-spin text-indigo-500" size={48} />
-      </div>
-    );
-  }
-
-  if (error) {
-    return <div className="text-red-500 text-center">{error}</div>;
-  }
-
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {projects.map((project, index) => (
-        <ProjectCard key={index} {...project} />
-      ))}
+      {projects.length === 0 ? (
+        live ? (
+          <div className="py-12 text-center text-gray-500 dark:text-gray-400">
+            No repositories found.
+          </div>
+        ) : null
+      ) : filteredProjects.length === 0 ? (
+        <div className="py-12 text-center text-gray-500 dark:text-gray-400">
+          No projects match this filter.
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredProjects.map((project) => (
+            <ProjectCard key={project.title} {...project} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

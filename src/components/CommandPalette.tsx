@@ -213,7 +213,7 @@ export default function CommandPalette({ posts }: CommandPaletteProps) {
                   return (
                     <React.Fragment key={`${entry.group}-${entry.label}`}>
                       {showHeader && (
-                        <p className="px-3 pb-1 pt-3 text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+                        <p className="px-3 pb-1 pt-3 text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-400">
                           {entry.group}
                         </p>
                       )}
@@ -252,7 +252,7 @@ export default function CommandPalette({ posts }: CommandPaletteProps) {
               )}
             </div>
 
-            <div className="flex items-center justify-between border-t border-gray-200 px-4 py-2.5 text-xs text-gray-400 dark:border-gray-700 dark:text-gray-500">
+            <div className="flex items-center justify-between border-t border-gray-200 px-4 py-2.5 text-xs text-gray-400 dark:border-gray-700 dark:text-gray-400">
               <span className="flex items-center gap-1.5">
                 <Settings size={12} />
                 ↑↓ navigate · ↵ open · esc close

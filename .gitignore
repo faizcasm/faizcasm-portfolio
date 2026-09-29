@@ -28,6 +28,11 @@ yarn-error.log*
 # local env files
 .env*.local
 .env
+
+# database (local SQLite file — seeded from posts/*.md)
+/data/*.db
+/data/*.db-*
+
 # vercel
 .vercel
 

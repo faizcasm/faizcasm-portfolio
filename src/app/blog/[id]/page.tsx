@@ -38,13 +38,13 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
       type: "article",
       publishedTime: postData.date,
       tags: postData.tags,
-      images: [`/images/${postData.id}.jpg`],
+      ...(postData.cover ? { images: [postData.cover] } : {}),
     },
     twitter: {
       card: "summary_large_image",
       title: postData.title,
       description: postData.description,
-      images: [`/images/${postData.id}.jpg`],
+      ...(postData.cover ? { images: [postData.cover] } : {}),
     },
   };
 }
@@ -100,14 +100,20 @@ export default async function BlogPost({ params }: BlogPostProps) {
               <TableOfContents headings={tocHeadings} variant="disclosure" />
             </div>
 
-            <Image
-              src={`/images/${postData.id}.jpg`}
-              alt={postData.title}
-              width={800}
-              height={400}
-              priority
-              className="rounded-lg mb-8 object-cover w-full"
-            />
+            {postData.cover ? (
+              <Image
+                src={postData.cover}
+                alt={postData.title}
+                width={800}
+                height={400}
+                priority
+                className="rounded-lg mb-8 object-cover w-full"
+              />
+            ) : (
+              <div className="mb-8 flex h-56 w-full items-center justify-center rounded-lg bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-700 dark:to-gray-800">
+                <Tag size={40} className="text-blue-400 dark:text-blue-500" />
+              </div>
+            )}
             <MarkdownContent content={postData.content} />
 
             <div className="mt-10 border-t border-gray-200 pt-6 dark:border-gray-700">

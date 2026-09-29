@@ -4,6 +4,9 @@
 
 @layer base {
   :root {
+    /* Tell the browser the site supports both schemes so native controls
+       (scrollbars, form fields, video controls) match the active theme. */
+    color-scheme: light;
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
@@ -27,6 +30,7 @@
   }
 
   .dark {
+    color-scheme: dark;
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
     --card: 222.2 84% 4.9%;
@@ -73,12 +77,16 @@
   animation: fadeInDown 0.5s ease-out;
 }
 
-.print-light-mode {
-  background-color: white !important;
-  color: black !important;
-}
+/* Safety net for printing (e.g. headless print-to-pdf, where the beforeprint
+   hook in PrintThemeSync may not run): always print on white paper. */
+@media print {
+  html,
+  body {
+    background-color: #fff !important;
+  }
 
-.print-light-mode * {
-  color: black !important;
-  background-color: transparent !important;
+  html.dark,
+  html.dark body {
+    color-scheme: light;
+  }
 }

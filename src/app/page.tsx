@@ -10,6 +10,7 @@ import Languages from "@/components/Languages";
 import Hobbies from "@/components/Hobbies";
 import ContactPage from "@/components/Contact";
 import Reveal from "@/components/Reveal";
+import { getGithubSnapshot } from "@/lib/github";
 
 export const metadata = {
   title: "Faizan Hameed Tantray | Forward Deployed Engineer & Agentic AI Engineer",
@@ -17,7 +18,10 @@ export const metadata = {
     "Portfolio of Faizan Hameed Tantray (@faizcasm) — Forward Deployed Engineer, Software Engineer and Agentic AI Engineer building scalable web platforms, backend systems and production AI agents.",
 };
 
-const HomePage: React.FC = () => {
+export const revalidate = 3600;
+
+const HomePage: React.FC = async () => {
+  const { profile, languages, live } = await getGithubSnapshot();
   const jsonLdData = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -65,7 +69,7 @@ I design and ship scalable web platforms, backend systems and production-grade A
             className="sm:col-span-2 md:col-span-3 lg:col-span-4 xl:col-span-6 grid grid-cols-1 lg:grid-cols-2 gap-4"
           >
             <div className="flex flex-col">
-              <GitHubStats />
+              <GitHubStats profile={profile} languages={languages} live={live} />
             </div>
             <div className="flex flex-col">
               <Technologies />
