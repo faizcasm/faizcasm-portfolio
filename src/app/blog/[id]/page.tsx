@@ -1,9 +1,13 @@
 import Image from "next/image";
+import Link from "next/link";
 import MarkdownContent from '@/components/MarkdownContent';
+import ReadingProgress from '@/components/ReadingProgress';
+import TableOfContents from '@/components/TableOfContents';
+import ShareButtons from '@/components/ShareButtons';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { getSortedPostsData, getPostData, getAllPostIds } from '../../../../utils/markdown';
-import Link from "next/link";
+import { extractHeadings, getTocHeadings } from '@/lib/headings';
 import { ArrowLeft, Calendar, Clock, Tag, User } from "lucide-react";
 import heroImage from "@/assets/sigma.jpg";
 
@@ -28,6 +32,20 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
   return {
     title: postData.title,
     description: postData.description,
+    openGraph: {
+      title: postData.title,
+      description: postData.description,
+      type: "article",
+      publishedTime: postData.date,
+      tags: postData.tags,
+      images: [`/images/${postData.id}.jpg`],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: postData.title,
+      description: postData.description,
+      images: [`/images/${postData.id}.jpg`],
+    },
   };
 }
 
@@ -46,82 +64,123 @@ export default async function BlogPost({ params }: BlogPostProps) {
   }
 
   const relatedPosts = await getRelatedPosts(params.id, postData.category);
+  const tocHeadings = getTocHeadings(extractHeadings(postData.content));
 
   return (
-    <article className="max-w-3xl mx-auto px-4 py-16">
-      <Link href="/blog" className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-8 transition-colors duration-200">
-        <ArrowLeft size={20} className="mr-2" />
-        <span className="text-lg">Back to blog</span>
-      </Link>
-      <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white leading-tight">{postData.title}</h1>
-      <div className="flex flex-wrap items-center text-sm text-gray-600 dark:text-gray-400 mb-8 space-x-4">
-        <span className="flex items-center">
-          <Calendar size={16} className="mr-2" />
-          {postData.date}
-        </span>
-        <span className="flex items-center">
-          <Clock size={16} className="mr-2" />
-          {postData.readTime}
-        </span>
-        <span className="flex items-center">
-          <Tag size={16} className="mr-2" />
-          {postData.category}
-        </span>
-        <span className="flex items-center">
-          <User size={16} className="mr-2" />
-          {postData.author}
-        </span>
-        </div>
-      <Image
-        src={`/images/${postData.id}.jpg`}
-        alt={postData.title}
-        width={800}
-        height={400}
-        className="rounded-lg mb-8 object-cover w-full"
-      />
-      <MarkdownContent content={postData.content} />
-
-      <div className="mt-12">
-        <h3 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Tags</h3>
-        <div className="flex flex-wrap gap-2 mb-12">
-          {postData.tags.map((tag) => (
-            <span
-              key={tag}
-              className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-        <h2 className="text-2xl font-bold mb-4">Related Posts</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {relatedPosts.map((post) => (
-            <div key={post.id} className="border p-4 rounded">
-              <h3 className="font-semibold">{post.title}</h3>
-              <p className="text-sm text-gray-600">{post.date}</p>
+    <>
+      <ReadingProgress />
+      <article className="max-w-5xl mx-auto px-4 py-16">
+        <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_15rem] lg:gap-12">
+          <div className="min-w-0">
+            <Link href="/blog" className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-8 transition-colors duration-200 dark:text-blue-400 dark:hover:text-blue-300">
+              <ArrowLeft size={20} className="mr-2" />
+              <span className="text-lg">Back to blog</span>
+            </Link>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white leading-tight">{postData.title}</h1>
+            <div className="flex flex-wrap items-center text-sm text-gray-600 dark:text-gray-400 mb-8 space-x-4">
+              <span className="flex items-center">
+                <Calendar size={16} className="mr-2" />
+                {postData.date}
+              </span>
+              <span className="flex items-center">
+                <Clock size={16} className="mr-2" />
+                {postData.readTime}
+              </span>
+              <span className="flex items-center">
+                <Tag size={16} className="mr-2" />
+                {postData.category}
+              </span>
+              <span className="flex items-center">
+                <User size={16} className="mr-2" />
+                {postData.author}
+              </span>
             </div>
-          ))}
-        </div>
-      </div>
-      <div className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
-        <h3 className="text-2xl font-semibold mb-6 text-gray-900 dark:text-white">About the Author</h3>
-        <div className="flex items-center bg-gray-100 dark:bg-gray-800 p-6 rounded-lg">
-          <Image
-            src={heroImage}
-            alt={postData.author}
-            width={80}
-            height={80}
-            className="rounded-full mr-6"
-          />
-          <div>
-            <h4 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">{postData.author}</h4>
-            <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-              A passionate writer and technologist exploring the intersections of code and creativity.
-            </p>
+
+            <div className="lg:hidden mb-8">
+              <TableOfContents headings={tocHeadings} variant="disclosure" />
+            </div>
+
+            <Image
+              src={`/images/${postData.id}.jpg`}
+              alt={postData.title}
+              width={800}
+              height={400}
+              priority
+              className="rounded-lg mb-8 object-cover w-full"
+            />
+            <MarkdownContent content={postData.content} />
+
+            <div className="mt-10 border-t border-gray-200 pt-6 dark:border-gray-700">
+              <ShareButtons title={postData.title} />
+            </div>
+
+            <div className="mt-12">
+              <h3 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Tags</h3>
+              <div className="flex flex-wrap gap-2 mb-12">
+                {postData.tags.map((tag) => (
+                  <Link
+                    key={tag}
+                    href={`/blog?tag=${encodeURIComponent(tag)}`}
+                    className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium transition-colors hover:bg-blue-200 dark:hover:bg-blue-800"
+                  >
+                    #{tag}
+                  </Link>
+                ))}
+              </div>
+
+              {relatedPosts.length > 0 && (
+                <>
+                  <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Related Posts</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                    {relatedPosts.map((post) => (
+                      <Link
+                        key={post.id}
+                        href={`/blog/${post.id}`}
+                        className="group block rounded-lg border border-gray-200 p-4 transition-colors hover:border-blue-400 dark:border-gray-700 dark:hover:border-blue-500"
+                      >
+                        <h3 className="font-semibold text-gray-900 group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">
+                          {post.title}
+                        </h3>
+                        <p className="mt-2 flex items-center text-sm text-gray-600 dark:text-gray-400">
+                          <Calendar size={13} className="mr-1.5" />
+                          {post.date}
+                          <Clock size={13} className="ml-3 mr-1.5" />
+                          {post.readTime}
+                        </p>
+                      </Link>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+            <div className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+              <h3 className="text-2xl font-semibold mb-6 text-gray-900 dark:text-white">About the Author</h3>
+              <div className="flex items-center bg-gray-100 dark:bg-gray-800 p-6 rounded-lg">
+                <Image
+                  src={heroImage}
+                  alt={postData.author}
+                  width={80}
+                  height={80}
+                  className="rounded-full mr-6"
+                />
+                <div>
+                  <h4 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">{postData.author}</h4>
+                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                    A passionate writer and technologist exploring the intersections of code and creativity.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
+
+          <aside className="hidden lg:block">
+            <div className="sticky top-24">
+              <TableOfContents headings={tocHeadings} />
+            </div>
+          </aside>
         </div>
-      </div>
-    </article>
+      </article>
+    </>
   );
 }
 

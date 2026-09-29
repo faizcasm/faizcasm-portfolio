@@ -10,6 +10,17 @@ This repository contains Faizan Hameed's personal portfolio, built with Next.js,
 - GitHub integration to display repositories and contributions
 - Dark mode support
 
+### Blog reading experience
+
+- Reading progress bar pinned above the navbar while you read
+- Sticky table of contents with active-section highlighting (plus a collapsible version on mobile)
+- Anchor ids on every heading, so sections can be deep-linked (`/blog/post#heading`)
+- Search, category, tag and year filtering on the blog index — deep-linkable, e.g. `/blog?tag=Next.js`
+- Share row on each post: copy link, X, LinkedIn and email
+- Code blocks with a one-click copy button
+- Post tags link straight to the matching filtered blog index
+- Rich link previews (Open Graph + Twitter card) for shared posts
+
 ## Tech Stack
 
 - Next.js

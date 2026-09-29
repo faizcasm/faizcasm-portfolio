@@ -8,6 +8,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://faizcasm.me"),
   title: {
     template: "%s | Faizcasm",
     default: "Faizan Hameed",
