@@ -1,120 +1,169 @@
 {
   "personalInfo": {
-    "name": "Faizan Hameed",
-    "title": "AI Engineer & Full Stack Developer",
+    "name": "Faizan Hameed Tantray",
+    "title": "Software Engineer | Full-Stack Developer | Agentic AI Engineer",
     "email": "faizanhameed690@gmail.com",
-    "phone": "+919149522458",
-    "location": "Srinagar, India",
+    "phone": "+91 91495 22458",
+    "location": "Jammu & Kashmir, India",
     "github": "https://github.com/faizcasm",
-    "linkedin": "https://www.linkedin.com/in/faizan-hameed/",
-    "website": "https://faizcasm.in",
-    "summary": "I'm an AI engineer and full stack developer based in Kashmir, India. Over the last two years, I have delivered more production-grade projects, strengthened my system design and deployment skills, and focused on building practical AI features including agentic workflows. I enjoy creating reliable products that balance performance, usability, and business impact.",
-    "image": "https://avatars.githubusercontent.com/u/40724828?v=4"
+    "linkedin": "https://www.linkedin.com/in/faizan-hameed-tantray-a54316255",
+    "website": "https://faizcasm.me",
+    "summary": "Software Engineer and Full-Stack Developer with hands-on experience building scalable web applications, backend systems, real-time platforms, APIs, and production-oriented software. Strong foundation in TypeScript, JavaScript, Node.js, React, PostgreSQL, MongoDB, Redis, REST APIs, WebSockets, Docker, and modern backend architecture. Currently specializing in Agentic AI engineering, with a focus on AI systems capable of tool use, multi-step execution, state management, memory, planning, structured outputs, RAG, and reliable workflow execution. Founder and Lead Backend Engineer of Wolvinix and creator of BackendOS, an open-source backend framework/toolkit."
   },
+  "skillGroups": [
+    {
+      "category": "Languages",
+      "items": ["TypeScript", "JavaScript", "SQL"]
+    },
+    {
+      "category": "Frontend",
+      "items": ["React.js", "Next.js", "Redux", "Tailwind CSS"]
+    },
+    {
+      "category": "Backend",
+      "items": ["Node.js", "Express.js", "NestJS", "REST APIs", "WebSockets", "Microservices", "Event-Driven Architecture"]
+    },
+    {
+      "category": "Databases",
+      "items": ["PostgreSQL", "MongoDB", "Redis"]
+    },
+    {
+      "category": "Agentic AI",
+      "items": ["AI Agents", "Agent Loops", "Tool Calling", "Planning", "State Management", "Memory", "RAG", "Embeddings", "Structured Outputs", "Human-in-the-Loop", "LLM APIs", "LangChain", "LangGraph", "pgvector"]
+    },
+    {
+      "category": "Cloud & DevOps",
+      "items": ["Docker", "AWS EC2", "AWS IAM", "NGINX", "GitHub Actions", "CI/CD", "Linux"]
+    },
+    {
+      "category": "Engineering",
+      "items": ["System Design", "Distributed Systems", "API Design", "Authentication", "Caching", "Rate Limiting", "Performance Optimization", "Scalable Architecture"]
+    },
+    {
+      "category": "Tools",
+      "items": ["Git", "GitHub", "VS Code", "Linux"]
+    }
+  ],
   "experience": [
     {
-      "company": "Infosys",
-      "position": "Full Stack Intern",
-      "startDate": "Oct 2024",
-      "endDate": "Dec 2024",
-      "description":"Worked on full-stack product features and backend workflows with a focus on quality, maintainability, and delivery."
-    },
-    {
-      "company": "UpskillMafia",
-      "position": "Intern",
-      "startDate": "Aug 2023",
-      "endDate": "Feb 2024",
-      "description":"Built and shipped web features, dashboards, and integrations while improving API reliability and overall UX."
-    },
-    {
+      "position": "Founder & Lead Backend Engineer",
       "company": "Wolvinix",
-      "position": "Founder & Builder",
       "startDate": "Jan 2024",
       "endDate": "Present",
-      "description":"Leading product and engineering for a gaming-focused social platform, including architecture, feature delivery, and scaling decisions."
-    }
-  ],
-  "education": [
-    {
-      "institution": "Punjab Technical University",
-      "degree": "Bachelor of Computer Applications",
-      "startDate": "June 2023",
-      "endDate": "June 2026",
-      "description": "Completed."
+      "bullets": [
+        "Architected backend infrastructure for a gaming-focused social platform using Node.js and TypeScript.",
+        "Designed scalable REST APIs, authentication systems, and real-time communication using WebSockets.",
+        "Integrated Redis for high-performance communication and caching use cases.",
+        "Containerized services and developed production-oriented deployment workflows using Docker.",
+        "Worked on database integration, API performance, scalability, and backend reliability."
+      ]
     },
     {
-      "institution": "KIECAT Srinagar",
-      "degree": "Master of Computer Applications",
-      "startDate": "2026",
-      "endDate": "Present",
-      "description": "Currently pursuing."
+      "position": "Full Stack Intern",
+      "company": "Infosys",
+      "startDate": "Oct 2024",
+      "endDate": "Dec 2024",
+      "bullets": [
+        "Developed backend services using Node.js and PostgreSQL.",
+        "Implemented Redis-based caching to improve application performance.",
+        "Contributed to full-stack application development, API integration, and CI/CD workflows.",
+        "Worked with modern software engineering and deployment practices."
+      ]
     },
     {
-      "institution": "Govt. Higher Secondary School Palhallan",
-      "degree": "12th Class",
-      "startDate": "Oct 2021",
-      "endDate": "May 2023",
-      "description": ""
-    }
-  ],
-  "skills": [
-    "HTML/CSS",
-    "Javascript/Typescript",
-    "React/Next JS",
-    "Node.js/Express.js",
-    "PostgreSQL/MongoDB",
-    "Git/GitHub",
-    "Docker",
-    "Redis",
-    "OpenAI APIs",
-    "LangChain",
-    "Agentic Systems"
-  ],
-  "languages": [
-    {
-      "language": "English",
-      "proficiency": "A++"
+      "position": "Backend Developer Intern",
+      "company": "Arcnet IT Solutions",
+      "startDate": "",
+      "endDate": "",
+      "bullets": [
+        "Developed and maintained backend APIs for production-oriented applications.",
+        "Worked with database integration, query optimization, and backend performance improvements.",
+        "Contributed to application reliability and scalable backend functionality."
+      ]
     },
     {
-      "language": "Hindi",
-      "proficiency": "A++"
-    },
-    {
-      "language": "Urdu",
-      "proficiency": "A++"
+      "position": "Full Stack Intern",
+      "company": "Upskill Mafia",
+      "startDate": "Aug 2023",
+      "endDate": "Feb 2024",
+      "bullets": [
+        "Developed full-stack application features using modern JavaScript technologies.",
+        "Built and integrated REST APIs, dashboards, and user-facing application functionality.",
+        "Contributed to authentication, security, and application improvements."
+      ]
     }
   ],
   "projects": [
     {
-      "name": "Portfolio",
-      "description": "A modern portfolio with AI-assisted interactions and updated project storytelling.",
-      "technologies": ["Next.js", "TypeScript", "Tailwind CSS", "LangChain", "Gemini"],
-      "link": "https://faizcasm.in"
+      "name": "BackendOS",
+      "subtitle": "Open-Source Backend Framework / Toolkit",
+      "link": "https://github.com/faizcasm/BackendOS",
+      "bullets": [
+        "Designed an open-source backend framework focused on production-grade application architecture.",
+        "Built reusable modules for authentication, API architecture, middleware, and database integration.",
+        "Focused on modularity, maintainability, and reusable engineering primitives."
+      ],
+      "technologies": ["TypeScript", "Node.js", "Express.js", "PostgreSQL", "REST APIs"]
     },
     {
-      "name": "Foodify",
-      "description": "Full-stack food ordering project with modern frontend architecture and backend integrations.",
-      "technologies": ["Next.js", "Prisma", "TypeScript", "Upstash", "Tailwind CSS"],
-      "link": "https://foodify-seven.vercel.app"
+      "name": "Locrave",
+      "subtitle": "Full-Stack Location Discovery Platform",
+      "link": "https://github.com/faizcasm/Locrave",
+      "bullets": [
+        "Developed a location-based full-stack platform with secure authentication and scalable APIs.",
+        "Designed backend services and database interactions and optimized database queries for performance."
+      ],
+      "technologies": ["React", "TypeScript", "Node.js", "PostgreSQL", "REST APIs"]
     },
     {
       "name": "Wolvinix",
-      "description": "Gaming-focused social platform featuring real-time communication and scalable backend services.",
-      "technologies": ["Node.js", "React", "MongoDB", "Redis", "WebSockets"],
-      "link": "https://wolvinix.com"
+      "subtitle": "Real-Time Gaming Social Platform",
+      "link": "https://wolvinix.com",
+      "bullets": [
+        "Built a gaming-focused social platform with real-time communication capabilities.",
+        "Implemented WebSocket-based communication, Redis-powered backend functionality, authentication, and scalable APIs.",
+        "Containerized backend services using Docker."
+      ],
+      "technologies": ["React", "TypeScript", "Node.js", "WebSockets", "Redis", "PostgreSQL", "Docker"]
+    },
+    {
+      "name": "Zanly",
+      "subtitle": "Scalable Backend Architecture Project",
+      "link": "https://github.com/faizcasm/zanly",
+      "bullets": [
+        "Designed backend architecture demonstrating caching, rate limiting, API optimization, and scalable request handling.",
+        "Focused on performance engineering and distributed-system concepts."
+      ],
+      "technologies": ["Node.js", "TypeScript", "Redis", "REST APIs", "PostgreSQL"]
     }
   ],
-  "interests": [
-    "Coding",
-    "Gaming",
-    "Chess",
-    "Crypto"
+  "agenticAI": [
+    "Agent loops and autonomous task execution; tool selection and tool calling.",
+    "Multi-step agents, planning, task decomposition, state management, and memory.",
+    "RAG, embeddings, vector search, structured agent outputs, and human-in-the-loop workflows.",
+    "LLM streaming, Server-Sent Events (SSE), agent error recovery, and AI application architecture.",
+    "Agent evaluation and reliability."
   ],
-  "certifications": [
+  "openSource": [
+    "Founder and Lead Backend Engineer of Wolvinix.",
+    "Creator of BackendOS, an open-source backend framework/toolkit.",
+    "Focused on scalable backend architecture, distributed systems, AI engineering, and developer tooling.",
+    "Experienced with Git/GitHub development workflows and practical system architecture."
+  ],
+  "education": [
     {
-      "name": "Microsoft Certified Professional (MCP)",
-      "date": "May 2024",
-      "description": "HTM, CSS, JAVASCRIPT"
+      "degree": "Master of Computer Applications (MCA)",
+      "institution": "National Institute of Electronics & Information Technology (NIELIT), Srinagar",
+      "startDate": "",
+      "endDate": "Currently Pursuing",
+      "description": ""
+    },
+    {
+      "degree": "Bachelor of Computer Applications (BCA)",
+      "institution": "Punjab Technical University",
+      "startDate": "2023",
+      "endDate": "2026",
+      "description": "Completed"
     }
   ]
 }

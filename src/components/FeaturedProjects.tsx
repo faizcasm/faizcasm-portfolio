@@ -7,12 +7,9 @@ export interface ProjectCardProps {
   technologies: string[];
   githubLink: string;
   liveLink: string;
-  stars: number;
-  forks: number;
-  lastUpdated: string;
 }
 
-const projects: Omit<ProjectCardProps, 'stars' | 'forks' | 'lastUpdated'>[] = [
+const projects: ProjectCardProps[] = [
   {
     title: "Portfolio",
     description: "A modern portfolio with AI-powered Q&A, refreshed storytelling, and recruiter-focused project presentation.",
@@ -47,9 +44,6 @@ const ProjectsDisplay: React.FC = () => {
           <ProjectCard 
             key={index} 
             {...project} 
-            stars={0} 
-            forks={0} 
-            lastUpdated={new Date().toISOString()}
           />
         ))}
       </div>

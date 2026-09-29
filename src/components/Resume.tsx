@@ -1,205 +1,229 @@
 import React from 'react';
-import resumeData from '../data/resumeDtata.json';
-import heroImage from "@/assets/sigma.jpg";
 import Image from 'next/image';
+import resumeData from '../data/resumeDtata.json';
+import heroImage from "@/assets/portfolio-profile.jpeg";
+import { Github, Globe, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 
-// Interfaces
-interface PersonalInfo {
-  name: string;
-  title: string;
-  email: string;
-  phone: string;
-  location: string;
-  github: string;
-  linkedin: string;
-  website: string;
-  summary: string;
-}
+type PersonalInfo = typeof resumeData.personalInfo;
+type ExperienceItem = (typeof resumeData.experience)[number];
+type Project = (typeof resumeData.projects)[number];
+type SkillGroup = (typeof resumeData.skillGroups)[number];
+type EducationItem = (typeof resumeData.education)[number];
 
-interface ExperienceItem {
-  company: string;
-  position: string;
-  startDate: string;
-  endDate: string;
-  description: string;
-}
+const Section: React.FC<{ title: string; children: React.ReactNode; className?: string }> = ({
+  title,
+  children,
+  className = '',
+}) => (
+  <section className={`mb-6 ${className}`}>
+    <h2 className="mb-3 border-b-2 border-blue-500/70 pb-1 text-lg font-bold uppercase tracking-wider text-gray-900 dark:text-white">
+      {title}
+    </h2>
+    {children}
+  </section>
+);
 
-interface EducationItem {
-  institution: string;
-  degree: string;
-  startDate: string;
-  endDate: string;
-  description: string;
-}
+const Bullets: React.FC<{ items: string[] }> = ({ items }) => (
+  <ul className="list-disc space-y-1 pl-5 text-sm leading-relaxed text-gray-700 dark:text-gray-300">
+    {items.map((item) => (
+      <li key={item}>{item}</li>
+    ))}
+  </ul>
+);
 
-interface Language {
-  language: string;
-  proficiency: string;
-}
-
-interface Project {
-  name: string;
-  description: string;
-  technologies: string[];
-  link: string;
-}
-
-
-// Header Component
 const Header: React.FC<{ personalInfo: PersonalInfo }> = ({ personalInfo }) => (
-  <header className="mb-2 flex flex-col md:flex-row items-center p-6 border-b-2 border-gray-200 dark:border-gray-700">
-    <div className="md:mr-8 mb-4 md:mb-0">
+  <header className="mb-6 flex flex-col items-center gap-5 border-b border-gray-200 pb-6 dark:border-gray-700 md:flex-row md:items-start">
+    <div className="relative shrink-0">
+      <span className="absolute -inset-1 rounded-full bg-gradient-to-tr from-blue-500 via-indigo-500 to-purple-500 opacity-70 blur" />
       <Image
-        src={heroImage || "/default-profile.jpg"}
+        src={heroImage}
         alt={personalInfo.name}
-        width={200}
+        width={160}
         height={200}
-        className="rounded-full border-4 border-gray-300 dark:border-gray-600"
+        className="relative h-28 w-28 rounded-full border-4 border-white object-cover shadow-lg dark:border-gray-800 md:h-32 md:w-32"
+        priority
       />
     </div>
+
     <div className="text-center md:text-left">
-      <h1 className="text-4xl font-bold mb-2 text-black dark:text-white">{personalInfo.name}</h1>
-      <h2 className="text-2xl text-gray-600 dark:text-gray-300 mb-4">{personalInfo.title}</h2>
-      <div className="flex flex-wrap justify-center md:justify-start gap-4 mb-4">
-        <a href={`mailto:${personalInfo.email}`} className="flex items-center text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-          <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
-          {personalInfo.email}
-        </a>
-        <a href={personalInfo.linkedin} className="flex items-center text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-          {personalInfo.linkedin}
-        </a>
-        <a href={personalInfo.github} className="flex items-center text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-          {personalInfo.github}
-        </a>
-      </div>
+      <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{personalInfo.name}</h1>
+      <h2 className="mb-3 text-base font-medium text-blue-600 dark:text-blue-400 md:text-lg">
+        {personalInfo.title}
+      </h2>
+
+      <ul className="flex flex-wrap justify-center gap-x-4 gap-y-1.5 text-sm text-gray-600 dark:text-gray-300 md:justify-start">
+        <li className="flex items-center gap-1.5">
+          <MapPin size={14} className="text-gray-400" />
+          {personalInfo.location}
+        </li>
+        <li>
+          <a href={`mailto:${personalInfo.email}`} className="flex items-center gap-1.5 transition-colors hover:text-blue-600 dark:hover:text-blue-400">
+            <Mail size={14} className="text-gray-400" />
+            {personalInfo.email}
+          </a>
+        </li>
+        <li>
+          <a href={`tel:${personalInfo.phone.replace(/\s/g, '')}`} className="flex items-center gap-1.5 transition-colors hover:text-blue-600 dark:hover:text-blue-400">
+            <Phone size={14} className="text-gray-400" />
+            {personalInfo.phone}
+          </a>
+        </li>
+        <li>
+          <a href={personalInfo.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 transition-colors hover:text-blue-600 dark:hover:text-blue-400">
+            <Globe size={14} className="text-gray-400" />
+            {personalInfo.website.replace('https://', '')}
+          </a>
+        </li>
+        <li>
+          <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 transition-colors hover:text-blue-600 dark:hover:text-blue-400">
+            <Github size={14} className="text-gray-400" />
+            github.com/faizcasm
+          </a>
+        </li>
+        <li>
+          <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 transition-colors hover:text-blue-600 dark:hover:text-blue-400">
+            <Linkedin size={14} className="text-gray-400" />
+            LinkedIn
+          </a>
+        </li>
+      </ul>
     </div>
   </header>
 );
 
-// Experience Component
-const Experience: React.FC<{ experience: ExperienceItem[] }> = ({ experience }) => (
-  <section className="mb-2 p-6 border-b-2 border-gray-200">
-    <h2 className="text-2xl font-bold mb-4 pb-2">Experience</h2>
-    {experience.map((item, index) => (
-      <div key={index} className="mb-6">
-        <h3 className="text-xl font-semibold">{item.position}</h3>
-        <p className="text-lg text-gray-600">{item.company}</p>
-        <p className="text-sm text-gray-500 mb-2">{item.startDate} - {item.endDate}</p>
-        <p>{item.description}</p>
-      </div>
-    ))}
-  </section>
+const Skills: React.FC<{ groups: SkillGroup[] }> = ({ groups }) => (
+  <Section title="Technical Skills">
+    <dl className="space-y-2.5">
+      {groups.map((group) => (
+        <div key={group.category} className="flex flex-col gap-1.5 sm:flex-row sm:gap-3">
+          <dt className="w-full shrink-0 text-sm font-semibold text-gray-900 sm:w-32 dark:text-white">
+            {group.category}
+          </dt>
+          <dd className="flex flex-wrap gap-1.5">
+            {group.items.map((item) => (
+              <span
+                key={item}
+                className="rounded-md bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-700 dark:bg-gray-800 dark:text-gray-300"
+              >
+                {item}
+              </span>
+            ))}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  </Section>
 );
 
-// Education Component
-const Education: React.FC<{ education: EducationItem[] }> = ({ education }) => (
-  <section className="mb-2 p-6 border-b-2 border-gray-200">
-    <h2 className="text-2xl font-bold mb-4 pb-2">Education</h2>
-    {education.map((item, index) => (
-      <div key={index} className="mb-6">
-        <h3 className="text-xl font-semibold">{item.degree}</h3>
-        <p className="text-lg text-gray-600">{item.institution}</p>
-        <p className="text-sm text-gray-500 mb-2">{item.startDate} - {item.endDate}</p>
-        <p>{item.description}</p>
-      </div>
-    ))}
-  </section>
-);
-
-// Skills Component
-const Skills: React.FC<{ skills: string[] }> = ({ skills }) => (
-  <section className="mb-2 p-6 border-b-2 border-gray-200">
-    <h2 className="text-2xl font-bold mb-4 pb-2">Skills</h2>
-    <div className="flex flex-wrap gap-4">
-      {skills.map((skill, index) => (
-        <span key={index} className="border border-gray-300 text-gray-700 px-3 py-1 rounded-full text-md font-medium">
-          {skill}
-        </span>
+const Experience: React.FC<{ items: ExperienceItem[] }> = ({ items }) => (
+  <Section title="Professional Experience">
+    <div className="space-y-5">
+      {items.map((item) => (
+        <div key={`${item.company}-${item.position}`}>
+          <div className="flex flex-wrap items-baseline justify-between gap-x-3">
+            <h3 className="text-base font-semibold text-gray-900 dark:text-white">
+              {item.position}
+              <span className="text-blue-600 dark:text-blue-400"> · {item.company}</span>
+            </h3>
+            {(item.startDate || item.endDate) && (
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                {[item.startDate, item.endDate].filter(Boolean).join(' – ')}
+              </p>
+            )}
+          </div>
+          <div className="mt-1.5">
+            <Bullets items={item.bullets} />
+          </div>
+        </div>
       ))}
     </div>
-  </section>
+  </Section>
 );
 
-// Languages Component
-const Languages: React.FC<{ languages: Language[] }> = ({ languages }) => (
-  <section className="mb-2 p-6 border-b-2 border-gray-200">
-    <h2 className="text-2xl font-bold mb-4 pb-2">Languages</h2>
-    <ul className="space-y-2">
-      {languages.map((lang, index) => (
-        <li key={index} className="flex items-center justify-between">
-          <span className="font-medium">{lang.language}</span>
-          <span className="text-gray-600 border border-gray-300 px-2 py-1 rounded-full text-sm">
-            {lang.proficiency}
-          </span>
-        </li>
-      ))}
-    </ul>
-  </section>
-);
-
-// Projects Component
 const Projects: React.FC<{ projects: Project[] }> = ({ projects }) => (
-  <section className="mb-2 p-6 border-b-2 border-gray-200">
-    <h2 className="text-2xl font-bold mb-4 pb-2">Projects</h2>
-    {projects.map((project, index) => (
-      <div key={index} className="mb-6">
-        <h3 className="text-xl font-semibold">
-          <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-            {project.name}
-          </a>
-        </h3>
-        <p className="mb-2">{project.description}</p>
-        <div className="flex flex-wrap gap-2 mt-2">
-          {project.technologies.map((tech, techIndex) => (
-            <span key={techIndex} className="border border-gray-300 text-gray-600 px-2 py-1 rounded-full text-xs font-medium">
-              {tech}
-            </span>
-          ))}
+  <Section title="Selected Projects">
+    <div className="space-y-5">
+      {projects.map((project) => (
+        <div key={project.name}>
+          <h3 className="text-base font-semibold text-gray-900 dark:text-white">
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-blue-600 dark:hover:text-blue-400"
+            >
+              {project.name}
+            </a>
+            <span className="font-normal text-gray-500 dark:text-gray-400"> — {project.subtitle}</span>
+          </h3>
+          <div className="mt-1.5">
+            <Bullets items={project.bullets} />
+          </div>
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            {project.technologies.map((tech) => (
+              <span
+                key={tech}
+                className="rounded-full border border-gray-200 px-2 py-0.5 text-xs text-gray-600 dark:border-gray-700 dark:text-gray-300"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
         </div>
-      </div>
-    ))}
-  </section>
-);
-
-// Interests Component
-const Interests: React.FC<{ interests: string[] }> = ({ interests }) => (
-  <section className="p-6">
-    <h2 className="text-2xl font-bold mb-4 pb-2">Interests</h2>
-    <ul className="grid grid-cols-2 gap-2">
-      {interests.map((interest, index) => (
-        <li key={index} className="flex items-center">
-          <svg className="w-4 h-4 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
-          <span>{interest}</span>
-        </li>
       ))}
-    </ul>
-  </section>
+    </div>
+  </Section>
 );
 
-// Main Resume Component
+const Education: React.FC<{ items: EducationItem[] }> = ({ items }) => (
+  <Section title="Education">
+    <div className="space-y-3">
+      {items.map((item) => (
+        <div key={item.degree} className="flex flex-wrap items-baseline justify-between gap-x-3">
+          <div>
+            <h3 className="text-base font-semibold text-gray-900 dark:text-white">{item.degree}</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300">{item.institution}</p>
+          </div>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            {[item.startDate, item.endDate].filter(Boolean).join(' – ')}
+          </p>
+        </div>
+      ))}
+    </div>
+  </Section>
+);
+
 const Resume: React.FC = () => {
   return (
-    <div id="resume" className="mx-auto my-10 p-2 text-black dark:text-white bg-white dark:bg-gray-900 print:bg-white print:text-black">
+    <div
+      id="resume"
+      className="mx-auto my-6 rounded-2xl border border-gray-200 bg-white p-6 text-black shadow-lg dark:border-gray-700 dark:bg-gray-900 dark:text-white sm:p-8 print:border-0 print:shadow-none"
+    >
       <Header personalInfo={resumeData.personalInfo} />
-      
-      <section className="mb-2 print:mb-4 p-6 border-b-2 border-gray-200 dark:border-gray-700">
-        <h2 className="text-2xl font-bold mb-4 pb-2 print:text-xl">Summary</h2>
-        <p className="print:text-gray-800 dark:text-gray-300">{resumeData.personalInfo.summary}</p>
-      </section>
 
-      <Experience experience={resumeData.experience} />
-      <Education education={resumeData.education} />
-      <Projects projects={resumeData.projects} />
-      
-      <div className="grid md:grid-cols-2 gap-8 print:gap-4">
-        <Skills skills={resumeData.skills} />
-        <div>
-          <Languages languages={resumeData.languages} />
-          <Interests interests={resumeData.interests} />
-        </div>
+      <Section title="Professional Summary">
+        <p className="text-sm leading-relaxed text-gray-700 dark:text-gray-300">
+          {resumeData.personalInfo.summary}
+        </p>
+      </Section>
+
+      <Skills groups={resumeData.skillGroups} />
+      <Experience items={resumeData.experience} />
+
+      <div className="grid gap-6 md:grid-cols-2">
+        <Section title="Agentic AI Engineering" className="mb-0">
+          <Bullets items={resumeData.agenticAI} />
+        </Section>
+        <Section title="Open Source & Engineering" className="mb-0">
+          <Bullets items={resumeData.openSource} />
+        </Section>
       </div>
+
+      <div className="mt-6">
+        <Projects projects={resumeData.projects} />
+      </div>
+
+      <Education items={resumeData.education} />
     </div>
   );
 };

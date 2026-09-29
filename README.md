@@ -7,7 +7,7 @@ This repository contains Faizan Hameed's personal portfolio, built with Next.js,
 - Responsive portfolio website with modern UI sections
 - AI chatbot integrated into the website
 - Dynamic content management for projects and blog posts
-- GitHub integration to display repositories and contributions
+- Live GitHub integration powering the top-languages chart
 - Dark mode support
 
 ### Blog reading experience
@@ -20,6 +20,20 @@ This repository contains Faizan Hameed's personal portfolio, built with Next.js,
 - Code blocks with a one-click copy button
 - Post tags link straight to the matching filtered blog index
 - Rich link previews (Open Graph + Twitter card) for shared posts
+
+### Modern UX
+
+- ⌘K / Ctrl+K command palette — fuzzy search across pages, projects and blog posts, with keyboard navigation
+- Scroll-reveal animations on every homepage section (framer-motion, `whileInView`)
+- Back-to-top button (bottom-left, so it never covers the chat widget)
+- Cursor-tracking glow + gradient halo on the hero card
+- Interactive 3D top-languages donut built from stacked SVG layers — hover a slice to lift it out of the disc, with a synced legend (falls back to a labelled snapshot if the GitHub API is rate-limited)
+- Tech stack grouped by the resume's skill categories: Languages, Frontend, Backend, Data, Agentic AI, Cloud & DevOps, Engineering
+
+### Resume
+
+- Full HTML resume generated from `src/data/resumeDtata.json`, mirroring the official PDF (summary, skills, experience, projects, education) with the profile photo
+- Embedded PDF viewer for the real `public/Faizcasm.pdf`, plus download and open-in-new-tab buttons
 
 ## Tech Stack
 
@@ -49,7 +63,7 @@ This repository contains Faizan Hameed's personal portfolio, built with Next.js,
 
 3. Create a `.env.local` file in the root directory and add the following environment variables:
    ```
-   GITHUB_TOKEN=your_github_personal_access_token
+   GITHUB_SECRET=your_github_personal_access_token
    OPENAI_API_KEY=your_openai_api_key
    ```
 
@@ -68,7 +82,7 @@ This repository contains Faizan Hameed's personal portfolio, built with Next.js,
 ## Profile Notes
 
 - Current focus: AI engineering + full-stack systems
-- Education: BCA completed, currently pursuing MCA at KIECAT Srinagar
+- Education: BCA completed, currently pursuing MCA at NIELIT Srinagar
 - Portfolio content is refreshed to reflect growth across the last two years of project work and learning
 
 ## Updating Content

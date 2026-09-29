@@ -30,6 +30,6 @@ Alongside this, I continue building and improving **Wolvinix**, while keeping us
 ## Education update
 
 - Completed **Bachelor of Computer Applications (BCA)**
-- Currently pursuing **Master of Computer Applications (MCA)** at **KIECAT Srinagar**
+- Currently pursuing **Master of Computer Applications (MCA)** at **NIELIT Srinagar**
 
 Faizcasm now reflects practical engineering, continuous learning, and building useful products with modern AI and web technologies.

@@ -19,7 +19,7 @@ I now spend most of my time building production-oriented web products and integr
 ## Education Update
 
 - ✅ Completed **Bachelor of Computer Applications (BCA)**
-- 🎓 Currently pursuing **Master of Computer Applications (MCA)** at **KIECAT Srinagar**
+- 🎓 Currently pursuing **Master of Computer Applications (MCA)** at **NIELIT Srinagar**
 
 ## Project Growth
 

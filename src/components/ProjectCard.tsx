@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, ExternalLink, Star, GitFork, Clock } from 'lucide-react';
+import { Github, ExternalLink } from 'lucide-react';
 
 interface ProjectCardProps {
   title: string;
@@ -7,9 +7,6 @@ interface ProjectCardProps {
   technologies: string[];
   githubLink: string;
   liveLink?: string;
-  stars: number;
-  forks: number;
-  lastUpdated: string;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -18,20 +15,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   technologies,
   githubLink,
   liveLink,
-  stars,
-  forks,
-  lastUpdated
 }) => {
-  // Function to format the date
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('de-DE', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    });
-  };
-
   return (
     <div className="group relative overflow-hidden rounded-xl p-1 transition-all duration-500 hover:scale-[1.02] hover:shadow-xl flex-grow">
       <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 opacity-75 transition-all duration-500 group-hover:opacity-100"></div>
@@ -45,22 +29,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                 {tech}
               </span>
             ))}
-          </div>
-          <div className="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400">
-            <div className="flex items-center space-x-4">
-              <span className="flex items-center">
-                <Star size={16} className="mr-1" />
-                {stars}
-              </span>
-              <span className="flex items-center">
-                <GitFork size={16} className="mr-1" />
-                {forks}
-              </span>
-            </div>
-            {/* <span className="flex items-center">
-              <Clock size={16} className="mr-1" />
-              {formatDate(lastUpdated)}
-            </span> */}
           </div>
           <div className="flex justify-between">
             <a

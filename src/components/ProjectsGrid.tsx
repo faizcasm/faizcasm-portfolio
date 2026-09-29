@@ -11,9 +11,6 @@ interface Project {
   technologies: string[];
   githubLink: string;
   liveLink?: string;
-  stars: number;
-  forks: number;
-  lastUpdated: string;
   latestCommitDate: string;
   isOwn: boolean;
 }
@@ -74,9 +71,6 @@ const ProjectsGrid: React.FC = () => {
           technologies: repo.topics || [],
           githubLink: repo.html_url,
           liveLink: repo.homepage || undefined,
-          stars: repo.stargazers_count || 0,
-          forks: repo.forks_count || 0,
-          lastUpdated: getValidDateString(repo.updated_at),
           latestCommitDate: getValidDateString(latestCommitDate),
           isOwn: !repo.fork,
         };

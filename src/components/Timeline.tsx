@@ -4,7 +4,7 @@ interface TimelineItem {
   type: 'education' | 'experience';
   title: string;
   organization: string;
-  date: string;
+  date?: string;
   location?: string;
   description?: string;
   skills?: string[];
@@ -14,9 +14,9 @@ const educationItems: TimelineItem[] = [
   {
     type: 'education',
     title: 'Master of Computer Applications (MCA)',
-    organization: 'KIECAT Srinagar',
+    organization: 'NIELIT Srinagar',
     date: '2026 - Present',
-    description: 'Currently pursuing postgraduate studies with focus on advanced software engineering and computing.',
+    description: 'National Institute of Electronics & Information Technology. Currently pursuing postgraduate studies with focus on advanced software engineering and computing.',
     skills: ['Advanced Computing', 'Software Architecture', 'Research Mindset']
   },
   {
@@ -39,11 +39,11 @@ const educationItems: TimelineItem[] = [
 const experienceItems: TimelineItem[] = [
   {
     type: 'experience',
-    title: 'Founder',
+    title: 'Founder & Lead Backend Engineer',
     organization: 'Wolvinix',
     date: 'Jan 2024 - Present',
     location: 'Remote',
-    skills: ['Product Engineering', 'System Design', 'Node.js', 'Next.js', 'AI Features']
+    skills: ['System Design', 'Node.js', 'TypeScript', 'WebSockets', 'Redis', 'Docker']
   },
   {
     type: 'experience',
@@ -51,7 +51,14 @@ const experienceItems: TimelineItem[] = [
     organization: 'Infosys',
     date: 'Oct 2024 - Dec 2024',
     location: 'Remote',
-    skills: ['Node.js', 'React', 'PostgreSQL', 'CI/CD', 'Code Quality']
+    skills: ['Node.js', 'PostgreSQL', 'Redis', 'CI/CD', 'API Integration']
+  },
+  {
+    type: 'experience',
+    title: 'Backend Developer Intern',
+    organization: 'Arcnet IT Solutions',
+    location: 'Remote',
+    skills: ['Backend APIs', 'Database Integration', 'Query Optimization', 'Reliability']
   },
   {
     type: 'experience',
@@ -59,7 +66,7 @@ const experienceItems: TimelineItem[] = [
     organization: 'UpskillMafia',
     date: 'Aug 2023 - Feb 2024',
     location: 'Remote',
-    skills: ['Node.js', 'Express.js', 'MongoDB', 'REST APIs', 'React', 'Performance']
+    skills: ['Node.js', 'Express.js', 'REST APIs', 'React', 'Authentication']
   }
 ];
 
@@ -70,7 +77,7 @@ const TimelineItem: React.FC<{ item: TimelineItem }> = ({ item }) => (
       <div className="absolute left-0 top-4 h-5 w-5 rounded-full border-4 border-white bg-blue-500 dark:border-gray-800" />
       <h3 className="text-lg font-medium text-gray-900 dark:text-white">{item.title}</h3>
       <p className="text-sm text-gray-600 dark:text-gray-400">{item.organization}</p>
-      <p className="text-sm text-gray-500 dark:text-gray-500">{item.date}</p>
+      {item.date && <p className="text-sm text-gray-500 dark:text-gray-500">{item.date}</p>}
       {item.location && (
         <p className="text-sm text-gray-500 dark:text-gray-500">{item.location}</p>
       )}

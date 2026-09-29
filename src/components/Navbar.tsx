@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
+import CommandPalette, { type PalettePost } from "./CommandPalette";
 import { Home, Briefcase, BookOpen, Github, FileText } from "lucide-react";
 
 const navLinks = [
@@ -15,7 +16,11 @@ const navLinks = [
   { name: "Resume", href: "/resume", icon: FileText },
 ];
 
-export default function Navbar() {
+interface NavbarProps {
+  posts?: PalettePost[];
+}
+
+export default function Navbar({ posts = [] }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -45,9 +50,9 @@ export default function Navbar() {
               ))}
             </div>
           </div>
-          <div className="hidden md:block">
-            <div className="ml-4 flex items-center md:ml-6">
-
+          <div className="flex items-center gap-3">
+            <CommandPalette posts={posts} />
+            <div className="hidden md:block">
               <ThemeToggle />
             </div>
           </div>
