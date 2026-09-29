@@ -158,7 +158,10 @@ export function getDb(): Client | null {
         // below will reject and callers fall back to markdown.
       }
     }
-    const client = createClient({ url });
+    // Turso (libsql://) requires the auth token; a local file: URL must not
+    // receive one or the native client rejects the option.
+    const authToken = process.env.TURSO_AUTH_TOKEN?.trim() || undefined;
+    const client = createClient(authToken ? { url, authToken } : { url });
     globalStore.__portfolioDb = { client, ready: bootstrap(client) };
     // Avoid unhandled-rejection noise if no caller awaits immediately.
     globalStore.__portfolioDb.ready.catch(() => {});

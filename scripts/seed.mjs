@@ -35,6 +35,33 @@ function resolveUrl() {
   return `file:${path.join(root, "data", "portfolio.db")}`;
 }
 
+/**
+ * Load .env.local for keys not already in the environment. Next.js injects
+ * these into its own process only — a plain `node scripts/seed.mjs` would
+ * otherwise silently miss DATABASE_URL/TURSO_AUTH_TOKEN and seed the wrong DB.
+ * (No dotenv dependency: values in .env.local are plain KEY=value lines.)
+ */
+async function loadLocalEnv() {
+  let raw;
+  try {
+    raw = await fs.readFile(path.join(root, ".env.local"), "utf8");
+  } catch {
+    return; // no .env.local (e.g. Vercel) — real env vars apply as-is
+  }
+  for (const line of raw.split("\n")) {
+    const match = line.match(/^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*?)\s*$/);
+    if (!match || match[1] === undefined || process.env[match[1]] !== undefined) continue;
+    let value = match[2] ?? "";
+    if (
+      (value.startsWith('"') && value.endsWith('"') && value.length > 1) ||
+      (value.startsWith("'") && value.endsWith("'") && value.length > 1)
+    ) {
+      value = value.slice(1, -1);
+    }
+    process.env[match[1]] = value;
+  }
+}
+
 const SCHEMA = `
 CREATE TABLE IF NOT EXISTS posts (
   id TEXT PRIMARY KEY,
@@ -50,6 +77,7 @@ CREATE TABLE IF NOT EXISTS posts (
 );`;
 
 async function main() {
+  await loadLocalEnv();
   if (!dbEnabled()) {
     console.log("[seed] No DATABASE_URL and running on Vercel — skipping (markdown mode).");
     return;
@@ -61,7 +89,10 @@ async function main() {
     await fs.mkdir(path.dirname(url.replace(/^file:/, "")), { recursive: true });
   }
 
-  const db = createClient({ url });
+  // Turso (libsql://) requires the auth token; local file: URLs must not
+  // receive one.
+  const authToken = process.env.TURSO_AUTH_TOKEN?.trim() || undefined;
+  const db = createClient(authToken ? { url, authToken } : { url });
   await db.execute(SCHEMA);
 
   const files = (await fs.readdir(postsDir)).filter((f) => f.endsWith(".md"));
