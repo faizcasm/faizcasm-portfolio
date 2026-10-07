@@ -1,4 +1,7 @@
-import React from 'react';
+"use client";
+
+import React from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   Atom,
   Bot,
@@ -35,6 +38,8 @@ const groups: SkillGroup[] = resumeData.skillGroups.map((group) => ({
 }));
 
 const Technologies: React.FC = () => {
+  const reduceMotion = useReducedMotion();
+
   return (
     <div className="flex-grow rounded-2xl border border-gray-200/80 bg-white/90 p-6 shadow-lg transition-all duration-300 hover:shadow-2xl dark:border-gray-700 dark:bg-gray-800/90 md:col-span-2 lg:col-span-3">
       <h2 className="mb-1 text-center text-2xl font-bold text-gray-800 dark:text-white">
@@ -45,8 +50,18 @@ const Technologies: React.FC = () => {
       </p>
 
       <div className="space-y-4">
-        {groups.map((group) => (
-          <div key={group.label}>
+        {groups.map((group, index) => (
+          <motion.div
+            key={group.label}
+            initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{
+              duration: 0.45,
+              delay: reduceMotion ? 0 : index * 0.06,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
             <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
               <span className="text-blue-500 dark:text-blue-400">{group.icon}</span>
               {group.label}
@@ -60,7 +75,7 @@ const Technologies: React.FC = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

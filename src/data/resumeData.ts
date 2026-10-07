@@ -10,7 +10,7 @@ export const resumeData = {
     github: "https://github.com/faizcasm",
     website: "https://faizcasm.me",
     summary:
-      "Software Engineer with 5 years of development experience building backend systems, full-stack products, distributed services, real-time platforms, and production AI systems. Strong in TypeScript, Node.js, PostgreSQL, Redis, Docker, AWS, React, and Next.js, with hands-on experience designing agentic systems for planning, tool calling, RAG, memory, multi-agent workflows, structured outputs, human-in-the-loop controls, evaluation, observability, retries, and long-running execution. Founder and lead engineer of Ryuksaidso, a production-oriented agent reliability and control-plane platform. Uses AI coding and research tools to accelerate implementation, debugging, documentation, refactoring, and test generation, followed by human review, automated validation, security checks, and architecture verification before release.",
+      "Software Engineer focused on backend architecture, distributed systems, full-stack products, and production AI. Builds reliable services and agentic systems with TypeScript/Node.js, PostgreSQL, Redis, Docker, AWS, and modern LLM tooling. Hands-on with agent planning, tool calling, RAG, memory, multi-agent workflows, structured outputs, human-in-the-loop controls, evaluation, observability, retries, and long-running execution. Founder and lead engineer of Ryuksaidso, an agent reliability and control-plane platform. Uses AI coding and research tools to accelerate implementation, debugging, documentation, refactoring, and test generation, followed by human review, automated validation, security checks, and architecture verification before changes ship.",
   },
   skillGroups: [
     { category: "Languages", items: ["TypeScript", "JavaScript", "SQL", "Python"] },
@@ -62,7 +62,7 @@ export const resumeData = {
       category: "Cloud / DevOps",
       items: [
         "AWS EC2",
-        "AWS IAM",
+        "IAM",
         "Docker",
         "Docker Compose",
         "NGINX",
@@ -88,6 +88,18 @@ export const resumeData = {
         "DSA",
       ],
     },
+    {
+      category: "AI-Augmented Development",
+      items: [
+        "LLM-assisted coding",
+        "Debugging",
+        "Test generation",
+        "Documentation",
+        "Implementation acceleration",
+        "Verification",
+        "Human-in-the-loop review",
+      ],
+    },
   ],
   experience: [
     {
@@ -96,14 +108,13 @@ export const resumeData = {
       startDate: "2026",
       endDate: "Present",
       bullets: [
-        "Built and deployed Ryuksaidso, a production-oriented agent reliability and control-plane platform for operating AI agents with software-engineering discipline.",
-        "Designed the control plane for agent definitions, tools, providers, versions, runs, traces, approvals, policies, API keys, RBAC, tenant isolation, audit history, and operational visibility.",
-        "Implemented agent runtime capabilities for planning, task decomposition, tool calls, memory/state, structured outputs, retries, recovery, approvals, execution traces, and long-running jobs.",
-        "Built asynchronous execution with Redis and BullMQ workers, separating synchronous API traffic from long-running workloads for reliability and horizontal scaling.",
-        "Implemented PostgreSQL + Prisma for transactional state, pgvector for semantic retrieval, and Redis for queues, caching, locks, and coordination.",
-        "Integrated OmniRoute, Ollama, and OpenAI-compatible providers with local/cloud routing, retries, failover, and support for quantized/fine-tuned models.",
-        "Built Dockerized production infrastructure on AWS EC2 behind NGINX with IAM, security groups/firewall controls, rate limiting, health/readiness checks, and isolated service boundaries.",
-        "Added Prometheus, Grafana, Loki, audit streams, agent traces, worker visibility, and operational diagnostics while retaining human code review, validation, security checks, and architecture ownership.",
+        "Built and deployed Ryuksaidso, an agent reliability and control-plane platform for operating AI agents with production software discipline.",
+        "Designed the control plane around agent definitions, tools, providers, versions, runs, traces, approvals, policies, API keys, RBAC, tenant isolation, audit history, and operational visibility.",
+        "Implemented durable agent execution with planning, task decomposition, tool calls, memory/state, structured outputs, retries, recovery, approvals, execution traces, and long-running jobs.",
+        "Built asynchronous execution with Redis/BullMQ workers and separated synchronous API traffic from long-running agent workloads for reliability and horizontal scaling.",
+        "Implemented PostgreSQL + Prisma for transactional state, pgvector for retrieval, and Redis for queues, caching, locks, and coordination.",
+        "Integrated OmniRoute, Ollama, and OpenAI-compatible providers with routing, retries, and failover; supported local/cloud and quantized model workflows.",
+        "Use AI tools as engineering accelerators for implementation, investigation, refactoring, documentation, and tests, followed by code review, automated validation, security checks, and architecture review.",
       ],
     },
     {
@@ -113,7 +124,8 @@ export const resumeData = {
       endDate: "Apr 2026",
       bullets: [
         "Developed and maintained a location-based full-stack platform with secure authentication, scalable APIs, and production-oriented application architecture.",
-        "Built frontend and backend functionality using React, TypeScript, Node.js, PostgreSQL, and REST APIs; designed database interactions, optimized queries, integrated APIs, and contributed to application performance and reliability.",
+        "Built frontend and backend functionality using React, TypeScript, Node.js, PostgreSQL, and REST APIs.",
+        "Designed database interactions, optimized queries, integrated APIs, and contributed to application performance and reliability.",
       ],
     },
     {
@@ -123,8 +135,9 @@ export const resumeData = {
       endDate: "2025",
       bullets: [
         "Architected backend infrastructure for a gaming-focused social platform using Node.js and TypeScript.",
-        "Designed scalable REST APIs, authentication, authorization, and WebSocket-based real-time communication; integrated Redis for caching and high-performance workloads.",
-        "Containerized backend services and deployment workflows with Docker, with hands-on ownership across database integration, API performance, scalability, reliability, and production deployment.",
+        "Designed scalable REST APIs, authentication, authorization, and WebSocket-based real-time communication.",
+        "Integrated Redis for caching and high-performance workloads; containerized services and deployment workflows with Docker.",
+        "Worked across database integration, API performance, scalability, reliability, and production deployment.",
       ],
     },
     {
@@ -148,6 +161,60 @@ export const resumeData = {
       ],
     },
   ],
+  ryuksaidsoProduct: {
+    name: "Ryuksaidso",
+    subtitle: "Product & Engineering",
+    live: "https://ryuksaidso.online",
+    description:
+      "Production-oriented agent reliability and control plane designed to operate AI agents with production software discipline. The platform centers on planning, tracing, approvals, evaluations, versioning, knowledge retrieval, and multi-provider failover.",
+    pillars: [
+      {
+        title: "Control Plane",
+        detail:
+          "Next.js/React dashboard for users, workspaces, agents, tools, providers, runs, approvals, traces, analytics, profiles, and administration.",
+      },
+      {
+        title: "API Layer",
+        detail:
+          "Stateless TypeScript/Node.js services with validation, authentication, RBAC, rate limiting, provider routing, health/readiness endpoints, and horizontal-scaling support.",
+      },
+      {
+        title: "Agent Runtime",
+        detail:
+          "Planning, task decomposition, tool calls, memory/state, structured outputs, retries, human approval, execution traces, and recovery.",
+      },
+      {
+        title: "Async Compute",
+        detail:
+          "Redis + BullMQ workers for long-running agent execution, browser automation, ingestion, scheduled jobs, retries, and workload isolation.",
+      },
+      {
+        title: "Data Layer",
+        detail:
+          "PostgreSQL + Prisma for transactional data, pgvector for semantic retrieval, and Redis for queues, caching, locks, and coordination.",
+      },
+      {
+        title: "LLM Layer",
+        detail:
+          "OmniRoute, Ollama, and OpenAI-compatible providers with local/cloud routing, quantized/fine-tuned model support, and controlled tool execution.",
+      },
+      {
+        title: "Production Infrastructure",
+        detail:
+          "Dockerized services on AWS EC2 behind NGINX with IAM, security groups/firewall controls, service isolation, health checks, and controlled network exposure.",
+      },
+      {
+        title: "Reliability & Safety",
+        detail:
+          "Human-in-the-loop approval gates, restricted tool permissions, policy enforcement, structured validation, auditability, retries, timeouts, and persistent execution state.",
+      },
+      {
+        title: "Observability",
+        detail:
+          "Prometheus metrics, Grafana dashboards, Loki logs, audit trails, agent traces, worker visibility, and operational health monitoring.",
+      },
+    ],
+  },
   projects: [
     {
       name: "Ryuksaidso",
@@ -182,17 +249,15 @@ export const resumeData = {
     },
   ],
   agenticAI: [
-    "Data Structures & Algorithms: Solved 150+ DSA problems across core algorithmic patterns and problem-solving techniques.",
+    "Algorithms: Solved 150+ DSA problems across core algorithmic patterns and problem-solving techniques.",
     "Agentic AI: Design and implement autonomous and supervised agents, multi-agent coordination, planning, tool execution, memory, RAG, stateful workflows, evaluation, streaming, and recovery.",
     "LLM Systems: Build secure local-LLM harnesses, work with quantized models and GGUF workflows, fine-tune adapters, optimize inference, and implement model/provider routing.",
-    "Production Engineering: Dockerized services, AWS EC2 deployment, NGINX reverse proxy, background workers, observability, caching, rate limiting, authentication, RBAC, and reliability patterns.",
-    "AI-Assisted Engineering: Use AI tools as force multipliers for implementation, research, debugging, refactoring, documentation, and testing while retaining responsibility for correctness, security, architecture, and final code review.",
+    "Production Engineering: Dockerized services, AWS EC2 deployment, reverse proxy/load balancing, background workers, observability, caching, rate limiting, authentication, RBAC, and reliability patterns.",
+    "AI-assisted engineering: Use AI tools as force multipliers for implementation, investigation, refactoring, documentation, and tests while retaining responsibility for correctness, security, architecture, and final code review.",
   ],
   openSource: [
     "Founder, Ryuksaidso — agent reliability/control plane, agent orchestration, automation, secure local AI, and scalable backend systems.",
-    "Creator, BackendOS — open-source backend framework/toolkit for reusable production-oriented application architecture.",
-    "Hands-on across API security, authentication, RBAC, rate limiting, caching, observability, performance, and distributed-system design.",
-    "Owner of human code review, automated validation, security checks, and architecture verification in AI-assisted workflows.",
+    "Creator, BackendOS — open-source backend framework/toolkit for reusable production-oriented architecture.",
   ],
   education: [
     {

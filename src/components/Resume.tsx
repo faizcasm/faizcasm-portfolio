@@ -9,6 +9,7 @@ type ExperienceItem = (typeof resumeData.experience)[number];
 type Project = (typeof resumeData.projects)[number];
 type SkillGroup = (typeof resumeData.skillGroups)[number];
 type EducationItem = (typeof resumeData.education)[number];
+type ProductSection = typeof resumeData.ryuksaidsoProduct;
 
 const Section: React.FC<{ title: string; children: React.ReactNode; className?: string }> = ({
   title,
@@ -23,7 +24,7 @@ const Section: React.FC<{ title: string; children: React.ReactNode; className?: 
   </section>
 );
 
-const Bullets: React.FC<{ items: string[] }> = ({ items }) => (
+const Bullets: React.FC<{ items: readonly string[] }> = ({ items }) => (
   <ul className="list-disc space-y-1 pl-5 text-sm leading-relaxed text-gray-700 dark:text-gray-300">
     {items.map((item) => (
       <li key={item}>{item}</li>
@@ -85,8 +86,8 @@ const Header: React.FC<{ personalInfo: PersonalInfo }> = ({ personalInfo }) => (
   </header>
 );
 
-const Skills: React.FC<{ groups: SkillGroup[] }> = ({ groups }) => (
-  <Section title="Technical Skills">
+const Skills: React.FC<{ groups: readonly SkillGroup[] }> = ({ groups }) => (
+  <Section title="Core Technical Skills">
     <dl className="space-y-2.5">
       {groups.map((group) => (
         <div key={group.category} className="flex flex-col gap-1.5 sm:flex-row sm:gap-3">
@@ -109,7 +110,7 @@ const Skills: React.FC<{ groups: SkillGroup[] }> = ({ groups }) => (
   </Section>
 );
 
-const Experience: React.FC<{ items: ExperienceItem[] }> = ({ items }) => (
+const Experience: React.FC<{ items: readonly ExperienceItem[] }> = ({ items }) => (
   <Section title="Professional Experience">
     <div className="space-y-5">
       {items.map((item) => (
@@ -134,7 +135,37 @@ const Experience: React.FC<{ items: ExperienceItem[] }> = ({ items }) => (
   </Section>
 );
 
-const Projects: React.FC<{ projects: Project[] }> = ({ projects }) => (
+/**
+ * Mirrors the resume's dedicated "Ryuksaidso | Product & Engineering" section:
+ * the live product link, its positioning, and the nine platform pillars.
+ */
+const RyuksaidsoProduct: React.FC<{ product: ProductSection }> = ({ product }) => (
+  <Section title={`${product.name} | ${product.subtitle}`}>
+    <p className="mb-1.5 text-sm leading-relaxed text-gray-700 dark:text-gray-300">
+      <a
+        href={product.live}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="font-semibold text-blue-600 transition-colors hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+      >
+        Live product: {product.live.replace("https://", "")}
+      </a>
+    </p>
+    <p className="mb-3 text-sm leading-relaxed text-gray-700 dark:text-gray-300">
+      {product.description}
+    </p>
+    <ul className="list-disc space-y-1 pl-5 text-sm leading-relaxed text-gray-700 dark:text-gray-300">
+      {product.pillars.map((pillar) => (
+        <li key={pillar.title}>
+          <span className="font-semibold text-gray-900 dark:text-white">{pillar.title}:</span>{" "}
+          {pillar.detail}
+        </li>
+      ))}
+    </ul>
+  </Section>
+);
+
+const Projects: React.FC<{ projects: readonly Project[] }> = ({ projects }) => (
   <Section title="Selected Projects">
     <div className="space-y-5">
       {projects.map((project) => (
@@ -169,7 +200,7 @@ const Projects: React.FC<{ projects: Project[] }> = ({ projects }) => (
   </Section>
 );
 
-const Education: React.FC<{ items: EducationItem[] }> = ({ items }) => (
+const Education: React.FC<{ items: readonly EducationItem[] }> = ({ items }) => (
   <Section title="Education">
     <div className="space-y-3">
       {items.map((item) => (
@@ -204,17 +235,21 @@ const Resume: React.FC = () => {
       <Skills groups={resumeData.skillGroups} />
       <Experience items={resumeData.experience} />
 
-      <div className="grid gap-6 md:grid-cols-2">
+      <RyuksaidsoProduct product={resumeData.ryuksaidsoProduct} />
+
+      <div className="mt-6">
+        <Projects
+          projects={resumeData.projects.filter((project) => project.name !== "Ryuksaidso")}
+        />
+      </div>
+
+      <div className="mt-6 grid gap-6 md:grid-cols-2">
         <Section title="Engineering Highlights" className="mb-0">
           <Bullets items={resumeData.agenticAI} />
         </Section>
         <Section title="Leadership & Open Source" className="mb-0">
           <Bullets items={resumeData.openSource} />
         </Section>
-      </div>
-
-      <div className="mt-6">
-        <Projects projects={resumeData.projects} />
       </div>
 
       <Education items={resumeData.education} />

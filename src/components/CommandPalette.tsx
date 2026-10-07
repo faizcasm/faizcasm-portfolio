@@ -36,14 +36,18 @@ const PAGE_ENTRIES: PaletteEntry[] = [
   { label: "Resume", group: "Pages", href: "/resume", hint: "PDF + HTML" },
 ];
 
-const projectEntries: PaletteEntry[] = resumeData.projects.map(
-  (project) => ({
+const projectEntries: PaletteEntry[] = resumeData.projects.map((project) => {
+  // Widen to `string` first: the literals in resumeData are always truthy, and
+  // `link || repo` would otherwise narrow `project` to `never` in the fallback.
+  const link: string = project.link;
+  const repo: string = project.repo;
+  return {
     label: project.name,
     group: "Projects",
-    href: project.link || project.repo || "/projects",
+    href: link || repo || "/projects",
     hint: project.technologies.slice(0, 2).join(", "),
-  })
-);
+  };
+});
 
 const groupIcon = (group: string) => {
   switch (group) {

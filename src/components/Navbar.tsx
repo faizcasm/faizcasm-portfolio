@@ -38,7 +38,7 @@ export default function Navbar({ posts = [] }: NavbarProps) {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="relative flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:text-gray-200 dark:hover:text-white"
+                  className="group relative flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:text-gray-200 dark:hover:text-white"
                 >
                   <link.icon className="w-5 h-5 mr-2" />
                   {link.name}

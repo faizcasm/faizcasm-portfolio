@@ -4,13 +4,13 @@ Faizan Hameed's personal portfolio, built with Next.js (App Router), TypeScript 
 
 ## Features
 
-- Responsive portfolio site with modern UI sections (hero, timeline, skills, projects, contact)
+- Responsive portfolio site with modern UI sections (hero, product spotlight, skills, projects, timeline, contact)
 - **Dynamic blog** — posts are managed at runtime through an admin panel backed by SQLite/libSQL, with the existing `posts/*.md` files migrated automatically
 - **Admin panel** at `/admin` — login, create/edit/delete posts, publish/unpublish, markdown editor with live preview
 - Live GitHub integration (server-side, cached) powering the top-languages chart and projects grid
 - Dark mode with system preference detection; print-safe themes
 - ⌘K command palette, scroll-reveal animations, reading progress, TOC, tag filtering, share buttons
-- 3D visuals: a WebGL hero scene (three.js / react-three-fiber) behind the intro card, a CSS-3D top-languages donut and perspective-tilt project cards
+- 3D visuals: a WebGL hero scene (three.js / react-three-fiber) behind the intro card, a second WebGL "agent control plane" scene in the Ryuksaidso product spotlight, a CSS-3D top-languages donut and perspective-tilt project cards
 
 ### Blog reading experience
 
@@ -26,7 +26,8 @@ Faizan Hameed's personal portfolio, built with Next.js (App Router), TypeScript 
 ### Modern UX
 
 - ⌘K / Ctrl+K command palette — fuzzy search across pages, projects and blog posts, with keyboard navigation
-- Scroll-reveal animations on every homepage section (framer-motion, `whileInView`, eased scale-in)
+- Scroll-reveal animations on every homepage section (framer-motion, `whileInView`, eased scale-in), with staggered entrances for the skills groups, timeline entries and product pillars
+- Animated experience & education timeline — gradient rail, glowing markers, hover lift, and links into the full resume page
 - Back-to-top button (bottom-left)
 - Cursor-tracking glow + gradient halo on the hero card
 - WebGL hero backdrop — slow-orbiting wireframe core, particle shell and emissive rings (loaded client-only, disabled for reduced-motion and missing-WebGL)
@@ -36,7 +37,7 @@ Faizan Hameed's personal portfolio, built with Next.js (App Router), TypeScript 
 
 ### Resume
 
-- Full HTML resume generated from `src/data/resumeData.ts`, mirroring the official PDF (summary, skills, experience, projects, education) with the profile photo
+- Full HTML resume generated from `src/data/resumeData.ts`, mirroring the official PDF (summary, skills, experience, Ryuksaidso product & engineering, projects, highlights, education) with the profile photo
 - Embedded PDF viewer for the real `public/Faizan-Hameed-Resume.pdf`, plus download and open-in-new-tab buttons
 
 ## Tech Stack

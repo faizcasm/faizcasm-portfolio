@@ -3,6 +3,7 @@ import React from "react";
 import AboutMe from "@/components/AboutMe";
 import Technologies from "@/components/Technologies";
 import FeaturedProjects from "@/components/FeaturedProjects";
+import ProductSpotlight from "@/components/ProductSpotlight";
 import LatestPosts from "@/components/LatestPosts";
 import GitHubStats from "@/components/GitHubStats";
 import Timeline from "@/components/Timeline";
@@ -16,7 +17,7 @@ import { resumeData } from "@/data/resumeData";
 export const metadata = {
   title: "Faizan Hameed | Software Engineer / Agentic AI Engineer",
   description:
-    "Portfolio of Faizan Hameed — Software Engineer / Agentic AI Engineer building backend systems, full-stack products, distributed services, and production AI systems.",
+    "Portfolio of Faizan Hameed — Software Engineer focused on backend architecture, distributed systems, full-stack products, and production AI / agentic systems.",
 };
 
 export const revalidate = 3600;
@@ -71,6 +72,12 @@ const HomePage: React.FC = async () => {
             className="sm:col-span-2 md:col-span-3 lg:col-span-4 xl:col-span-6"
           >
             <FeaturedProjects />
+          </Reveal>
+          <Reveal
+            delay={0.05}
+            className="sm:col-span-2 md:col-span-3 lg:col-span-4 xl:col-span-6"
+          >
+            <ProductSpotlight />
           </Reveal>
           <Reveal
             delay={0.05}

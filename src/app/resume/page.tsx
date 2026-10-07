@@ -15,8 +15,8 @@ export default function ResumePage() {
       <header className="mb-8 text-center">
         <h1 className="mb-2 text-4xl font-bold text-gray-900 dark:text-white">Resume</h1>
         <p className="mx-auto mb-5 max-w-2xl text-gray-600 dark:text-gray-400">
-          The full resume below mirrors the official PDF — experience, technical skills,
-          projects and education.
+          The full resume below mirrors the official PDF — summary, technical skills,
+          experience, the Ryuksaidso product, projects, highlights and education.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3">
           <DownloadButton />
