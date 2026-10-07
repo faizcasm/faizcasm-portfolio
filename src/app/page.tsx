@@ -13,9 +13,9 @@ import Reveal from "@/components/Reveal";
 import { getGithubSnapshot } from "@/lib/github";
 
 export const metadata = {
-  title: "Faizan Hameed Tantray | Forward Deployed Engineer & Agentic AI Engineer",
+  title: "Faizan Hameed | Software Engineer — Backend, Full-Stack & Agentic AI",
   description:
-    "Portfolio of Faizan Hameed Tantray (@faizcasm) — Forward Deployed Engineer, Software Engineer and Agentic AI Engineer building scalable web platforms, backend systems and production AI agents.",
+    "Portfolio of Faizan Hameed (@faizcasm) — Software Engineer building backend systems, distributed services, full-stack products and production AI agents with TypeScript, Node.js, PostgreSQL, Redis, Docker and AWS.",
 };
 
 export const revalidate = 3600;
@@ -25,9 +25,9 @@ const HomePage: React.FC = async () => {
   const jsonLdData = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: "Faizan Hameed Tantray",
+    name: "Faizan Hameed",
     jobTitle:
-      "Forward Deployed Engineer, Software Engineer, Agentic AI Engineer, Founder of Wolvinix",
+      "Software Engineer — Backend & Distributed Systems, Full-Stack, Agentic AI / LLM Engineering, Founder of Ryuksaidso",
     url: "https://faizcasm.me",
     image:
       "https://res.cloudinary.com/dvqs8ferk/image/upload/v1729588663/muegehb9q00obxstv57m.jpg",
@@ -38,16 +38,16 @@ const HomePage: React.FC = async () => {
       "https://www.instagram.com/faizcasmcodes",
       "https://youtube.com/@faizcasm",
     ],
-    description: `Faizan Hameed Tantray
-Forward Deployed Engineer • Software Engineer • Agentic AI Engineer
-📍 Palhallan Pattan, Srinagar, India
+    description: `Faizan Hameed
+Software Engineer — Backend & Distributed Systems • Full-Stack • Agentic AI / LLM Engineering
+📍 Jammu & Kashmir, India
 
-I design and ship scalable web platforms, backend systems and production-grade AI agents — blending deep full-stack expertise with practical agentic AI engineering to build user-focused solutions that scale.`,
+5 years of experience building backend systems, full-stack products, distributed services, real-time platforms and production AI systems — founder and lead engineer of Ryuksaidso, a production-oriented agent reliability and control-plane platform.`,
     email: "faizanhameed690@gmail.com",
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Srinagar",
-      addressRegion: "Pattan",
+      addressLocality: "Pattan, Srinagar",
+      addressRegion: "Jammu & Kashmir",
       postalCode: "193121",
       addressCountry: "India",
     },
@@ -89,7 +89,7 @@ I design and ship scalable web platforms, backend systems and production-grade A
           </Reveal>
           <Reveal
             delay={0.05}
-            className="sm:col-span-2 md:col-span-3 lg:grid-cols-2 gap-4"
+            className="sm:col-span-2 md:col-span-3 lg:col-span-4 xl:col-span-6 grid grid-cols-1 lg:grid-cols-2 gap-4"
           >
             <div className="flex flex-col">
               <LatestPosts />
@@ -100,7 +100,7 @@ I design and ship scalable web platforms, backend systems and production-grade A
           </Reveal>
           <Reveal
             delay={0.05}
-            className="sm:col-span-2 md:col-span-3 lg:grid-cols-2 gap-4"
+            className="sm:col-span-2 md:col-span-3 lg:col-span-4 xl:col-span-6 grid grid-cols-1 lg:grid-cols-2 gap-4"
           >
             <div className="flex flex-col">
               <Hobbies />

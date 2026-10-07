@@ -5,9 +5,9 @@ import {
   Code,
   Container,
   Database,
-  Gauge,
   Layers,
   Server,
+  Sparkles,
 } from 'lucide-react';
 
 interface SkillGroup {
@@ -16,47 +16,47 @@ interface SkillGroup {
   items: string[];
 }
 
-/** Mirrors the TECHNICAL SKILLS section of the resume. */
+/** Mirrors the CORE TECHNICAL SKILLS section of the resume. */
 const groups: SkillGroup[] = [
   {
     label: 'Languages',
     icon: <Code size={14} />,
-    items: ['TypeScript', 'JavaScript', 'SQL'],
-  },
-  {
-    label: 'Frontend',
-    icon: <Atom size={14} />,
-    items: ['React', 'Next.js', 'Redux', 'Tailwind CSS'],
+    items: ['TypeScript', 'JavaScript', 'SQL', 'Python'],
   },
   {
     label: 'Backend',
     icon: <Server size={14} />,
-    items: ['Node.js', 'Express.js', 'NestJS', 'REST APIs', 'WebSockets', 'Microservices'],
+    items: ['Node.js', 'Express.js', 'Fastify', 'NestJS', 'REST APIs', 'WebSockets', 'Microservices', 'Event-Driven'],
+  },
+  {
+    label: 'Frontend',
+    icon: <Atom size={14} />,
+    items: ['React.js', 'Next.js', 'Redux', 'Tailwind CSS'],
   },
   {
     label: 'Data',
     icon: <Database size={14} />,
-    items: ['PostgreSQL', 'MongoDB', 'Redis', 'pgvector'],
+    items: ['PostgreSQL', 'MongoDB', 'Redis', 'pgvector', 'Prisma'],
   },
   {
-    label: 'Agentic AI',
+    label: 'AI / Agents',
     icon: <Bot size={14} />,
-    items: ['Agent Loops', 'Tool Calling', 'Planning', 'RAG', 'LangChain', 'LangGraph'],
+    items: ['AI Agents', 'Multi-Agent Systems', 'Planning', 'Tool Calling', 'Memory', 'RAG', 'Structured Outputs', 'HITL', 'LangChain', 'LangGraph'],
   },
   {
-    label: 'Cloud & DevOps',
+    label: 'LLM Engineering',
+    icon: <Sparkles size={14} />,
+    items: ['Local LLMs', 'Fine-Tuning', 'LoRA/QLoRA', 'Quantization', 'GGUF', 'Inference Optimization', 'Model Routing'],
+  },
+  {
+    label: 'Cloud / DevOps',
     icon: <Container size={14} />,
-    items: ['Docker', 'AWS', 'NGINX', 'GitHub Actions', 'CI/CD', 'Linux'],
+    items: ['AWS EC2', 'AWS IAM', 'Docker', 'NGINX', 'CI/CD', 'Linux', 'Prometheus', 'Grafana', 'Loki'],
   },
   {
     label: 'Engineering',
     icon: <Layers size={14} />,
-    items: ['System Design', 'Distributed Systems', 'API Design', 'Scalable Infrastructure'],
-  },
-  {
-    label: 'Focus',
-    icon: <Gauge size={14} />,
-    items: ['Performance', 'Caching', 'Rate Limiting', 'Auth'],
+    items: ['System Design', 'Distributed Systems', 'API Security', 'RBAC', 'Rate Limiting', 'Caching', 'Observability', 'Performance'],
   },
 ];
 
@@ -67,7 +67,7 @@ const Technologies: React.FC = () => {
         Technologies
       </h2>
       <p className="mb-6 text-center text-sm text-gray-600 dark:text-gray-300">
-        The stack behind my production work and agentic AI engineering
+        The stack behind my production backend, distributed systems and agentic AI engineering
       </p>
 
       <div className="space-y-4">

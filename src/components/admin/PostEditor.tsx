@@ -186,7 +186,7 @@ export default function PostEditor({ originalId, initial }: PostEditorProps) {
               name="author"
               maxLength={80}
               className={inputClass}
-              defaultValue={initial?.author ?? "Faizan Hameed Tantray"}
+              defaultValue={initial?.author ?? "Faizan Hameed"}
             />
           </div>
 

@@ -108,7 +108,7 @@ export function validatePost(input: PostInput): {
     throw new ValidationError('Cover must start with "/images/" or be an https:// URL.');
   }
 
-  const author = input.author.trim() || "Faizan Hameed Tantray";
+  const author = input.author.trim() || "Faizan Hameed";
   const category = input.category.trim() || "General";
 
   return {

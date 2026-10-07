@@ -1,5 +1,6 @@
 import React from 'react';
 import ProjectCard from './ProjectCard';
+import TiltCard from './TiltCard';
 
 export interface ProjectCardProps {
   title: string;
@@ -11,24 +12,36 @@ export interface ProjectCardProps {
 
 const projects: ProjectCardProps[] = [
   {
-    title: "Portfolio",
-    description: "A modern portfolio with AI-powered Q&A, refreshed storytelling, and recruiter-focused project presentation.",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "LangChain"],
-    githubLink: "https://github.com/faizcasm/faizcasm-portfolio",
-    liveLink: "https://faizcasm.in"
+    title: "Ryuksaidso",
+    description:
+      "Production-oriented agent reliability and control-plane platform: planning, tracing, approvals, evaluations, versioning, knowledge retrieval and multi-provider failover.",
+    technologies: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "Redis", "Docker", "AWS"],
+    githubLink: "https://github.com/faizcasm",
+    liveLink: "https://ryuksaidso.online"
   },
   {
-    title: "Foodify",
-    description: "A full-stack food ordering product with robust APIs, practical integrations, and polished UX flows.",
-    technologies: ["Next.js", "Prisma", "TypeScript", "Tailwind CSS"],
-    githubLink: "https://github.com/faizcasm/Foodify",
-    liveLink: "https://foodify-seven.vercel.app"
-  }, 
-  {title: "Wolvinix",
-    description: "Gaming-focused social platform engineered for scale with real-time communication and production-ready backend architecture.",
-    technologies: ["Node.js", "React", "MongoDB", "Redis", "WebSockets", "Docker"],
+    title: "Wolvinix",
+    description:
+      "Real-time gaming social platform engineered for scale with WebSockets, Redis-backed services, authentication and Dockerized backend infrastructure.",
+    technologies: ["React", "TypeScript", "Node.js", "WebSockets", "Redis", "PostgreSQL", "Docker"],
     githubLink: "https://github.com/faizcasm/wolvinix",
     liveLink: "https://wolvinix.com"
+  },
+  {
+    title: "BackendOS",
+    description:
+      "Open-source backend framework of reusable production-oriented primitives covering authentication, API architecture, middleware and database integration.",
+    technologies: ["TypeScript", "Node.js", "Express.js", "PostgreSQL", "REST APIs"],
+    githubLink: "https://github.com/faizcasm/BackendOS",
+    liveLink: "https://github.com/faizcasm/BackendOS"
+  },
+  {
+    title: "Portfolio",
+    description:
+      "This site: Next.js App Router, dynamic admin-backed blog, server-side GitHub integration, 3D visuals and a resume that mirrors the official PDF.",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Three.js"],
+    githubLink: "https://github.com/faizcasm/faizcasm-portfolio",
+    liveLink: "https://faizcasm.me"
   }
 ];
 
@@ -37,14 +50,15 @@ const ProjectsDisplay: React.FC = () => {
     <div className="rounded-2xl border border-gray-200/80 bg-white/90 shadow-lg dark:border-gray-700 dark:bg-gray-800/90 md:col-span-2 lg:col-span-3">
       <div className="p-4">
         <h2 className="text-xl font-bold text-gray-900 dark:text-white">Featured Projects</h2>
-        <p className="text-sm text-gray-600 dark:text-gray-300">Recent work across full-stack products and AI-powered experiences</p>
+        <p className="text-sm text-gray-600 dark:text-gray-300">
+          Production systems across agentic AI, real-time products and open-source tooling
+        </p>
       </div>
       <div className="grid gap-4 p-4 sm:grid-cols-2">
-        {projects.map((project, index) => (
-          <ProjectCard 
-            key={index} 
-            {...project} 
-          />
+        {projects.map((project) => (
+          <TiltCard key={project.title} className="relative h-full" maxTilt={6}>
+            <ProjectCard {...project} />
+          </TiltCard>
         ))}
       </div>
     </div>

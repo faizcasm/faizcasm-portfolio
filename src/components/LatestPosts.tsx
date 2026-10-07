@@ -2,7 +2,6 @@ import React from 'react';
 import { ChevronRight, Clock, Calendar, ArrowRight, BookOpen } from 'lucide-react';
 import Link from 'next/link';
 import { getSortedPostsData, PostData } from '../../utils/markdown';
-// import { getSortedPostsData, PostData } from '../../../utils/markdown';
 
 const LatestPosts: React.FC = async () => {
   const allPosts = await getSortedPostsData();

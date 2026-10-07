@@ -1,7 +1,7 @@
 ---
 title: "Mastering Full-Stack Development with Next.js and Node.js: A Complete Guide"
 date: "2024-09-03"
-author: "Faizan Hameed Tantray"
+author: "Faizan Hameed"
 tags: ["Full-Stack Development", "Next.js", "Node.js", "Web Development"]
 category: "Web Development"
 description: "Dive deep into full-stack development by leveraging the power of Next.js for the frontend and Node.js for the backend. This comprehensive guide will take you from setup to deployment, covering all essential aspects of building a modern web application."

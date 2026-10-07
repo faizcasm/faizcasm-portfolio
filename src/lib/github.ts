@@ -17,6 +17,24 @@ import "server-only";
 const USERNAME = "faizcasm";
 const API = "https://api.github.com";
 
+/**
+ * Rate-limit resilience:
+ *
+ * - The token is read from `GITHUB_SECRET` or `GITHUB_TOKEN`, whichever is set.
+ *   Without a token every request is anonymous (60 req/h per IP) and the whole
+ *   deployment can get 403'd by a single popular page.
+ * - Every successful payload is memoised in process memory for `STALE_TTL_MS`.
+ *   When GitHub rate-limits or errors we serve that last-good payload instead
+ *   of an empty fallback, so cards keep rendering real data across the whole
+ *   window until GitHub recovers.
+ */
+const STALE_TTL_MS = 6 * 60 * 60 * 1000; // keep serving last-good data for 6h
+const memory = new Map<string, { value: unknown; at: number }>();
+
+function githubToken(): string | undefined {
+  return process.env.GITHUB_SECRET || process.env.GITHUB_TOKEN || undefined;
+}
+
 export interface GithubProfile {
   login: string;
   name: string | null;
@@ -66,18 +84,48 @@ async function gh<T>(path: string): Promise<T> {
   const headers: Record<string, string> = {
     Accept: "application/vnd.github+json",
     "User-Agent": "faizcasm-portfolio",
+    "X-GitHub-Api-Version": "2022-11-28",
   };
-  const token = process.env.GITHUB_SECRET;
+  const token = githubToken();
   if (token) headers.Authorization = `Bearer ${token}`;
 
   const res = await fetch(`${API}${path}`, {
     headers,
     next: { revalidate: 3600 },
   });
+
   if (!res.ok) {
+    const remaining = res.headers.get("x-ratelimit-remaining");
+    const reset = res.headers.get("x-ratelimit-reset");
+    if (res.status === 403 || res.status === 429) {
+      const resetDate = reset ? new Date(Number(reset) * 1000).toISOString() : "unknown";
+      console.error(
+        `[github] rate-limited on ${path} (status ${res.status}, remaining=${remaining}, reset=${resetDate}, token=${token ? "yes" : "no"})`
+      );
+    }
     throw new Error(`GitHub ${res.status} for ${path}`);
   }
+
   return (await res.json()) as T;
+}
+
+/**
+ * Runs `loader`, memoises the result, and on failure falls back to the
+ * last-good value (up to `STALE_TTL_MS` old) before giving up.
+ */
+async function cached<T>(key: string, loader: () => Promise<T>): Promise<T | null> {
+  try {
+    const value = await loader();
+    memory.set(key, { value, at: Date.now() });
+    return value;
+  } catch (error) {
+    const previous = memory.get(key);
+    if (previous && Date.now() - previous.at <= STALE_TTL_MS) {
+      console.warn(`[github] serving ${key} from memory after upstream error:`, error);
+      return previous.value as T;
+    }
+    throw error;
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -111,10 +159,14 @@ export async function getGithubSnapshot(): Promise<{
   live: boolean;
 }> {
   try {
-    const [profile, repos] = await Promise.all([
-      gh<GithubProfile>(`/users/${USERNAME}`),
-      gh<GitHubRepo[]>(`/users/${USERNAME}/repos?per_page=100&sort=updated`),
-    ]);
+    const data = await cached("snapshot", () =>
+      Promise.all([
+        gh<GithubProfile>(`/users/${USERNAME}`),
+        gh<GitHubRepo[]>(`/users/${USERNAME}/repos?per_page=100&sort=updated`),
+      ])
+    );
+    if (!data) throw new Error("empty snapshot");
+    const [profile, repos] = data;
 
     const counts: Record<string, number> = {};
     for (const repo of repos) {
@@ -147,10 +199,10 @@ export async function getProjectsSnapshot(): Promise<{
   live: boolean;
 }> {
   try {
-    const repos = await gh<GitHubRepo[]>(
-      `/users/${USERNAME}/repos?per_page=100&sort=updated&type=all`
+    const repos = await cached("projects", () =>
+      gh<GitHubRepo[]>(`/users/${USERNAME}/repos?per_page=100&sort=updated&type=all`)
     );
-    if (repos.length === 0) throw new Error("no repositories");
+    if (!repos || repos.length === 0) throw new Error("no repositories");
 
     const projects: Project[] = repos.map((repo) => ({
       title: repo.name,
@@ -191,10 +243,12 @@ export async function getTrendingSnapshot(page: number): Promise<{
     const since = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
       .toISOString()
       .split("T")[0];
-    const data = await gh<{ items: TrendingRepo[] }>(
-      `/search/repositories?q=created:>${since}&sort=stars&order=desc&per_page=6&page=${page}`
+    const data = await cached(`trending:${page}`, () =>
+      gh<{ items: TrendingRepo[] }>(
+        `/search/repositories?q=created:>${since}&sort=stars&order=desc&per_page=6&page=${page}`
+      )
     );
-    return { repos: data.items ?? [], live: true };
+    return { repos: data?.items ?? [], live: true };
   } catch (error) {
     console.error("[github] trending snapshot failed:", error);
     return { repos: [], live: false };
@@ -214,14 +268,22 @@ export async function getInsightsSnapshot(): Promise<InsightsSnapshot> {
     live: false,
   };
   try {
-    const [langRes, repoRes] = await Promise.all([
-      gh<{ items: { language: string | null }[] }>(
-        "/search/repositories?q=stars:>10000&sort=stars&order=desc&per_page=100"
-      ),
-      gh<{ items: { name: string; stargazers_count: number }[] }>(
-        "/search/repositories?q=stars:>50000&sort=stars&order=desc&per_page=10"
-      ),
-    ]);
+    type InsightsPayload = [
+      { items: { language: string | null }[] },
+      { items: { name: string; stargazers_count: number }[] },
+    ];
+    const data = await cached<InsightsPayload>("insights", () =>
+      Promise.all([
+        gh<{ items: { language: string | null }[] }>(
+          "/search/repositories?q=stars:>10000&sort=stars&order=desc&per_page=100"
+        ),
+        gh<{ items: { name: string; stargazers_count: number }[] }>(
+          "/search/repositories?q=stars:>50000&sort=stars&order=desc&per_page=10"
+        ),
+      ])
+    );
+    if (!data) throw new Error("empty insights");
+    const [langRes, repoRes] = data;
 
     const counts: Record<string, number> = {};
     for (const repo of langRes.items ?? []) {

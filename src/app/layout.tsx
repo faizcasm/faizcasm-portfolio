@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     default: "Faizan Hameed",
   },
   description:
-    "Portfolio of Faizan Hameed Tantray (faizcasm) — Forward Deployed Engineer, Software Engineer and Agentic AI Engineer building scalable infrastructure and intelligent products.",
+    "Portfolio of Faizan Hameed (faizcasm) — Software Engineer building backend systems, distributed services, full-stack products and production AI agents.",
 };
 
 export default async function RootLayout({

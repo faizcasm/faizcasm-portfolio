@@ -1,7 +1,7 @@
 ---
 title: "Building a Telegram Bot with Node.js: A Step-by-Step Guide"
 date: "2024-09-03"
-author: "Faizan Hameed Tantray"
+author: "Faizan Hameed"
 tags: ["Node.js", "Telegram Bot", "Bot Development", "API Integration"]
 category: "Bot Development"
 description: "Learn how to create a Telegram bot using Node.js. This guide will walk you through the setup, coding, and deployment of your bot, enabling you to automate tasks and interact with users on Telegram."
@@ -38,7 +38,7 @@ Copy code
 ---
 title: "Building a Telegram Bot with Node.js: A Step-by-Step Guide"
 date: "2024-09-03"
-author: "Faizan Hameed Tantray"
+author: "Faizan Hameed"
 tags: ["Node.js", "Telegram Bot", "Bot Development", "API Integration"]
 category: "Bot Development"
 description: "Learn how to create a Telegram bot using Node.js. This guide will walk you through the setup, coding, and deployment of your bot, enabling you to automate tasks and interact with users on Telegram."

@@ -77,7 +77,7 @@ const Header: React.FC<{ personalInfo: PersonalInfo }> = ({ personalInfo }) => (
         <li>
           <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 transition-colors hover:text-blue-600 dark:hover:text-blue-400">
             <Github size={14} className="text-gray-400" />
-            github.com/faizcasm
+            {personalInfo.github.replace('https://', '')}
           </a>
         </li>
         <li>
@@ -211,10 +211,10 @@ const Resume: React.FC = () => {
       <Experience items={resumeData.experience} />
 
       <div className="grid gap-6 md:grid-cols-2">
-        <Section title="Agentic AI Engineering" className="mb-0">
+        <Section title="Engineering Highlights" className="mb-0">
           <Bullets items={resumeData.agenticAI} />
         </Section>
-        <Section title="Open Source & Engineering" className="mb-0">
+        <Section title="Leadership & Open Source" className="mb-0">
           <Bullets items={resumeData.openSource} />
         </Section>
       </div>

@@ -12,7 +12,7 @@ const navLinks = [
   { name: "Home", href: "/", icon: Home },
   { name: "Projects", href: "/projects", icon: Briefcase },
   { name: "Blog", href: "/blog", icon: BookOpen },
-  { name: "Github in Magic", href: "/github-stats", icon: Github },
+  { name: "GitHub Insights", href: "/github-stats", icon: Github },
   { name: "Resume", href: "/resume", icon: FileText },
 ];
 
@@ -42,9 +42,9 @@ export default function Navbar({ posts = [] }: NavbarProps) {
                 >
                   <link.icon className="w-5 h-5 mr-2" />
                   {link.name}
-                  <motion.span
-                    className="absolute bottom-0 left-0 w-full h-0.5  transform scale-x-0 group-hover:scale-x-100 "
-                    layoutId="underline"
+                  <span
+                    aria-hidden="true"
+                    className="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 transition-transform duration-300 group-hover:scale-x-100 group-focus-visible:scale-x-100"
                   />
                 </Link>
               ))}

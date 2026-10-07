@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@libsql/client": "^0.18.0",
+    "@react-three/drei": "^9.122.0",
+    "@react-three/fiber": "^8.18.0",
     "@tailwindcss/typography": "^0.5.13",
     "axios": "^1.7.7",
     "clsx": "^2.1.0",
@@ -29,7 +31,8 @@
     "remark-gfm": "^4.0.0",
     "server-only": "^0.0.1",
     "sharp": "^0.33.4",
-    "tailwind-merge": "^2.2.1"
+    "tailwind-merge": "^2.2.1",
+    "three": "^0.180.0"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -37,6 +40,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/react-syntax-highlighter": "^15.5.13",
+    "@types/three": "^0.180.0",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.1.0",

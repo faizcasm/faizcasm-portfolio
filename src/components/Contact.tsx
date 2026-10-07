@@ -17,7 +17,6 @@ const ContactPage: React.FC = () => {
     setSuccess(null);
     try {
       await axios.post('/api/mailer',{name,email,message})
-      console.log('Form data submitted:');
       setSuccess('Your message has been sent successfully!');
       setEmail('')
       setMessage('')
@@ -30,7 +29,7 @@ const ContactPage: React.FC = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center p-6">
+    <div className="flex items-center justify-center p-6">
       <div className="w-full max-w-lg rounded-2xl border border-gray-200/80 bg-white/90 p-6 shadow-2xl backdrop-blur-sm dark:border-gray-700 dark:bg-gray-800/90">
         <h2 className="mb-2 text-center text-2xl font-bold text-gray-800 dark:text-white">Let&apos;s Build Something Great</h2>
         <p className="mb-6 text-center text-sm text-gray-600 dark:text-gray-300">Open to AI engineering, product, and full-stack collaboration opportunities.</p>

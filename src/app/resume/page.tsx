@@ -6,7 +6,7 @@ import { FileText, ExternalLink } from 'lucide-react';
 export const metadata = {
   title: "Resume",
   description:
-    "Faizan Hameed Tantray — Software Engineer, Full-Stack Developer and Agentic AI Engineer. Experience, skills, projects and education.",
+    "Faizan Hameed — Software Engineer (Backend & Distributed Systems, Full-Stack, Agentic AI / LLM Engineering). Experience, skills, projects and education.",
 };
 
 export default function ResumePage() {
@@ -21,7 +21,7 @@ export default function ResumePage() {
         <div className="flex flex-wrap items-center justify-center gap-3">
           <DownloadButton />
           <a
-            href="/Faizcasm.pdf"
+            href="/Faizan-Hameed-Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-semibold text-gray-700 transition-colors hover:border-blue-500 hover:text-blue-600 dark:border-gray-700 dark:text-gray-300 dark:hover:border-blue-400 dark:hover:text-blue-400"
@@ -40,14 +40,14 @@ export default function ResumePage() {
           Original PDF
         </h2>
         <object
-          data="/Faizcasm.pdf"
+          data="/Faizan-Hameed-Resume.pdf"
           type="application/pdf"
-          aria-label="Faizan Hameed Tantray resume PDF"
+          aria-label="Faizan Hameed resume PDF"
           className="h-[75vh] min-h-[560px] w-full rounded-xl border border-gray-200 bg-gray-100 shadow-lg dark:border-gray-700 dark:bg-gray-800"
         >
           <p className="p-6 text-sm text-gray-600 dark:text-gray-300">
             Your browser cannot display PDFs inline.{" "}
-            <a href="/Faizcasm.pdf" className="text-blue-600 underline dark:text-blue-400">
+            <a href="/Faizan-Hameed-Resume.pdf" className="text-blue-600 underline dark:text-blue-400">
               Open the resume PDF
             </a>
             .

@@ -19,7 +19,7 @@ interface HobbyCardProps {
 
 const HobbyCard: React.FC<HobbyCardProps> = ({ hobby, index }) => (
   <div
-    className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 flex flex-col items-center justify-center transform hover:scale-105 transition duration-300 ease-in-out"
+    className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 flex flex-col items-center justify-center transform hover:scale-105 transition duration-300 ease-in-out animate-fade-in-down"
     style={{ animationDelay: `${index * 100}ms` }}
   >
     <span className="text-4xl mb-2">{hobby.icon}</span>

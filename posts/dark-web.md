@@ -1,7 +1,7 @@
 ---
 title: "Mastering Dark Web Development: Building and Deploying a Hidden Service Website"
 date: "2024-10-01"
-author: "Faizan Hameed Tantray"
+author: "Faizan Hameed"
 tags: ["Dark Web", "Onion Services", "Tor Network", "Web Development"]
 category: "Web Development"
 description: "Learn how to create and deploy a hidden service website on the dark web using Tor. This guide takes you from setting up the Tor service to deploying your hidden web service securely."

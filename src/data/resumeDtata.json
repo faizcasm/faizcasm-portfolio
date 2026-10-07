@@ -1,73 +1,85 @@
 {
   "personalInfo": {
-    "name": "Faizan Hameed Tantray",
-    "title": "Software Engineer | Full-Stack Developer | Agentic AI Engineer",
+    "name": "Faizan Hameed",
+    "title": "Software Engineer | Backend & Distributed Systems | Full-Stack | Agentic AI / LLM Engineering",
     "email": "faizanhameed690@gmail.com",
     "phone": "+91 91495 22458",
     "location": "Jammu & Kashmir, India",
     "github": "https://github.com/faizcasm",
     "linkedin": "https://www.linkedin.com/in/faizan-hameed-tantray-a54316255",
     "website": "https://faizcasm.me",
-    "summary": "Software Engineer and Full-Stack Developer with hands-on experience building scalable web applications, backend systems, real-time platforms, APIs, and production-oriented software. Strong foundation in TypeScript, JavaScript, Node.js, React, PostgreSQL, MongoDB, Redis, REST APIs, WebSockets, Docker, and modern backend architecture. Currently specializing in Agentic AI engineering, with a focus on AI systems capable of tool use, multi-step execution, state management, memory, planning, structured outputs, RAG, and reliable workflow execution. Founder and Lead Backend Engineer of Wolvinix and creator of BackendOS, an open-source backend framework/toolkit."
+    "summary": "Software Engineer with 5 years of development experience building backend systems, full-stack products, distributed services, real-time platforms, and production AI systems. Strong in TypeScript, Node.js, PostgreSQL, Redis, Docker, AWS, React, and Next.js, with hands-on experience designing agentic systems for planning, tool calling, RAG, memory, multi-agent workflows, structured outputs, human-in-the-loop controls, evaluation, observability, retries, and long-running execution. Founder and lead engineer of Ryuksaidso, a production-oriented agent reliability and control-plane platform. Uses AI coding and research tools to accelerate implementation, debugging, documentation, refactoring, and test generation, followed by human review, automated validation, security checks, and architecture verification before release."
   },
   "skillGroups": [
     {
       "category": "Languages",
-      "items": ["TypeScript", "JavaScript", "SQL"]
+      "items": ["TypeScript", "JavaScript", "SQL", "Python"]
+    },
+    {
+      "category": "Backend",
+      "items": ["Node.js", "Express.js", "Fastify", "NestJS", "REST APIs", "WebSockets", "Microservices", "Event-Driven Architecture"]
     },
     {
       "category": "Frontend",
       "items": ["React.js", "Next.js", "Redux", "Tailwind CSS"]
     },
     {
-      "category": "Backend",
-      "items": ["Node.js", "Express.js", "NestJS", "REST APIs", "WebSockets", "Microservices", "Event-Driven Architecture"]
+      "category": "Data",
+      "items": ["PostgreSQL", "MongoDB", "Redis", "pgvector", "Prisma"]
     },
     {
-      "category": "Databases",
-      "items": ["PostgreSQL", "MongoDB", "Redis"]
+      "category": "AI / Agents",
+      "items": ["AI Agents", "Multi-Agent Systems", "Planning", "Tool Calling", "Memory", "RAG", "Embeddings", "Structured Outputs", "HITL", "LangChain", "LangGraph"]
     },
     {
-      "category": "Agentic AI",
-      "items": ["AI Agents", "Agent Loops", "Tool Calling", "Planning", "State Management", "Memory", "RAG", "Embeddings", "Structured Outputs", "Human-in-the-Loop", "LLM APIs", "LangChain", "LangGraph", "pgvector"]
+      "category": "LLM Engineering",
+      "items": ["Local LLMs", "Secure LLM Harnesses", "Fine-Tuning", "LoRA/QLoRA", "Quantization", "GGUF", "Inference Optimization", "Model Routing"]
     },
     {
-      "category": "Cloud & DevOps",
-      "items": ["Docker", "AWS EC2", "AWS IAM", "NGINX", "GitHub Actions", "CI/CD", "Linux"]
+      "category": "Cloud / DevOps",
+      "items": ["AWS EC2", "AWS IAM", "Docker", "Docker Compose", "NGINX", "CI/CD", "Linux", "Prometheus", "Grafana", "Loki"]
     },
     {
       "category": "Engineering",
-      "items": ["System Design", "Distributed Systems", "API Design", "Authentication", "Caching", "Rate Limiting", "Performance Optimization", "Scalable Architecture"]
-    },
-    {
-      "category": "Tools",
-      "items": ["Git", "GitHub", "VS Code", "Linux"]
+      "items": ["System Design", "Distributed Systems", "API Security", "Authentication", "RBAC", "Rate Limiting", "Caching", "Observability", "Performance", "DSA"]
     }
   ],
   "experience": [
     {
-      "position": "Founder & Lead Backend Engineer",
-      "company": "Wolvinix",
-      "startDate": "Jan 2024",
+      "position": "Founder & Lead Software / AI Engineer",
+      "company": "Ryuksaidso",
+      "startDate": "2026",
       "endDate": "Present",
       "bullets": [
-        "Architected backend infrastructure for a gaming-focused social platform using Node.js and TypeScript.",
-        "Designed scalable REST APIs, authentication systems, and real-time communication using WebSockets.",
-        "Integrated Redis for high-performance communication and caching use cases.",
-        "Containerized services and developed production-oriented deployment workflows using Docker.",
-        "Worked on database integration, API performance, scalability, and backend reliability."
+        "Built and deployed Ryuksaidso, a production-oriented agent reliability and control-plane platform for operating AI agents with software-engineering discipline.",
+        "Designed the control plane for agent definitions, tools, providers, versions, runs, traces, approvals, policies, API keys, RBAC, tenant isolation, audit history, and operational visibility.",
+        "Implemented agent runtime capabilities for planning, task decomposition, tool calls, memory/state, structured outputs, retries, recovery, approvals, execution traces, and long-running jobs.",
+        "Built asynchronous execution with Redis and BullMQ workers, separating synchronous API traffic from long-running workloads for reliability and horizontal scaling.",
+        "Implemented PostgreSQL + Prisma for transactional state, pgvector for semantic retrieval, and Redis for queues, caching, locks, and coordination.",
+        "Integrated OmniRoute, Ollama, and OpenAI-compatible providers with local/cloud routing, retries, failover, and support for quantized/fine-tuned models.",
+        "Built Dockerized production infrastructure on AWS EC2 behind NGINX with IAM, security groups/firewall controls, rate limiting, health/readiness checks, and isolated service boundaries.",
+        "Added Prometheus, Grafana, Loki, audit streams, agent traces, worker visibility, and operational diagnostics while retaining human code review, validation, security checks, and architecture ownership."
       ]
     },
     {
-      "position": "Full Stack Intern",
-      "company": "Infosys",
-      "startDate": "Oct 2024",
-      "endDate": "Dec 2024",
+      "position": "Full Stack Engineer",
+      "company": "Locrave",
+      "startDate": "Dec 2025",
+      "endDate": "Apr 2026",
       "bullets": [
-        "Developed backend services using Node.js and PostgreSQL.",
-        "Implemented Redis-based caching to improve application performance.",
-        "Contributed to full-stack application development, API integration, and CI/CD workflows.",
-        "Worked with modern software engineering and deployment practices."
+        "Developed and maintained a location-based full-stack platform with secure authentication, scalable APIs, and production-oriented application architecture.",
+        "Built frontend and backend functionality using React, TypeScript, Node.js, PostgreSQL, and REST APIs; designed database interactions, optimized queries, integrated APIs, and contributed to application performance and reliability."
+      ]
+    },
+    {
+      "position": "Founder & Lead Backend Engineer",
+      "company": "Wolvinix",
+      "startDate": "2024",
+      "endDate": "2025",
+      "bullets": [
+        "Architected backend infrastructure for a gaming-focused social platform using Node.js and TypeScript.",
+        "Designed scalable REST APIs, authentication, authorization, and WebSocket-based real-time communication; integrated Redis for caching and high-performance workloads.",
+        "Containerized backend services and deployment workflows with Docker, with hands-on ownership across database integration, API performance, scalability, reliability, and production deployment."
       ]
     },
     {
@@ -77,8 +89,7 @@
       "endDate": "",
       "bullets": [
         "Developed and maintained backend APIs for production-oriented applications.",
-        "Worked with database integration, query optimization, and backend performance improvements.",
-        "Contributed to application reliability and scalable backend functionality."
+        "Worked on database integration, query optimization, backend performance, reliability, and scalable application functionality."
       ]
     },
     {
@@ -88,67 +99,52 @@
       "endDate": "Feb 2024",
       "bullets": [
         "Developed full-stack application features using modern JavaScript technologies.",
-        "Built and integrated REST APIs, dashboards, and user-facing application functionality.",
-        "Contributed to authentication, security, and application improvements."
+        "Built REST APIs, dashboards, authentication flows, and user-facing functionality."
       ]
     }
   ],
   "projects": [
     {
-      "name": "BackendOS",
-      "subtitle": "Open-Source Backend Framework / Toolkit",
-      "link": "https://github.com/faizcasm/BackendOS",
+      "name": "Ryuksaidso",
+      "subtitle": "Agent Reliability & Control-Plane Platform",
+      "link": "https://ryuksaidso.online",
       "bullets": [
-        "Designed an open-source backend framework focused on production-grade application architecture.",
-        "Built reusable modules for authentication, API architecture, middleware, and database integration.",
-        "Focused on modularity, maintainability, and reusable engineering primitives."
+        "Production-oriented control plane for operating AI agents with planning, tracing, approvals, evaluations, versioning, knowledge retrieval, and multi-provider failover.",
+        "Runs on a Next.js/React dashboard, stateless TypeScript/Node.js services, Redis + BullMQ workers, PostgreSQL + Prisma with pgvector, and Dockerized AWS EC2 infrastructure behind NGINX."
       ],
-      "technologies": ["TypeScript", "Node.js", "Express.js", "PostgreSQL", "REST APIs"]
-    },
-    {
-      "name": "Locrave",
-      "subtitle": "Full-Stack Location Discovery Platform",
-      "link": "https://github.com/faizcasm/Locrave",
-      "bullets": [
-        "Developed a location-based full-stack platform with secure authentication and scalable APIs.",
-        "Designed backend services and database interactions and optimized database queries for performance."
-      ],
-      "technologies": ["React", "TypeScript", "Node.js", "PostgreSQL", "REST APIs"]
+      "technologies": ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "Redis", "pgvector", "Docker", "AWS"]
     },
     {
       "name": "Wolvinix",
       "subtitle": "Real-Time Gaming Social Platform",
-      "link": "https://wolvinix.com",
+      "link": "https://github.com/faizcasm/wolvinix",
       "bullets": [
-        "Built a gaming-focused social platform with real-time communication capabilities.",
-        "Implemented WebSocket-based communication, Redis-powered backend functionality, authentication, and scalable APIs.",
-        "Containerized backend services using Docker."
+        "Built a gaming-focused social platform with real-time communication, authentication, scalable APIs, Redis-backed functionality, and Dockerized backend services."
       ],
       "technologies": ["React", "TypeScript", "Node.js", "WebSockets", "Redis", "PostgreSQL", "Docker"]
     },
     {
-      "name": "Zanly",
-      "subtitle": "Scalable Backend Architecture Project",
-      "link": "https://github.com/faizcasm/zanly",
+      "name": "BackendOS",
+      "subtitle": "Open-Source Backend Framework / Toolkit",
+      "link": "https://github.com/faizcasm/BackendOS",
       "bullets": [
-        "Designed backend architecture demonstrating caching, rate limiting, API optimization, and scalable request handling.",
-        "Focused on performance engineering and distributed-system concepts."
+        "Designed reusable production-oriented backend primitives covering authentication, API architecture, middleware, and database integration."
       ],
-      "technologies": ["Node.js", "TypeScript", "Redis", "REST APIs", "PostgreSQL"]
+      "technologies": ["TypeScript", "Node.js", "Express.js", "PostgreSQL", "REST APIs"]
     }
   ],
   "agenticAI": [
-    "Agent loops and autonomous task execution; tool selection and tool calling.",
-    "Multi-step agents, planning, task decomposition, state management, and memory.",
-    "RAG, embeddings, vector search, structured agent outputs, and human-in-the-loop workflows.",
-    "LLM streaming, Server-Sent Events (SSE), agent error recovery, and AI application architecture.",
-    "Agent evaluation and reliability."
+    "Data Structures & Algorithms: Solved 150+ DSA problems across core algorithmic patterns and problem-solving techniques.",
+    "Agentic AI: Design and implement autonomous and supervised agents, multi-agent coordination, planning, tool execution, memory, RAG, stateful workflows, evaluation, streaming, and recovery.",
+    "LLM Systems: Build secure local-LLM harnesses, work with quantized models and GGUF workflows, fine-tune adapters, optimize inference, and implement model/provider routing.",
+    "Production Engineering: Dockerized services, AWS EC2 deployment, NGINX reverse proxy, background workers, observability, caching, rate limiting, authentication, RBAC, and reliability patterns.",
+    "AI-Assisted Engineering: Use AI tools as force multipliers for implementation, research, debugging, refactoring, documentation, and testing while retaining responsibility for correctness, security, architecture, and final code review."
   ],
   "openSource": [
-    "Founder and Lead Backend Engineer of Wolvinix.",
-    "Creator of BackendOS, an open-source backend framework/toolkit.",
-    "Focused on scalable backend architecture, distributed systems, AI engineering, and developer tooling.",
-    "Experienced with Git/GitHub development workflows and practical system architecture."
+    "Founder, Ryuksaidso — agent reliability/control plane, agent orchestration, automation, secure local AI, and scalable backend systems.",
+    "Creator, BackendOS — open-source backend framework/toolkit for reusable production-oriented application architecture.",
+    "Hands-on across API security, authentication, RBAC, rate limiting, caching, observability, performance, and distributed-system design.",
+    "Owner of human code review, automated validation, security checks, and architecture verification in AI-assisted workflows."
   ],
   "education": [
     {

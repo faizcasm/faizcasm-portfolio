@@ -6,7 +6,7 @@ export const revalidate = 3600;
 export const metadata = {
   title: "Projects",
   description:
-    "GitHub projects by Faizan Hameed Tantray — full-stack, backend and agentic AI work.",
+    "GitHub projects by Faizan Hameed — backend, full-stack and agentic AI work.",
 };
 
 export default async function Projects() {

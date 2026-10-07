@@ -3,26 +3,28 @@ import Image from 'next/image';
 import heroImage from "@/assets/portfolio-profile.jpeg";
 import { Twitter, GithubIcon, Linkedin, MapPin } from 'lucide-react';
 import HeroGlow from './HeroGlow';
+import HeroScene from './HeroScene';
 
-const roles = ['Forward Deployed Engineer', 'Software Engineer', 'Agentic AI Engineer'];
+const roles = ['Software Engineer', 'Backend & Distributed Systems', 'Full-Stack', 'Agentic AI / LLM Engineering'];
 
 const skills = [
   'TypeScript',
-  'Agentic Systems',
-  'Next.js',
   'Node.js',
-  'Scalable Infrastructure',
-  'RAG & Agents',
   'PostgreSQL',
   'Redis',
   'Docker',
+  'AWS',
+  'React / Next.js',
+  'Agentic AI',
   'System Design',
+  'Observability',
 ];
 
 const AboutMe: React.FC = () => {
   return (
     <div className="relative overflow-hidden rounded-2xl border border-gray-200/70 bg-white/90 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-2xl dark:border-gray-700 dark:bg-gray-800/90 md:col-span-3 lg:col-span-4">
       <HeroGlow />
+      <HeroScene />
       <div className="relative p-6 md:p-8">
         <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
           <div className="relative shrink-0">
@@ -57,12 +59,15 @@ const AboutMe: React.FC = () => {
             </p>
 
             <p className="mb-4 leading-relaxed text-gray-700 dark:text-gray-300">
-              I design and ship <strong>scalable web platforms, backend systems and production-grade AI agents</strong>.
-              From REST/WebSocket architecture and PostgreSQL &amp; Redis performance to agent loops, tool calling and
-              RAG pipelines, I turn agentic AI ideas into reliable software that holds up in production.
+              <strong>5 years of development experience</strong> building backend systems, full-stack
+              products, distributed services, real-time platforms and production AI systems — strong in
+              TypeScript, Node.js, PostgreSQL, Redis, Docker, AWS, React and Next.js. I design agentic
+              systems for planning, tool calling, RAG, memory, structured outputs, human-in-the-loop
+              controls, evaluation, observability, retries and long-running execution.
             </p>
             <p className="mb-4 leading-relaxed text-gray-700 dark:text-gray-300">
-              Founder &amp; Lead Backend Engineer of <strong>Wolvinix</strong> and creator of{" "}
+              Founder &amp; lead engineer of <strong>Ryuksaidso</strong>, a production-oriented agent
+              reliability and control-plane platform, and creator of{" "}
               <strong>BackendOS</strong>, an open-source backend toolkit. Currently pursuing{" "}
               <strong>MCA at NIELIT Srinagar</strong> after completing my BCA at Punjab Technical University.
             </p>
@@ -108,7 +113,7 @@ const AboutMe: React.FC = () => {
               </a>
               <span className="hidden items-center text-sm text-gray-500 dark:text-gray-400 sm:flex">
                 <MapPin size={14} className="mr-1" />
-                Srinagar, India
+                Jammu &amp; Kashmir, India
               </span>
             </div>
           </div>

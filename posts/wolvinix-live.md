@@ -60,6 +60,6 @@ The revolution has begun, and we invite you to be part of it! Stay connected wit
 - **Instagram**: [@Wolvinix](https://instagram.com/wolvinix)  
 
 Best regards,  
-**Faizan Hameed Tantray**  
+**Faizan Hameed**  
 Founder & CEO, Wolvinix  
 

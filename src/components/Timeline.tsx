@@ -15,7 +15,7 @@ const educationItems: TimelineItem[] = [
     type: 'education',
     title: 'Master of Computer Applications (MCA)',
     organization: 'NIELIT Srinagar',
-    date: '2026 - Present',
+    date: 'Currently Pursuing',
     description: 'National Institute of Electronics & Information Technology. Currently pursuing postgraduate studies with focus on advanced software engineering and computing.',
     skills: ['Advanced Computing', 'Software Architecture', 'Research Mindset']
   },
@@ -39,19 +39,29 @@ const educationItems: TimelineItem[] = [
 const experienceItems: TimelineItem[] = [
   {
     type: 'experience',
-    title: 'Founder & Lead Backend Engineer',
-    organization: 'Wolvinix',
-    date: 'Jan 2024 - Present',
+    title: 'Founder & Lead Software / AI Engineer',
+    organization: 'Ryuksaidso',
+    date: '2026 - Present',
     location: 'Remote',
-    skills: ['System Design', 'Node.js', 'TypeScript', 'WebSockets', 'Redis', 'Docker']
+    description:
+      'Agent reliability and control-plane platform: control plane, agent runtime, Redis + BullMQ async execution, PostgreSQL/Prisma + pgvector, multi-provider LLM routing, Dockerized AWS EC2 infrastructure and observability.',
+    skills: ['TypeScript', 'Node.js', 'BullMQ', 'pgvector', 'RBAC', 'Observability']
   },
   {
     type: 'experience',
-    title: 'Full Stack Intern',
-    organization: 'Infosys',
-    date: 'Oct 2024 - Dec 2024',
+    title: 'Full Stack Engineer',
+    organization: 'Locrave',
+    date: 'Dec 2025 - Apr 2026',
     location: 'Remote',
-    skills: ['Node.js', 'PostgreSQL', 'Redis', 'CI/CD', 'API Integration']
+    skills: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'REST APIs']
+  },
+  {
+    type: 'experience',
+    title: 'Founder & Lead Backend Engineer',
+    organization: 'Wolvinix',
+    date: '2024 - 2025',
+    location: 'Remote',
+    skills: ['System Design', 'Node.js', 'TypeScript', 'WebSockets', 'Redis', 'Docker']
   },
   {
     type: 'experience',
@@ -63,7 +73,7 @@ const experienceItems: TimelineItem[] = [
   {
     type: 'experience',
     title: 'Full Stack Intern',
-    organization: 'UpskillMafia',
+    organization: 'Upskill Mafia',
     date: 'Aug 2023 - Feb 2024',
     location: 'Remote',
     skills: ['Node.js', 'Express.js', 'REST APIs', 'React', 'Authentication']
