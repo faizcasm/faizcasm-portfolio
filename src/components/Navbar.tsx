@@ -24,12 +24,12 @@ export default function Navbar({ posts = [] }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-md ">
+    <header className="sticky top-0 z-50 border-b border-gray-200/70 bg-white/80 backdrop-blur-md dark:border-gray-800 dark:bg-gray-950/70">
       <nav className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <Link href="/" className="text-2xl font-bold">
-            Faizcasm👨‍💻
+            <Link href="/" className="text-lg font-bold text-gray-900 dark:text-white sm:text-xl">
+              Faizan Hameed
             </Link>
           </div>
           <div className="hidden md:block">
@@ -38,7 +38,7 @@ export default function Navbar({ posts = [] }: NavbarProps) {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="relative px-3 py-2 rounded-md text-sm font-medium   group flex items-center"
+                  className="relative flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:text-gray-200 dark:hover:text-white"
                 >
                   <link.icon className="w-5 h-5 mr-2" />
                   {link.name}
@@ -59,7 +59,7 @@ export default function Navbar({ posts = [] }: NavbarProps) {
           <div className="flex -mr-2 md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500"
+              className="inline-flex items-center justify-center rounded-md p-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 dark:text-gray-200"
             >
               <span className="sr-only">Open main menu</span>
               {!isOpen ? (
@@ -78,7 +78,7 @@ export default function Navbar({ posts = [] }: NavbarProps) {
 
       {isOpen && (
         <motion.div
-          className="md:hidden backdrop-blur-md bg-white/90 dark:bg-gray-900/90"
+          className="bg-white/95 backdrop-blur-md dark:bg-gray-900/95 md:hidden"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
@@ -88,7 +88,7 @@ export default function Navbar({ posts = [] }: NavbarProps) {
               <Link
                 key={link.name}
                 href={link.href}
-                className="px-3 py-2 rounded-md text-base font-medium flex items-center"
+                className="flex items-center rounded-md px-3 py-2 text-base font-medium text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:text-gray-200"
               >
                 <link.icon className="w-5 h-5 mr-2" />
                 {link.name}

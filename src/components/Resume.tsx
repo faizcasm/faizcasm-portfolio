@@ -1,8 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
-import resumeData from '../data/resumeDtata.json';
+import { resumeData } from '@/data/resumeData';
 import heroImage from "@/assets/portfolio-profile.jpeg";
-import { Github, Globe, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
+import { Github, Globe, Mail, MapPin, Phone } from 'lucide-react';
 
 type PersonalInfo = typeof resumeData.personalInfo;
 type ExperienceItem = (typeof resumeData.experience)[number];
@@ -78,12 +78,6 @@ const Header: React.FC<{ personalInfo: PersonalInfo }> = ({ personalInfo }) => (
           <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 transition-colors hover:text-blue-600 dark:hover:text-blue-400">
             <Github size={14} className="text-gray-400" />
             {personalInfo.github.replace('https://', '')}
-          </a>
-        </li>
-        <li>
-          <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 transition-colors hover:text-blue-600 dark:hover:text-blue-400">
-            <Linkedin size={14} className="text-gray-400" />
-            LinkedIn
           </a>
         </li>
       </ul>

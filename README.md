@@ -36,7 +36,7 @@ Faizan Hameed's personal portfolio, built with Next.js (App Router), TypeScript 
 
 ### Resume
 
-- Full HTML resume generated from `src/data/resumeDtata.json`, mirroring the official PDF (summary, skills, experience, projects, education) with the profile photo
+- Full HTML resume generated from `src/data/resumeData.ts`, mirroring the official PDF (summary, skills, experience, projects, education) with the profile photo
 - Embedded PDF viewer for the real `public/Faizan-Hameed-Resume.pdf`, plus download and open-in-new-tab buttons
 
 ## Tech Stack
@@ -95,7 +95,7 @@ Faizan Hameed's personal portfolio, built with Next.js (App Router), TypeScript 
 - GitHub tokens and mail credentials are server-side only (`server-only` module imports guard them); nothing sensitive ships to the browser
 - Sessions: random 256-bit token, SHA-256 at rest in the DB, HTTP-only SameSite=Lax cookie, 7-day TTL, login rate limiting
 - Markdown is rendered as React elements — no `rehype-raw`, so posts cannot inject HTML/scripts
-- GitHub calls are ISR-cached for 1 hour (2 requests for the homepage instead of dozens), plus a process-memory cache of last-good payloads: when GitHub rate-limits (403/429) the UI keeps serving real data for up to 6 hours before degrading to static fallbacks. Rate-limit responses log the remaining quota and reset time.
+- GitHub calls are ISR-cached for 1 hour, with in-flight deduplication and a process-memory cache of last-good payloads: when GitHub rate-limits (403/429), stale cached payloads are served for up to 6 hours before static fallbacks are used.
 - `/admin` is disallowed for crawlers; blog posts prerendered with `revalidate = 3600`
 
 ## Project Structure
@@ -115,7 +115,7 @@ public/                # static assets (Faizan-Hameed-Resume.pdf, images, robots
 
 - **Blog:** use the admin panel at `/admin`, or edit/add markdown files in `posts/*.md` (picked up automatically; seeded into the DB on first run).
 - **Projects / GitHub:** automatic from the GitHub profile.
-- **Resume:** edit `src/data/resumeDtata.json` (HTML) and `public/Faizan-Hameed-Resume.pdf`.
+- **Resume:** edit `src/data/resumeData.ts` (HTML) and `public/Faizan-Hameed-Resume.pdf`.
 
 ## Customization
 

@@ -1,8 +1,10 @@
 'use client'
 import React, { FormEvent, useState } from 'react';
-import { Send } from 'lucide-react';
-import axios from 'axios'
+import { Github, Globe, Mail, Phone, Send } from 'lucide-react';
+import { resumeData } from '@/data/resumeData';
+
 const ContactPage: React.FC = () => {
+  const { personalInfo } = resumeData;
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
@@ -16,7 +18,12 @@ const ContactPage: React.FC = () => {
     setError(null);
     setSuccess(null);
     try {
-      await axios.post('/api/mailer',{name,email,message})
+      const response = await fetch('/api/mailer', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message }),
+      });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
       setSuccess('Your message has been sent successfully!');
       setEmail('')
       setMessage('')
@@ -29,10 +36,32 @@ const ContactPage: React.FC = () => {
   };
 
   return (
-    <div className="flex items-center justify-center p-6">
-      <div className="w-full max-w-lg rounded-2xl border border-gray-200/80 bg-white/90 p-6 shadow-2xl backdrop-blur-sm dark:border-gray-700 dark:bg-gray-800/90">
+    <div className="flex items-center justify-center p-2">
+      <div className="w-full max-w-lg rounded-2xl border border-gray-200/80 bg-white/90 p-6 shadow-xl backdrop-blur-sm dark:border-gray-700 dark:bg-gray-800/90">
         <h2 className="mb-2 text-center text-2xl font-bold text-gray-800 dark:text-white">Let&apos;s Build Something Great</h2>
         <p className="mb-6 text-center text-sm text-gray-600 dark:text-gray-300">Open to AI engineering, product, and full-stack collaboration opportunities.</p>
+        <ul className="mb-6 grid gap-2 rounded-xl border border-gray-200 bg-gray-50 p-3 text-sm text-gray-700 dark:border-gray-700 dark:bg-gray-900/60 dark:text-gray-300">
+          <li>
+            <a href={`mailto:${personalInfo.email}`} className="inline-flex items-center gap-2 hover:text-blue-600 dark:hover:text-blue-400">
+              <Mail size={14} /> {personalInfo.email}
+            </a>
+          </li>
+          <li>
+            <a href={`tel:${personalInfo.phone.replace(/\s/g, '')}`} className="inline-flex items-center gap-2 hover:text-blue-600 dark:hover:text-blue-400">
+              <Phone size={14} /> {personalInfo.phone}
+            </a>
+          </li>
+          <li>
+            <a href={personalInfo.website} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-blue-600 dark:hover:text-blue-400">
+              <Globe size={14} /> {personalInfo.website}
+            </a>
+          </li>
+          <li>
+            <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-blue-600 dark:hover:text-blue-400">
+              <Github size={14} /> {personalInfo.github}
+            </a>
+          </li>
+        </ul>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>

@@ -9,6 +9,7 @@ import {
   Server,
   Sparkles,
 } from 'lucide-react';
+import { resumeData } from '@/data/resumeData';
 
 interface SkillGroup {
   label: string;
@@ -16,55 +17,28 @@ interface SkillGroup {
   items: string[];
 }
 
-/** Mirrors the CORE TECHNICAL SKILLS section of the resume. */
-const groups: SkillGroup[] = [
-  {
-    label: 'Languages',
-    icon: <Code size={14} />,
-    items: ['TypeScript', 'JavaScript', 'SQL', 'Python'],
-  },
-  {
-    label: 'Backend',
-    icon: <Server size={14} />,
-    items: ['Node.js', 'Express.js', 'Fastify', 'NestJS', 'REST APIs', 'WebSockets', 'Microservices', 'Event-Driven'],
-  },
-  {
-    label: 'Frontend',
-    icon: <Atom size={14} />,
-    items: ['React.js', 'Next.js', 'Redux', 'Tailwind CSS'],
-  },
-  {
-    label: 'Data',
-    icon: <Database size={14} />,
-    items: ['PostgreSQL', 'MongoDB', 'Redis', 'pgvector', 'Prisma'],
-  },
-  {
-    label: 'AI / Agents',
-    icon: <Bot size={14} />,
-    items: ['AI Agents', 'Multi-Agent Systems', 'Planning', 'Tool Calling', 'Memory', 'RAG', 'Structured Outputs', 'HITL', 'LangChain', 'LangGraph'],
-  },
-  {
-    label: 'LLM Engineering',
-    icon: <Sparkles size={14} />,
-    items: ['Local LLMs', 'Fine-Tuning', 'LoRA/QLoRA', 'Quantization', 'GGUF', 'Inference Optimization', 'Model Routing'],
-  },
-  {
-    label: 'Cloud / DevOps',
-    icon: <Container size={14} />,
-    items: ['AWS EC2', 'AWS IAM', 'Docker', 'NGINX', 'CI/CD', 'Linux', 'Prometheus', 'Grafana', 'Loki'],
-  },
-  {
-    label: 'Engineering',
-    icon: <Layers size={14} />,
-    items: ['System Design', 'Distributed Systems', 'API Security', 'RBAC', 'Rate Limiting', 'Caching', 'Observability', 'Performance'],
-  },
-];
+const iconByCategory: Record<string, React.ReactNode> = {
+  Languages: <Code size={14} />,
+  Backend: <Server size={14} />,
+  Frontend: <Atom size={14} />,
+  Data: <Database size={14} />,
+  'AI / Agents': <Bot size={14} />,
+  'LLM Engineering': <Sparkles size={14} />,
+  'Cloud / DevOps': <Container size={14} />,
+  Engineering: <Layers size={14} />,
+};
+
+const groups: SkillGroup[] = resumeData.skillGroups.map((group) => ({
+  label: group.category,
+  icon: iconByCategory[group.category] ?? <Code size={14} />,
+  items: [...group.items],
+}));
 
 const Technologies: React.FC = () => {
   return (
     <div className="flex-grow rounded-2xl border border-gray-200/80 bg-white/90 p-6 shadow-lg transition-all duration-300 hover:shadow-2xl dark:border-gray-700 dark:bg-gray-800/90 md:col-span-2 lg:col-span-3">
       <h2 className="mb-1 text-center text-2xl font-bold text-gray-800 dark:text-white">
-        Technologies
+        Core Technical Skills
       </h2>
       <p className="mb-6 text-center text-sm text-gray-600 dark:text-gray-300">
         The stack behind my production backend, distributed systems and agentic AI engineering

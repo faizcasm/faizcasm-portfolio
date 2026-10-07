@@ -1,35 +1,14 @@
 import "server-only";
-
-/**
- * Server-side GitHub access.
- *
- * All GitHub calls happen here, on the server, so the token (GITHUB_SECRET)
- * never reaches the browser — client-side `process.env.GITHUB_SECRET` resolves
- * to `undefined`, which made every request anonymous (60 req/h limit) and was
- * the root cause of the 403s.
- *
- * Every fetch is ISR-cached for an hour, so a page render costs at most a
- * couple of GitHub calls, not dozens. Any failure degrades to a friendly
- * fallback instead of throwing (a failed page build would otherwise take the
- * site down when GitHub rate-limits the deployment network).
- */
+import { resumeData } from "@/data/resumeData";
 
 const USERNAME = "faizcasm";
 const API = "https://api.github.com";
+const FETCH_REVALIDATE_SECONDS = 3600;
+const STALE_TTL_MS = 6 * 60 * 60 * 1000;
 
-/**
- * Rate-limit resilience:
- *
- * - The token is read from `GITHUB_SECRET` or `GITHUB_TOKEN`, whichever is set.
- *   Without a token every request is anonymous (60 req/h per IP) and the whole
- *   deployment can get 403'd by a single popular page.
- * - Every successful payload is memoised in process memory for `STALE_TTL_MS`.
- *   When GitHub rate-limits or errors we serve that last-good payload instead
- *   of an empty fallback, so cards keep rendering real data across the whole
- *   window until GitHub recovers.
- */
-const STALE_TTL_MS = 6 * 60 * 60 * 1000; // keep serving last-good data for 6h
 const memory = new Map<string, { value: unknown; at: number }>();
+const inFlight = new Map<string, Promise<unknown>>();
+const blockedUntil = new Map<string, number>();
 
 function githubToken(): string | undefined {
   return process.env.GITHUB_SECRET || process.env.GITHUB_TOKEN || undefined;
@@ -80,58 +59,90 @@ interface GitHubRepo {
   pushed_at: string | null;
 }
 
+class GitHubHttpError extends Error {
+  status: number;
+  resetAt?: number;
+
+  constructor(status: number, message: string, resetAt?: number) {
+    super(message);
+    this.status = status;
+    this.resetAt = resetAt;
+  }
+}
+
+function parseResetAt(response: Response): number | undefined {
+  const retryAfter = response.headers.get("retry-after");
+  if (retryAfter) {
+    const numeric = Number(retryAfter);
+    if (Number.isFinite(numeric)) return Date.now() + numeric * 1000;
+    const parsedDate = Date.parse(retryAfter);
+    if (!Number.isNaN(parsedDate)) return parsedDate;
+  }
+
+  const reset = Number(response.headers.get("x-ratelimit-reset"));
+  if (Number.isFinite(reset) && reset > 0) return reset * 1000;
+  return undefined;
+}
+
 async function gh<T>(path: string): Promise<T> {
   const headers: Record<string, string> = {
     Accept: "application/vnd.github+json",
     "User-Agent": "faizcasm-portfolio",
     "X-GitHub-Api-Version": "2022-11-28",
   };
-  const token = githubToken();
-  if (token) headers.Authorization = `Bearer ${token}`;
 
-  const res = await fetch(`${API}${path}`, {
+  const token = githubToken();
+  if (token) headers.Authorization = "Bearer " + token;
+
+  const response = await fetch(`${API}${path}`, {
     headers,
-    next: { revalidate: 3600 },
+    cache: "force-cache",
+    next: { revalidate: FETCH_REVALIDATE_SECONDS },
   });
 
-  if (!res.ok) {
-    const remaining = res.headers.get("x-ratelimit-remaining");
-    const reset = res.headers.get("x-ratelimit-reset");
-    if (res.status === 403 || res.status === 429) {
-      const resetDate = reset ? new Date(Number(reset) * 1000).toISOString() : "unknown";
-      console.error(
-        `[github] rate-limited on ${path} (status ${res.status}, remaining=${remaining}, reset=${resetDate}, token=${token ? "yes" : "no"})`
-      );
-    }
-    throw new Error(`GitHub ${res.status} for ${path}`);
+  if (!response.ok) {
+    const resetAt = parseResetAt(response);
+    throw new GitHubHttpError(response.status, `GitHub ${response.status} for ${path}`, resetAt);
   }
 
-  return (await res.json()) as T;
+  return (await response.json()) as T;
 }
 
-/**
- * Runs `loader`, memoises the result, and on failure falls back to the
- * last-good value (up to `STALE_TTL_MS` old) before giving up.
- */
 async function cached<T>(key: string, loader: () => Promise<T>): Promise<T | null> {
-  try {
-    const value = await loader();
-    memory.set(key, { value, at: Date.now() });
-    return value;
-  } catch (error) {
-    const previous = memory.get(key);
-    if (previous && Date.now() - previous.at <= STALE_TTL_MS) {
-      console.warn(`[github] serving ${key} from memory after upstream error:`, error);
-      return previous.value as T;
-    }
-    throw error;
-  }
-}
+  const now = Date.now();
+  const previous = memory.get(key);
+  const blocked = blockedUntil.get(key);
 
-// ---------------------------------------------------------------------------
-// Fallbacks — shown when GitHub is unreachable/rate-limited so no card ever
-// renders as an error box.
-// ---------------------------------------------------------------------------
+  if (blocked && blocked > now && previous && now - previous.at <= STALE_TTL_MS) {
+    return previous.value as T;
+  }
+
+  const existing = inFlight.get(key);
+  if (existing) return existing as Promise<T>;
+
+  const work = (async () => {
+    try {
+      const value = await loader();
+      memory.set(key, { value, at: Date.now() });
+      blockedUntil.delete(key);
+      return value;
+    } catch (error) {
+      if (error instanceof GitHubHttpError && (error.status === 403 || error.status === 429) && error.resetAt) {
+        blockedUntil.set(key, error.resetAt);
+      }
+      const cachedValue = memory.get(key);
+      if (cachedValue && Date.now() - cachedValue.at <= STALE_TTL_MS) {
+        return cachedValue.value as T;
+      }
+      throw error;
+    } finally {
+      inFlight.delete(key);
+    }
+  })();
+
+  inFlight.set(key, work as Promise<unknown>);
+  return work;
+}
 
 export const FALLBACK_PROFILE: GithubProfile = {
   login: USERNAME,
@@ -141,17 +152,21 @@ export const FALLBACK_PROFILE: GithubProfile = {
 };
 
 export const FALLBACK_LANGUAGES: LanguageDatum[] = [
-  { name: "JavaScript", value: 19 },
-  { name: "TypeScript", value: 10 },
-  { name: "Python", value: 2 },
-  { name: "Java", value: 1 },
-  { name: "Shell", value: 1 },
-  { name: "HTML", value: 1 },
+  { name: "TypeScript", value: 12 },
+  { name: "JavaScript", value: 10 },
+  { name: "Python", value: 3 },
+  { name: "SQL", value: 2 },
 ];
 
-// ---------------------------------------------------------------------------
-// Homepage: profile identity + top languages (2 calls, cached)
-// ---------------------------------------------------------------------------
+const FALLBACK_PROJECTS: Project[] = resumeData.projects.map((project) => ({
+  title: project.name,
+  description: project.bullets.join(" "),
+  technologies: [...project.technologies],
+  githubLink: project.repo,
+  liveLink: project.link,
+  latestCommitDate: "2026-01-01T00:00:00.000Z",
+  isOwn: true,
+}));
 
 export async function getGithubSnapshot(): Promise<{
   profile: GithubProfile;
@@ -162,7 +177,7 @@ export async function getGithubSnapshot(): Promise<{
     const data = await cached("snapshot", () =>
       Promise.all([
         gh<GithubProfile>(`/users/${USERNAME}`),
-        gh<GitHubRepo[]>(`/users/${USERNAME}/repos?per_page=100&sort=updated`),
+        gh<GitHubRepo[]>(`/users/${USERNAME}/repos?per_page=100&sort=updated&type=owner`),
       ])
     );
     if (!data) throw new Error("empty snapshot");
@@ -172,6 +187,7 @@ export async function getGithubSnapshot(): Promise<{
     for (const repo of repos) {
       if (repo.language) counts[repo.language] = (counts[repo.language] ?? 0) + 1;
     }
+
     const languages = Object.entries(counts)
       .map(([name, value]) => ({ name, value }))
       .sort((a, b) => b.value - a.value)
@@ -179,7 +195,7 @@ export async function getGithubSnapshot(): Promise<{
 
     return {
       profile,
-      languages: languages.length > 0 ? languages : FALLBACK_LANGUAGES,
+      languages: languages.length ? languages : FALLBACK_LANGUAGES,
       live: true,
     };
   } catch (error) {
@@ -187,12 +203,6 @@ export async function getGithubSnapshot(): Promise<{
     return { profile: FALLBACK_PROFILE, languages: FALLBACK_LANGUAGES, live: false };
   }
 }
-
-// ---------------------------------------------------------------------------
-// /projects — ONE call total. The old client code fired listCommits for every
-// single repository (40+ requests) just to display a date; `pushed_at` from
-// the repo list is equivalent for this purpose.
-// ---------------------------------------------------------------------------
 
 export async function getProjectsSnapshot(): Promise<{
   projects: Project[];
@@ -211,38 +221,29 @@ export async function getProjectsSnapshot(): Promise<{
       githubLink: repo.html_url,
       liveLink: repo.homepage || undefined,
       latestCommitDate:
-        repo.pushed_at && !isNaN(Date.parse(repo.pushed_at))
+        repo.pushed_at && !Number.isNaN(Date.parse(repo.pushed_at))
           ? new Date(repo.pushed_at).toISOString()
           : new Date(repo.updated_at).toISOString(),
       isOwn: !repo.fork,
     }));
 
     projects.sort(
-      (a, b) =>
-        new Date(b.latestCommitDate).getTime() -
-        new Date(a.latestCommitDate).getTime()
+      (a, b) => new Date(b.latestCommitDate).getTime() - new Date(a.latestCommitDate).getTime()
     );
+
     return { projects, live: true };
   } catch (error) {
     console.error("[github] projects snapshot failed:", error);
-    return { projects: [], live: false };
+    return { projects: FALLBACK_PROJECTS, live: false };
   }
 }
-
-// ---------------------------------------------------------------------------
-// /github-stats: trending search (paginated) + insights.
-// Search API limits are stricter (10/min anonymous, 30/min with token), so
-// these are cached too and consumed through the internal API route.
-// ---------------------------------------------------------------------------
 
 export async function getTrendingSnapshot(page: number): Promise<{
   repos: TrendingRepo[];
   live: boolean;
 }> {
   try {
-    const since = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
-      .toISOString()
-      .split("T")[0];
+    const since = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split("T")[0];
     const data = await cached(`trending:${page}`, () =>
       gh<{ items: TrendingRepo[] }>(
         `/search/repositories?q=created:>${since}&sort=stars&order=desc&per_page=6&page=${page}`
@@ -263,22 +264,24 @@ export interface InsightsSnapshot {
 
 export async function getInsightsSnapshot(): Promise<InsightsSnapshot> {
   const fallback: InsightsSnapshot = {
-    languages: [],
-    topRepos: [],
+    languages: FALLBACK_LANGUAGES,
+    topRepos: FALLBACK_PROJECTS.map((project) => ({ name: project.title, stars: 0 })),
     live: false,
   };
+
   try {
     type InsightsPayload = [
       { items: { language: string | null }[] },
       { items: { name: string; stargazers_count: number }[] },
     ];
+
     const data = await cached<InsightsPayload>("insights", () =>
       Promise.all([
         gh<{ items: { language: string | null }[] }>(
           "/search/repositories?q=stars:>10000&sort=stars&order=desc&per_page=100"
         ),
         gh<{ items: { name: string; stargazers_count: number }[] }>(
-          "/search/repositories?q=stars:>50000&sort=stars&order=desc&per_page=10"
+          "/search/repositories?q=user:faizcasm&sort=stars&order=desc&per_page=10"
         ),
       ])
     );

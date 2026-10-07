@@ -6,7 +6,7 @@ export const revalidate = 3600;
 export const metadata = {
   title: "Projects",
   description:
-    "GitHub projects by Faizan Hameed — backend, full-stack and agentic AI work.",
+    "Selected projects by Faizan Hameed across backend, full-stack, and agentic AI engineering.",
 };
 
 export default async function Projects() {
@@ -15,8 +15,8 @@ export default async function Projects() {
   return (
     <div className="min-h-screen">
       <main className="container mx-auto px-4 py-16">
-        <h1 className="text-5xl font-bold mb-24 text-center">
-          🧑‍💻Projects
+        <h1 className="mb-10 text-center text-4xl font-bold text-gray-900 dark:text-white md:text-5xl">
+          Projects
         </h1>
         <ProjectsGrid projects={projects} live={live} />
       </main>
