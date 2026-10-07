@@ -59,7 +59,7 @@ Faizan Hameed's personal portfolio, built with Next.js (App Router), TypeScript 
    cd faizcasm-portfolio
    ```
 
-2. Install dependencies:
+2. Install dependencies (Node.js 24.x — see the `engines` field in `package.json`):
    ```bash
    npm install
    ```
