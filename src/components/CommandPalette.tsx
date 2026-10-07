@@ -13,7 +13,7 @@ import {
   Search,
   Settings,
 } from "lucide-react";
-import projectsData from "../../data.json";
+import { resumeData } from "@/data/resumeData";
 
 export interface PalettePost {
   id: string;
@@ -36,11 +36,11 @@ const PAGE_ENTRIES: PaletteEntry[] = [
   { label: "Resume", group: "Pages", href: "/resume", hint: "PDF + HTML" },
 ];
 
-const projectEntries: PaletteEntry[] = (projectsData.featuredProjects ?? []).map(
+const projectEntries: PaletteEntry[] = resumeData.projects.map(
   (project) => ({
-    label: project.title,
+    label: project.name,
     group: "Projects",
-    href: project.liveDemo || project.githubLink || "/projects",
+    href: project.link || project.repo || "/projects",
     hint: project.technologies.slice(0, 2).join(", "),
   })
 );

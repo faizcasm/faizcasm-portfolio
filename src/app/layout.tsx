@@ -12,11 +12,28 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   metadataBase: new URL("https://faizcasm.me"),
   title: {
-    template: "%s | Faizcasm",
-    default: "Faizan Hameed",
+    template: "%s | Faizan Hameed",
+    default: "Faizan Hameed | Software Engineer / Agentic AI Engineer",
   },
   description:
-    "Portfolio of Faizan Hameed (faizcasm) — Software Engineer building backend systems, distributed services, full-stack products and production AI agents.",
+    "Portfolio of Faizan Hameed — Software Engineer / Agentic AI Engineer.",
+  openGraph: {
+    title: "Faizan Hameed | Software Engineer / Agentic AI Engineer",
+    description:
+      "Backend, distributed systems, full-stack, and production agentic AI engineering portfolio.",
+    url: "https://faizcasm.me",
+    siteName: "Faizan Hameed Portfolio",
+    images: [{ url: "/images/faizcasm.jpg", width: 1200, height: 630, alt: "Faizan Hameed" }],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Faizan Hameed | Software Engineer / Agentic AI Engineer",
+    description:
+      "Backend, distributed systems, full-stack, and production agentic AI engineering portfolio.",
+    images: ["/images/faizcasm.jpg"],
+  },
 };
 
 export default async function RootLayout({

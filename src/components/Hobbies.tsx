@@ -1,42 +1,16 @@
 import React from 'react';
-
-interface Hobby {
-  name: string;
-  icon: string;
-}
-
-const hobbies: Hobby[] = [
-  { name: 'Chess', icon: '♟️' },
-  { name: 'Hiking', icon: '🥾' },
-  { name: 'Climbing', icon: '🧗' },
-  { name: 'Travel', icon: '✈️' },
-];
-
-interface HobbyCardProps {
-  hobby: Hobby;
-  index: number;
-}
-
-const HobbyCard: React.FC<HobbyCardProps> = ({ hobby, index }) => (
-  <div
-    className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 flex flex-col items-center justify-center transform hover:scale-105 transition duration-300 ease-in-out animate-fade-in-down"
-    style={{ animationDelay: `${index * 100}ms` }}
-  >
-    <span className="text-4xl mb-2">{hobby.icon}</span>
-    <h3 className="text-xl font-semibold text-gray-800 dark:text-white">{hobby.name}</h3>
-  </div>
-);
+import { resumeData } from '@/data/resumeData';
 
 const Hobbies: React.FC = () => {
   return (
-    <div>
-      <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-6 animate-fade-in-down">Hobbies</h2>
-      <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
-        {hobbies.map((hobby, index) => (
-          <HobbyCard key={hobby.name} hobby={hobby} index={index} />
+    <section className="rounded-2xl border border-gray-200/80 bg-white/90 p-6 shadow-lg dark:border-gray-700 dark:bg-gray-800/90">
+      <h2 className="mb-3 text-2xl font-bold text-gray-800 dark:text-white">Leadership & Open Source</h2>
+      <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed text-gray-700 dark:text-gray-300">
+        {resumeData.openSource.map((item) => (
+          <li key={item}>{item}</li>
         ))}
-      </div>
-    </div>
+      </ul>
+    </section>
   );
 };
 
